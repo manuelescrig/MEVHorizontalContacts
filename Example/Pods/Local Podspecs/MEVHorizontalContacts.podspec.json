@@ -1,0 +1,19 @@
+{
+  "name": "MEVHorizontalContacts",
+  "version": "0.1.0",
+  "summary": "A short description of MEVHorizontalContacts.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/MEVHorizontalContacts",
+  "license": "MIT",
+  "authors": {
+    "Manuel Escrig Ventura": "manuelescrig@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/MEVHorizontalContacts.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "MEVHorizontalContacts/Classes/**/*"
+}
