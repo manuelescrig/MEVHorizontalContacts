@@ -1,0 +1,12 @@
+use_frameworks!
+
+target 'MEVHorizontalContacts_Example', :exclusive => true do
+  pod 'MEVHorizontalContacts', :path => '../'
+end
+
+target 'MEVHorizontalContacts_Tests', :exclusive => true do
+  pod 'MEVHorizontalContacts', :path => '../'
+
+  pod 'Specta'
+  pod 'Expecta'
+end
