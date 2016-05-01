@@ -23,6 +23,13 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>047911BE215B2F90BF06C4C396FC5146</key>
+		<dict>
+			<key>fileRef</key>
+			<string>31B4BEC55BC3C82432C98EEC9D0DC582</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>04BBCCE13322F42620459D20E8DE3673</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -53,6 +60,26 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>0526BA17EF253E92ED1482939A658112</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B0BB64CD89ED55C747DA3A9D4B84A336</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>06242314D56C666E3FE9C5746DF090FA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MEVHorizontalContactListFlowLayout.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>06C1DD363D5966F42C4D802641B4CEEA</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -67,20 +94,6 @@
 			<string>Specta/Specta/SPTSharedExampleGroups.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0941DD5276CB60C5BB2B703B6AF0B7F0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E75F3885874E6B7614B58C91DB56EC7B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
 		<key>0B2557AD04BE586ABECA21D4D28A2447</key>
 		<dict>
@@ -151,7 +164,7 @@
 			<key>name</key>
 			<string>MEVHorizontalContacts</string>
 			<key>target</key>
-			<string>58CD02A5ADFE3CCE8F61C7F2CF2EA6D5</string>
+			<string>385ACF9EFA064D806E3A00C54E657168</string>
 			<key>targetProxy</key>
 			<string>BDCC4A7F18E5617BF0E80B5D88A858D1</string>
 		</dict>
@@ -384,13 +397,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>1145859B82B648B1BA05E998B1BC0B57</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1BF5CDA390C6D30E13CABAB2C68B3B78</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>114E485716E6202929C38F24F358E6B0</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -428,6 +434,19 @@
 				</array>
 			</dict>
 		</dict>
+		<key>123C63681FC61C7774DEE7EE5C38EB35</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MEVHorizontalContactListModel.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>124408F448490BCF39CC1C2AA5297197</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -442,6 +461,62 @@
 			<string>Expecta/Matchers/EXPMatchers+postNotification.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1261A9609B1F65478E76FB45E23AE58A</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>195015449084F8269A0EBA9F75715C49</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/MEVHorizontalContacts/MEVHorizontalContacts-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/MEVHorizontalContacts/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.3</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/MEVHorizontalContacts/MEVHorizontalContacts.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>PRODUCT_NAME</key>
+				<string>MEVHorizontalContacts</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
 		</dict>
 		<key>1312A7D381C51428CF481E33E3D37901</key>
 		<dict>
@@ -708,20 +783,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>1B98CFE59585821FDB8A54489D84245C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>1145859B82B648B1BA05E998B1BC0B57</string>
-				<string>42C077C5E4302C05852CF65B59B79D50</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
 		<key>1BF5CDA390C6D30E13CABAB2C68B3B78</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -747,6 +808,13 @@
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
+		</dict>
+		<key>1D550E38EBA801C5115B6A2526512D2B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>49F434847EE365C4D02AFA5EFE11B04B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>1DF8BC2C6730675F74DD28A442535501</key>
 		<dict>
@@ -859,6 +927,13 @@
 			<string>Info.plist</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>25B87E4FEEE950B227B95D6C346FBEDB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1BF5CDA390C6D30E13CABAB2C68B3B78</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>260BC7EED9289AF321A6F791964CE472</key>
 		<dict>
@@ -991,6 +1066,13 @@
 				<string>-fno-objc-arc</string>
 			</dict>
 		</dict>
+		<key>2C1ADDAB506C29B80667854C4FFFE802</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B3D517D347BD60A1138439054266EC0A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>2CF861D2ADFE89409C39B6E076059DCE</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -1092,7 +1174,7 @@
 		<dict>
 			<key>children</key>
 			<array>
-				<string>7FC9382D64F3F845C069C9F5F5639C72</string>
+				<string>D9CA594D2F32CD6CE0D6472848900B9C</string>
 				<string>8BB02DD6C75FDEE7DECBBF9BFED227A3</string>
 			</array>
 			<key>isa</key>
@@ -1174,27 +1256,7 @@
 				</array>
 			</dict>
 		</dict>
-		<key>2FE3BB513E6543C52A1369B4A78FC68C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>313DA7D1EF34BE3CBFB7CFF9B99DE718</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
 		<key>30CC32D6A9919D27AAC92DB6FC0FA01E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E351727CD07BB90B2A3CAE2C2433F6C5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>313DA7D1EF34BE3CBFB7CFF9B99DE718</key>
 		<dict>
 			<key>fileRef</key>
 			<string>E351727CD07BB90B2A3CAE2C2433F6C5</string>
@@ -1213,6 +1275,19 @@
 			<string>EXPMatchers+contain.m</string>
 			<key>path</key>
 			<string>Expecta/Matchers/EXPMatchers+contain.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>31B4BEC55BC3C82432C98EEC9D0DC582</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MEVHorizontalContactListFlowLayout.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1326,6 +1401,31 @@
 			<string>279AA6492631DEFA8C439A9C088EEB8A</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>385ACF9EFA064D806E3A00C54E657168</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>7FC909F9C6D207AD38687A08634AC895</string>
+			<key>buildPhases</key>
+			<array>
+				<string>F6AD7F03E52477E1B689D060B3DD5006</string>
+				<string>8945025926AE05F2CA6EA91C57B72176</string>
+				<string>D9BF6C14E0B66944A66C0F70CC50AB05</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>MEVHorizontalContacts</string>
+			<key>productName</key>
+			<string>MEVHorizontalContacts</string>
+			<key>productReference</key>
+			<string>543032BDA57BD11A9C498E410EC6276B</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
 		</dict>
 		<key>393405584126BC701B16CB695FBEC1B0</key>
 		<dict>
@@ -1524,13 +1624,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>42C077C5E4302C05852CF65B59B79D50</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C11EE976C0B6AC8CE82B8852474BFEAC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>42EC02837F7465B7AED8E1A256D57C91</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -1559,6 +1652,20 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>444C95FFEBDD32604AFC5FE97B05B696</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B03AFF43F9E1DA4477FC9D03605851EF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
 		<key>46137F5CC368BF38BAF0D0AF81DD8FFE</key>
 		<dict>
 			<key>fileRef</key>
@@ -1586,6 +1693,19 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>49F434847EE365C4D02AFA5EFE11B04B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MEVHorizontalContactListAddContactView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>4B226BA38E6C400342FC494796E893A5</key>
 		<dict>
@@ -1786,6 +1906,20 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>52649250409D6124F20CC5CA95255BA8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E2F84C97D39045A74105618D8F4444C7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
 		<key>543032BDA57BD11A9C498E410EC6276B</key>
 		<dict>
 			<key>explicitFileType</key>
@@ -1908,31 +2042,6 @@
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Debug</string>
-		</dict>
-		<key>58CD02A5ADFE3CCE8F61C7F2CF2EA6D5</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>CD9807AFD8A27C15AD3749CAC1BC9F73</string>
-			<key>buildPhases</key>
-			<array>
-				<string>1B98CFE59585821FDB8A54489D84245C</string>
-				<string>2FE3BB513E6543C52A1369B4A78FC68C</string>
-				<string>A44DEA953D678280A41B4D0FE513BE66</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>MEVHorizontalContacts</string>
-			<key>productName</key>
-			<string>MEVHorizontalContacts</string>
-			<key>productReference</key>
-			<string>543032BDA57BD11A9C498E410EC6276B</string>
-			<key>productType</key>
-			<string>com.apple.product-type.framework</string>
 		</dict>
 		<key>592E81109E597E27A3D9DBB86ABBE590</key>
 		<dict>
@@ -2076,6 +2185,20 @@
 		<dict>
 			<key>fileRef</key>
 			<string>0D742C36417083F91C50620C170817D1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>618B13DB92D495D51FEB5F0FAC9D0303</key>
+		<dict>
+			<key>fileRef</key>
+			<string>06242314D56C666E3FE9C5746DF090FA</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2305,6 +2428,20 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>68605A7962D631AEC046776B5DCB815B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E75F3885874E6B7614B58C91DB56EC7B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
 		<key>68F820C46D336F1E6EB733BFC4374C51</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2397,62 +2534,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>71E7CDD850B921E9F49B93C029D5AA98</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>195015449084F8269A0EBA9F75715C49</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/MEVHorizontalContacts/MEVHorizontalContacts-prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/MEVHorizontalContacts/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.3</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/MEVHorizontalContacts/MEVHorizontalContacts.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>PRODUCT_NAME</key>
-				<string>MEVHorizontalContacts</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
 		<key>7687931B86D55C2A3B7570964EEFDEAB</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2506,6 +2587,20 @@
 			<string>Pods-MEVHorizontalContacts_Tests-frameworks.sh</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>78D2EA4E3DD27EB5A1A0D1B9104B1E8A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>123C63681FC61C7774DEE7EE5C38EB35</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
 		<key>78F5D31437776FFE9BBCAE5FD37C912E</key>
 		<dict>
@@ -2663,6 +2758,13 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
+		<key>7B9A9E99DCE3DF860179138AA324868B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E351727CD07BB90B2A3CAE2C2433F6C5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>7D23EA9CCB1E421678FACAC3D02921A8</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2705,20 +2807,19 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>7FC9382D64F3F845C069C9F5F5639C72</key>
+		<key>7FC909F9C6D207AD38687A08634AC895</key>
 		<dict>
-			<key>children</key>
+			<key>buildConfigurations</key>
 			<array>
-				<string>B7D8B79991AD4DB1E2FF54A96EAC0EF2</string>
+				<string>E60B46EC84086052925DB4A27C646CAA</string>
+				<string>1261A9609B1F65478E76FB45E23AE58A</string>
 			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>MEVHorizontalContacts</string>
-			<key>path</key>
-			<string>MEVHorizontalContacts</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>XCConfigurationList</string>
 		</dict>
 		<key>8002AEC214B6BB97F584715F86C953D0</key>
 		<dict>
@@ -2945,6 +3046,32 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-fno-objc-arc</string>
 			</dict>
+		</dict>
+		<key>8945025926AE05F2CA6EA91C57B72176</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>7B9A9E99DCE3DF860179138AA324868B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>896524BF25F0DDCB445B9616F6868EEB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MEVHorizontalContactListCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>8B13E7675CDFD3E42F7D76EFC061BDE1</key>
 		<dict>
@@ -3527,19 +3654,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>A44DEA953D678280A41B4D0FE513BE66</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>0941DD5276CB60C5BB2B703B6AF0B7F0</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
 		<key>A5140E0C0C55DC8D99C2179E29DE4BE9</key>
 		<dict>
 			<key>containerPortal</key>
@@ -3838,6 +3952,32 @@
 				</array>
 			</dict>
 		</dict>
+		<key>B03AFF43F9E1DA4477FC9D03605851EF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MEVHorizontalContactListAddContactView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B0BB64CD89ED55C747DA3A9D4B84A336</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MEVHorizontalContactListCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>B174ECCB055189C835E1613FD300BB85</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -3960,6 +4100,19 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>B3D517D347BD60A1138439054266EC0A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MEVHorizontalContactListModel.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>B424E5B08CAAABE851C235789EE3EC6B</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -4009,21 +4162,6 @@
 			<string>8130E2C24D57D446CB02B745DEBFDB68</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>B7D8B79991AD4DB1E2FF54A96EAC0EF2</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C11EE976C0B6AC8CE82B8852474BFEAC</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Classes</string>
-			<key>path</key>
-			<string>Classes</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>B84431CF8C64F363A334AA7089F6C134</key>
 		<dict>
@@ -4087,7 +4225,7 @@
 			<key>proxyType</key>
 			<string>1</string>
 			<key>remoteGlobalIDString</key>
-			<string>58CD02A5ADFE3CCE8F61C7F2CF2EA6D5</string>
+			<string>385ACF9EFA064D806E3A00C54E657168</string>
 			<key>remoteInfo</key>
 			<string>MEVHorizontalContacts</string>
 		</dict>
@@ -4118,62 +4256,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>BF587846B1FA9BC586FE491D57DC629C</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>195015449084F8269A0EBA9F75715C49</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/MEVHorizontalContacts/MEVHorizontalContacts-prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/MEVHorizontalContacts/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.3</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/MEVHorizontalContacts/MEVHorizontalContacts.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>PRODUCT_NAME</key>
-				<string>MEVHorizontalContacts</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
 		<key>C0420BD68EF14CF918B80CF6BEFD7E11</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -4184,19 +4266,6 @@
 			<string>text.xcconfig</string>
 			<key>path</key>
 			<string>Expecta.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C11EE976C0B6AC8CE82B8852474BFEAC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>ReplaceMe.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -4214,6 +4283,26 @@
 			<string>Specta/Specta/XCTestCase+Specta.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C2E13D496B465AA3619B67D990CC3743</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MEVHorizontalContactListView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C324636335ED35612C4535AD12FA50BF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C2E13D496B465AA3619B67D990CC3743</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>C4B7D0E9A4B5C41AAB14F00FD98692F4</key>
 		<dict>
@@ -4374,20 +4463,6 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>CD9807AFD8A27C15AD3749CAC1BC9F73</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>71E7CDD850B921E9F49B93C029D5AA98</string>
-				<string>BF587846B1FA9BC586FE491D57DC629C</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
 		<key>CDC14648AF937EC51B26F7B2EBDF1D0B</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -4450,7 +4525,7 @@
 			<key>name</key>
 			<string>MEVHorizontalContacts</string>
 			<key>target</key>
-			<string>58CD02A5ADFE3CCE8F61C7F2CF2EA6D5</string>
+			<string>385ACF9EFA064D806E3A00C54E657168</string>
 			<key>targetProxy</key>
 			<string>F2E8633B5712FCFC457287D0F33BBE47</string>
 		</dict>
@@ -4490,11 +4565,25 @@
 			<key>targets</key>
 			<array>
 				<string>0D888F29E05E498D0CD91A51D28599A5</string>
-				<string>58CD02A5ADFE3CCE8F61C7F2CF2EA6D5</string>
+				<string>385ACF9EFA064D806E3A00C54E657168</string>
 				<string>A92C31E06890FA85F4B94AADC5FAD486</string>
 				<string>8F084B31CF1E0FD3BFF9C533F6C61A2D</string>
 				<string>37313CDCFB6E89D00CBDDCC7A95983FF</string>
 			</array>
+		</dict>
+		<key>D428D5E4747F4D2C163D9E5FC60379B0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>896524BF25F0DDCB445B9616F6868EEB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
 		<key>D43B14B3A080E004A36C7D95C9F0BCB2</key>
 		<dict>
@@ -4585,6 +4674,39 @@
 			<string>113855CF66A69F6876546E978AC2362E</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>D9BF6C14E0B66944A66C0F70CC50AB05</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>444C95FFEBDD32604AFC5FE97B05B696</string>
+				<string>D428D5E4747F4D2C163D9E5FC60379B0</string>
+				<string>618B13DB92D495D51FEB5F0FAC9D0303</string>
+				<string>78D2EA4E3DD27EB5A1A0D1B9104B1E8A</string>
+				<string>52649250409D6124F20CC5CA95255BA8</string>
+				<string>68605A7962D631AEC046776B5DCB815B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>D9CA594D2F32CD6CE0D6472848900B9C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>F9AFAED7B284336D445054AC84C22B52</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MEVHorizontalContacts</string>
+			<key>path</key>
+			<string>MEVHorizontalContacts</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>DA5EBB318D16AE6EC1958DC8510C228D</key>
 		<dict>
@@ -4770,6 +4892,19 @@
 				</array>
 			</dict>
 		</dict>
+		<key>E2F84C97D39045A74105618D8F4444C7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MEVHorizontalContactListView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>E351727CD07BB90B2A3CAE2C2433F6C5</key>
 		<dict>
 			<key>isa</key>
@@ -4797,6 +4932,62 @@
 			<string>Specta/Specta/SPTExampleGroup.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E60B46EC84086052925DB4A27C646CAA</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>195015449084F8269A0EBA9F75715C49</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/MEVHorizontalContacts/MEVHorizontalContacts-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/MEVHorizontalContacts/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.3</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/MEVHorizontalContacts/MEVHorizontalContacts.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>PRODUCT_NAME</key>
+				<string>MEVHorizontalContacts</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
 		</dict>
 		<key>E64EE1FA2E988E166397F7C5FFFBEBB6</key>
 		<dict>
@@ -5056,7 +5247,7 @@
 			<key>proxyType</key>
 			<string>1</string>
 			<key>remoteGlobalIDString</key>
-			<string>58CD02A5ADFE3CCE8F61C7F2CF2EA6D5</string>
+			<string>385ACF9EFA064D806E3A00C54E657168</string>
 			<key>remoteInfo</key>
 			<string>MEVHorizontalContacts</string>
 		</dict>
@@ -5117,6 +5308,24 @@
 				</array>
 			</dict>
 		</dict>
+		<key>F6AD7F03E52477E1B689D060B3DD5006</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>1D550E38EBA801C5115B6A2526512D2B</string>
+				<string>0526BA17EF253E92ED1482939A658112</string>
+				<string>047911BE215B2F90BF06C4C396FC5146</string>
+				<string>2C1ADDAB506C29B80667854C4FFFE802</string>
+				<string>C324636335ED35612C4535AD12FA50BF</string>
+				<string>25B87E4FEEE950B227B95D6C346FBEDB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
 		<key>F6F8FF8A990C9C4A05F87ABF32C56970</key>
 		<dict>
 			<key>fileRef</key>
@@ -5153,6 +5362,30 @@
 			<string>PBXFileReference</string>
 			<key>path</key>
 			<string>Pods-MEVHorizontalContacts_Example.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F9AFAED7B284336D445054AC84C22B52</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>B03AFF43F9E1DA4477FC9D03605851EF</string>
+				<string>49F434847EE365C4D02AFA5EFE11B04B</string>
+				<string>896524BF25F0DDCB445B9616F6868EEB</string>
+				<string>B0BB64CD89ED55C747DA3A9D4B84A336</string>
+				<string>06242314D56C666E3FE9C5746DF090FA</string>
+				<string>31B4BEC55BC3C82432C98EEC9D0DC582</string>
+				<string>123C63681FC61C7774DEE7EE5C38EB35</string>
+				<string>B3D517D347BD60A1138439054266EC0A</string>
+				<string>E2F84C97D39045A74105618D8F4444C7</string>
+				<string>C2E13D496B465AA3619B67D990CC3743</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Classes</string>
+			<key>path</key>
+			<string>Classes</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>

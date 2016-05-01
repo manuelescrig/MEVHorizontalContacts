@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface MEVViewController : UIViewController
+@interface MEVViewController : UITableViewController
 
 @end
