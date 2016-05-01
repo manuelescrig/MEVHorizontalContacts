@@ -1,10 +1,10 @@
 #import <UIKit/UIKit.h>
 
-#import "MEVHorizontalContactListAddContactView.h"
-#import "MEVHorizontalContactListCell.h"
-#import "MEVHorizontalContactListFlowLayout.h"
-#import "MEVHorizontalContactListModel.h"
-#import "MEVHorizontalContactListView.h"
+#import "MEVHorizontalContactsAddContactView.h"
+#import "MEVHorizontalContactsCell.h"
+#import "MEVHorizontalContactsFlowLayout.h"
+#import "MEVHorizontalContactsModel.h"
+#import "MEVHorizontalContactsView.h"
 
 FOUNDATION_EXPORT double MEVHorizontalContactsVersionNumber;
 FOUNDATION_EXPORT const unsigned char MEVHorizontalContactsVersionString[];

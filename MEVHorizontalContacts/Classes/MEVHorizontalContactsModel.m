@@ -1,22 +1,22 @@
 //
-//  MEVHorizontalContactListModel.m
+//  MEVHorizontalContactsModel.m
 //  People Tracker
 //
 //  Created by Manuel Escrig Ventura on 24/02/15.
 //  Copyright (c) 2015 Manuel Escrig Ventura. All rights reserved.
 //
 
-#import "MEVHorizontalContactListModel.h"
+#import "MEVHorizontalContactsModel.h"
 
-@implementation MEVHorizontalContactListModel {
+@implementation MEVHorizontalContactsModel {
     
     Boolean _expanded;
 }
 
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[MEVHorizontalContactListModel class]]) {
-        MEVHorizontalContactListModel *other = object;
+    if ([object isKindOfClass:[MEVHorizontalContactsModel class]]) {
+        MEVHorizontalContactsModel *other = object;
         
         if ([self.id isEqualToString:other.id]) {
             return true;
@@ -30,7 +30,7 @@
 
 + (instancetype)contactWithImage:(UIImage *)image name:(NSString *)name
 {
-    MEVHorizontalContactListModel *model = [[MEVHorizontalContactListModel new] init];
+    MEVHorizontalContactsModel *model = [[MEVHorizontalContactsModel new] init];
     if (model) {
         model.image = image;
         model.name = name;

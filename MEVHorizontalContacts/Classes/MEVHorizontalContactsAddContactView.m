@@ -1,14 +1,14 @@
 //
-//  MEVHorizontalContactListAddContactView.m
+//  MEVHorizontalContactsAddContactView.m
 //  People Tracker
 //
 //  Created by Manuel Escrig Ventura on 25/02/15.
 //  Copyright (c) 2015 Manuel Escrig Ventura. All rights reserved.
 //
 
-#import "MEVHorizontalContactListAddContactView.h"
+#import "MEVHorizontalContactsAddContactView.h"
 
-@implementation MEVHorizontalContactListAddContactView
+@implementation MEVHorizontalContactsAddContactView
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 

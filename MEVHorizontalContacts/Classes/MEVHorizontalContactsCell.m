@@ -1,5 +1,5 @@
 //
-//  MEVHorizontalContactListCell.m
+//  MEVHorizontalContactsCell.m
 //  People Tracker
 //
 //  Created by Manuel Escrig Ventura on 24/02/15.
@@ -7,15 +7,15 @@
 //
 
 
-#import "MEVHorizontalContactListCell.h"
-#import "MEVHorizontalContactListView.h"
+#import "MEVHorizontalContactsCell.h"
+#import "MEVHorizontalContactsView.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 int const kBottomBarViewLabelHeight = 20;
 int const kCellButtonWidth = 50;
 
-@implementation MEVHorizontalContactListCell
+@implementation MEVHorizontalContactsCell
 {
     NSArray *menuViews;
 }
@@ -188,7 +188,7 @@ int const kCellButtonWidth = 50;
 #pragma mark - Overridden Properties
 
 
--(void)setContactModel:(MEVHorizontalContactListModel *)model
+-(void)setContactModel:(MEVHorizontalContactsModel *)model
 {
     self.contact = model;
     

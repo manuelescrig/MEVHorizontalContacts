@@ -1,5 +1,5 @@
 //
-//  MEVHorizontalContactListModel.h
+//  MEVHorizontalContactsModel.h
 //  People Tracker
 //
 //  Created by Manuel Escrig Ventura on 24/02/15.
@@ -9,9 +9,9 @@
 @import Foundation;
 @import UIKit;
 
-#import "MEVHorizontalContactListView.h"
+#import "MEVHorizontalContactsView.h"
 
-@interface MEVHorizontalContactListModel : NSObject
+@interface MEVHorizontalContactsModel : NSObject
 
 @property (nonatomic, strong) NSString *id;
 @property (nonatomic, strong) UIImage *image;

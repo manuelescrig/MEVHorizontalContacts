@@ -6,17 +6,17 @@
 //  Copyright (c) 2015 Manuel Escrig Ventura. All rights reserved.
 //
 
-#import "MEVHorizontalContactListFlowLayout.h"
-#import "MEVHorizontalContactListAddContactView.h"
+#import "MEVHorizontalContactsFlowLayout.h"
+#import "MEVHorizontalContactsAddContactView.h"
 
-@interface MEVHorizontalContactListFlowLayout()
+@interface MEVHorizontalContactsFlowLayout()
 
 // arrays to keep track of insert, delete index paths
 @property (nonatomic, strong) NSMutableArray *deleteIndexPaths;
 @property (nonatomic, strong) NSMutableArray *insertIndexPaths;
 @end
 
-@implementation MEVHorizontalContactListFlowLayout
+@implementation MEVHorizontalContactsFlowLayout
 
 
 - (instancetype)init
@@ -25,7 +25,7 @@
     if (self) {
         
         [self setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-        [self registerClass:[MEVHorizontalContactListAddContactView class] forDecorationViewOfKind:@"addContactView"];
+        [self registerClass:[MEVHorizontalContactsAddContactView class] forDecorationViewOfKind:@"addContactView"];
         [self setMinimumInteritemSpacing:2];
         [self setMinimumLineSpacing:2];
         

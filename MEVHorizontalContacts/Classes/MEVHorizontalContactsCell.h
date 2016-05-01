@@ -1,5 +1,5 @@
 //
-//  MEVHorizontalContactListCell.h
+//  MEVHorizontalContactsCell.h
 //  People Tracker
 //
 //  Created by Manuel Escrig Ventura on 24/02/15.
@@ -9,7 +9,7 @@
 @import UIKit;
 @import QuartzCore;
 
-@protocol MEVHorizontalContactListCellDelegate <NSObject>
+@protocol MEVHorizontalContactCellDelegate <NSObject>
 
 - (void)cellSelected:(NSInteger)index;
 
@@ -18,17 +18,17 @@
 @end
 
 
-@class MEVHorizontalContactListModel;
+@class MEVHorizontalContactsModel;
 
-@interface MEVHorizontalContactListCell : UICollectionViewCell
+@interface MEVHorizontalContactsCell : UICollectionViewCell
 {
     UIImageView *imageView;
     UILabel *label;
 }
 
-@property (nonatomic, strong) MEVHorizontalContactListModel *contact;
+@property (nonatomic, strong) MEVHorizontalContactsModel *contact;
 
-@property (nonatomic,strong) id<MEVHorizontalContactListCellDelegate> cellDelegate;
+@property (nonatomic,strong) id<MEVHorizontalContactCellDelegate> cellDelegate;
 
 
 - (void)setUpCellOptions;
@@ -37,7 +37,7 @@
 
 - (void)hideMenuViews;
 
-- (void)setContactModel:(MEVHorizontalContactListModel *)contact;
+- (void)setContactModel:(MEVHorizontalContactsModel *)contact;
 
 
 @end

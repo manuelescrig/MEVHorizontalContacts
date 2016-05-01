@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface MEVHorizontalContactListFlowLayout : UICollectionViewFlowLayout
+@interface MEVHorizontalContactsFlowLayout : UICollectionViewFlowLayout
 
 @end
