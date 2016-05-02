@@ -10,51 +10,24 @@
 
 @interface MEVHorizontalContactsExample1()
 
+@property (nonatomic, strong) UICollectionView *horizontalContactListView;
 @property (nonatomic, strong) NSArray *contacts;
 
 @end
-
-
 
 @implementation MEVHorizontalContactsExample1
 
 
 #pragma mark - View Life Cycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    NSLog(@"viewDidLoad self.view = %@", self.view);
-    
-    self.view.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view setFrame:CGRectMake(self.view.bounds.origin.x,
-                                   self.view.bounds.origin.y,
-                                   self.view.bounds.size.width,
-                                   100)];
-    [self.view setAlpha:1];
-    [self.view setOpaque:YES];
-    
-    // Contact List
-    MEVHorizontalContactsFlowLayout *layout = [[MEVHorizontalContactsFlowLayout alloc] init];
-    _horizontalContactListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)) collectionViewLayout:layout];
-    [_horizontalContactListView registerClass:[MEVHorizontalContactsCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
-    [_horizontalContactListView registerClass:[MEVHorizontalContactsAddContactView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"addContactView"];
-    [_horizontalContactListView setDataSource:self];
-    [_horizontalContactListView setDelegate:self];
-    [_horizontalContactListView setBackgroundColor:[UIColor clearColor]];
-    [_horizontalContactListView setContentInset:UIEdgeInsetsMake(5, 10, 0, 14)];
-    _horizontalContactListView.alwaysBounceHorizontal = YES;
-    _horizontalContactListView.showsVerticalScrollIndicator = NO;
-    _horizontalContactListView.showsHorizontalScrollIndicator = NO;
-    _horizontalContactListView.translatesAutoresizingMaskIntoConstraints = NO;
-//    [_horizontalContactListView setBackgroundColor:[UIColor yellowColor]];
-    
-    [self.view addSubview:_horizontalContactListView];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContactsView" : _horizontalContactListView}]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContactsView" : _horizontalContactListView}]];
 
+- (void)loadView
+{
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self setAlpha:1];
+    [self setOpaque:YES];
     
+    // Data
     NSMutableArray *contacts = [NSMutableArray new];
     for (int i = 0; i < 10; i++) {
         MEVHorizontalContactsModel *contact =  [MEVHorizontalContactsModel new];
@@ -65,8 +38,23 @@
     }
     _contacts = [contacts copy];
     
-    NSLog(@"viewDidLoad self.view = %@", self.parentViewController.view);
-    NSLog(@"viewDidLoad _horizontalContactListView = %@",_horizontalContactListView);
+    // Contact List
+    MEVHorizontalContactsFlowLayout *layout = [[MEVHorizontalContactsFlowLayout alloc] init];
+    _horizontalContactListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)) collectionViewLayout:layout];
+    [_horizontalContactListView registerClass:[MEVHorizontalContactsCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
+    [_horizontalContactListView registerClass:[MEVHorizontalContactsAddContactView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"addContactView"];
+    [_horizontalContactListView setDataSource:self];
+    [_horizontalContactListView setDelegate:self];
+    [_horizontalContactListView setBackgroundColor:[UIColor clearColor]];
+    [_horizontalContactListView setContentInset:UIEdgeInsetsMake(5, 10, 0, 14)];
+    _horizontalContactListView.alwaysBounceHorizontal = YES;
+    _horizontalContactListView.showsVerticalScrollIndicator = NO;
+    _horizontalContactListView.showsHorizontalScrollIndicator = NO;
+    _horizontalContactListView.translatesAutoresizingMaskIntoConstraints = NO;
+    [_horizontalContactListView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    [self addSubview:_horizontalContactListView];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContactsView" : _horizontalContactListView}]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContactsView" : _horizontalContactListView}]];
 }
 
 
@@ -84,8 +72,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cellForItemAtIndexPath = %d", indexPath.row);
-    
     MEVHorizontalContactsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
     cell.cellDelegate = self;
     cell.tag = indexPath.row;
@@ -104,7 +90,6 @@
     UICollectionReusableView *reusableview = nil;
     
     if (kind == UICollectionElementKindSectionFooter) {
-        
         MEVHorizontalContactsAddContactView *footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"addContactView" forIndexPath:indexPath];
         footerview.buttonDelegate = self;
         reusableview = footerview;
@@ -195,9 +180,8 @@
 
 - (void)menuSelectedOption:(NSInteger)option atIndex:(NSInteger)index
 {
-    NSLog(@"index = %@",index);
-    NSLog(@"option = %@",option);
-    
+    NSLog(@"index = %zu",index);
+    NSLog(@"option = %zi",option);
     
 }
 

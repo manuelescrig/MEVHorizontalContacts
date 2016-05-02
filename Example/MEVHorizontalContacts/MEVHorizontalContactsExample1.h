@@ -13,10 +13,8 @@
 #import "MEVHorizontalContactsCell.h"
 #import "MEVHorizontalContactsAddContactView.h"
 
-@interface MEVHorizontalContactsExample1 : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MEVHorizontalContactsCellDelegate, MEVHorizontalContactsAddContactViewDelegate>
-{
-    UICollectionView *_horizontalContactListView;
-}
+@interface MEVHorizontalContactsExample1 : UIView <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MEVHorizontalContactsCellDelegate, MEVHorizontalContactsAddContactViewDelegate>
 
+- (void)loadView;
 
 @end

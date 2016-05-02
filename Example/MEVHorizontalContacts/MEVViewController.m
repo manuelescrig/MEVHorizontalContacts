@@ -79,27 +79,13 @@ static NSString *CellIdentifier = @"CellIdentifier";
     [cell setBackgroundColor:[UIColor colorWithRed:236/255.0f green:236/255.0f blue:236/255.0f alpha:1]];
 
     MEVHorizontalContactsExample1 *horizontalContactsView = [MEVHorizontalContactsExample1 new];
-    [cell addSubview:horizontalContactsView.view];
-    [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView.view}]];
-    [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView.view}]];
-    
-    // Make sure the constraints have been added to this cell, since it may have just been created from scratch
-    [cell setNeedsUpdateConstraints];
-    [cell updateConstraintsIfNeeded];
+    [horizontalContactsView loadView];
+    [cell addSubview:horizontalContactsView];
+    [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView}]];
+    [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView}]];
     
     return cell;
 }
-
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-  
-}
-
-
 
 
 @end
