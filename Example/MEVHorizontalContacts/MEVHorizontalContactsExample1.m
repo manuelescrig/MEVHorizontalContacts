@@ -110,10 +110,15 @@
 {
     MEVHorizontalContactsModel *contact = [_contacts objectAtIndex:indexPath.row];
     if ([contact isExpanded]) {
-        return CGSizeMake(120 + 200, 120);
+        return CGSizeMake(120 + 300, 120);
     } else {
         return CGSizeMake(120, 120);
     }
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 
@@ -121,7 +126,7 @@
 
 - (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath
 {
-    return 3;
+    return 4;
 }
 
 - (UIImage *)imageForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath

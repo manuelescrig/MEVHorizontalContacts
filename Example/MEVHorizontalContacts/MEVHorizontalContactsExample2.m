@@ -71,19 +71,22 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MEVHorizontalContactsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    cell.tag = indexPath.row;
+    cell.cellIndexPath = indexPath;
     cell.cellDelegate = self;
+    cell.cellDataSource = self;
+    [cell.imageView.layer setBorderWidth:2.f];
+    [cell.imageView.layer setBorderColor:[UIColor whiteColor].CGColor];
+    
     [cell.label setTextColor:[UIColor whiteColor]];
+    [cell.label setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:16]];
     
     MEVHorizontalContactsModel *contact = [_contacts objectAtIndex:indexPath.row];
     [cell setContactModel:contact];
-    
     if ([contact isExpanded] == NO) {
         [cell hideMenuOptions];
     }
     return cell;
 }
-
 
 
 #pragma mark - UICollectionViewDelegate
@@ -120,6 +123,50 @@
 }
 
 
+#pragma mark – MEVHorizontalContactsCellDataSource Methods
+
+- (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath
+{
+    return 4;
+}
+
+- (UIImage *)imageForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath
+{
+    switch (index) {
+        case 0:
+            return [UIImage imageNamed:@"actionCall"];
+            break;
+        case 1:
+            return [UIImage imageNamed:@"actionEmail"];
+            break;
+        case 2:
+            return [UIImage imageNamed:@"actionMessage"];
+            break;
+        default:
+            return [UIImage imageNamed:@"actionCall"];
+            break;
+    }
+}
+
+- (NSString *)textForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath
+{
+    switch (index) {
+        case 0:
+            return @"Call";
+            break;
+        case 1:
+            return @"Email";
+            break;
+        case 2:
+            return @"Message";
+            break;
+        default:
+            return @"Call";
+            break;
+    }
+}
+
+
 #pragma mark – MEVHorizontalContactListCellDelegate
 
 - (void)closeAllContacts
@@ -136,36 +183,36 @@
     [_horizontalContactListView performBatchUpdates:nil completion:nil];
 }
 
-- (void)cellSelected:(NSInteger)index
+- (void)cellSelectedAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"cellSelected");
     
     [_horizontalContactListView invalidateIntrinsicContentSize];
-    MEVHorizontalContactsCell *cell = (MEVHorizontalContactsCell *)[_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    MEVHorizontalContactsCell *cell = (MEVHorizontalContactsCell *)[_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
     
-    if ([[_contacts objectAtIndex:index] isExpanded]) {
+    if ([[_contacts objectAtIndex:indexPath.row] isExpanded]) {
         [cell hideMenuOptions];
-        [[_contacts objectAtIndex:index] setExpanded:NO];
+        [[_contacts objectAtIndex:indexPath.row] setExpanded:NO];
         
         [_horizontalContactListView performBatchUpdates:nil completion:nil];
-        [_horizontalContactListView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        [_horizontalContactListView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     } else {
         [self closeAllContacts];
         
-        [[_contacts objectAtIndex:index] setExpanded:YES];
+        [[_contacts objectAtIndex:indexPath.row] setExpanded:YES];
         [cell setUpCellOptions];
         
         [_horizontalContactListView performBatchUpdates:nil completion:nil];
-        [_horizontalContactListView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+        [_horizontalContactListView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
     }
 }
 
-- (void)menuSelectedOption:(NSInteger)option atIndex:(NSInteger)index
+- (void)menuOptionSelected:(NSInteger)option atIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"index = %zu",index);
+    NSLog(@"indexPath.row = %zu",indexPath.row);
     NSLog(@"option = %zi",option);
-    
 }
+
 
 
 #pragma mark - Generate Data Methods

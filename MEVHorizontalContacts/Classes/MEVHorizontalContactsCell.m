@@ -11,7 +11,6 @@
 #import "MEVHorizontalContactsModel.h"
 
 int const kBottomBarViewLabelHeight = 30;
-int const kCellButtonWidth = 50;
 
 @implementation MEVHorizontalContactsCell
 {
@@ -64,57 +63,64 @@ int const kCellButtonWidth = 50;
 
 - (void)menuOptionSingleTap:(UIButton *)sender
 {
-    NSLog(@"menuOptionSingleTap");
     if([_cellDelegate respondsToSelector:@selector(menuOptionSelected:atIndexPath:)])
         [_cellDelegate menuOptionSelected:sender.tag atIndexPath:self.cellIndexPath];
 }
 
 - (void)setUpCellOptions
 {
+    [menuOptions removeAllObjects];
+    
     int numberOfItems;
     if([_cellDataSource respondsToSelector:@selector(numberOfItemsInCellIndexPath:)])
         numberOfItems = [_cellDataSource numberOfItemsInCellIndexPath:self.cellIndexPath];
     
-    int y = 70;
-    int x = 6;
+    float maxWidth = CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight;
+    int y = maxWidth;
     
     for (int index = 0; index < numberOfItems ; index++) {
+        
+        y += 10;
         
         UIButton *button = [UIButton new];
         button.tag = index;
         button.alpha = 0;
+        button.frame = CGRectMake(y,0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+        button.tintColor = [UIColor redColor];
+        [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
 
-        y += 10;
-        
-        UILabel *buttonLabel = [UILabel new];
-        [buttonLabel setFrame:CGRectMake(0 - 10, 0 + 39, kCellButtonWidth + 20, kCellButtonWidth)];
-        [button setFrame:CGRectMake(y, x, kCellButtonWidth, kCellButtonWidth)];
-        y += kCellButtonWidth + 10;
-        [button setBackgroundColor:[UIColor whiteColor]];
-        [button setTintColor:[UIColor redColor]];
-        
         if ([_cellDataSource respondsToSelector:@selector(textForItemAtIndex:inCellIndexPath:)]) {
             
             NSString *textLabel = [_cellDataSource textForItemAtIndex:index inCellIndexPath:self.cellIndexPath];
-            [buttonLabel setText:textLabel];
-            buttonLabel.backgroundColor = [UIColor clearColor];
-            buttonLabel.textColor = [UIColor whiteColor];
-            buttonLabel.textAlignment = NSTextAlignmentCenter;
-            buttonLabel.font = [UIFont fontWithName:@"Avenir-Light" size:13];
-            [button addSubview:buttonLabel];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight, CGRectGetWidth(self.bounds), kBottomBarViewLabelHeight)];
+            label.opaque = YES;
+            label.backgroundColor = [UIColor clearColor];
+            label.textColor = [UIColor whiteColor];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.font = [UIFont systemFontOfSize:12];
+            label.text = textLabel;
+            [button addSubview:label];
         }
      
         if ([_cellDataSource respondsToSelector:@selector(imageForItemAtIndex:inCellIndexPath:)]) {
             
             UIImage *image = [_cellDataSource imageForItemAtIndex:index inCellIndexPath:self.cellIndexPath];
             image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            [button setImage:image forState:UIControlStateNormal];
-            [button.layer setCornerRadius:kCellButtonWidth/2];
-            [self addSubview:button];
+            
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, maxWidth, maxWidth)];
+            imageView.image = image;
+            imageView.opaque = YES;
+            imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - kBottomBarViewLabelHeight/2);
+            imageView.contentMode = UIViewContentModeCenter;
+            imageView.layer.cornerRadius = (maxWidth)/2;
+            imageView.layer.masksToBounds = YES;
+            [button addSubview:imageView];
         }
         
         [menuOptions addObject:button];
-        [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
+
+        y += maxWidth + 10;
     }
     
     [self showMenuOptions];
@@ -125,11 +131,13 @@ int const kCellButtonWidth = 50;
 
 - (void)showMenuOptions
 {
-    float delay = 0.5f;
+    NSLog(@"showMenuOptions");
+    
+    float delay = 0.1f;
     for (UIView *view in menuOptions) {
 
         [view setUserInteractionEnabled:NO];
-        [UIView animateWithDuration:0.1f
+        [UIView animateWithDuration:0.01f
                               delay:0.1f + (delay * [menuOptions indexOfObject:view])
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
