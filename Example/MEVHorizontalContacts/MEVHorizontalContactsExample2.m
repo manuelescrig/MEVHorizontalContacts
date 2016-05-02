@@ -71,17 +71,15 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MEVHorizontalContactsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    cell.cellDelegate = self;
-//    [cell.imageView.layer setBorderWidth:0.f];
-//    [cell.imageView.layer setBorderColor:[UIColor whiteColor].CGColor];
-    [cell.label setTextColor:[UIColor grayColor]];
     cell.tag = indexPath.row;
+    cell.cellDelegate = self;
+    [cell.label setTextColor:[UIColor whiteColor]];
     
     MEVHorizontalContactsModel *contact = [_contacts objectAtIndex:indexPath.row];
     [cell setContactModel:contact];
     
     if ([contact isExpanded] == NO) {
-        [cell hideMenuViews];
+        [cell hideMenuOptions];
     }
     return cell;
 }
@@ -110,9 +108,9 @@
     NSLog(@"sizeForItemAtIndexPath _contacts = %@", _contacts);
     MEVHorizontalContactsModel *contact = [_contacts objectAtIndex:indexPath.row];
     if ([contact isExpanded]) {
-        return CGSizeMake(CGRectGetHeight(_horizontalContactListView.frame) + 200, CGRectGetHeight(_horizontalContactListView.frame)-20);
+        return CGSizeMake(70 + 200, 90);
     } else {
-        return CGSizeMake(CGRectGetHeight(_horizontalContactListView.frame), CGRectGetHeight(_horizontalContactListView.frame)-20);
+        return CGSizeMake(70, 90);
     }
 }
 
@@ -132,7 +130,7 @@
         MEVHorizontalContactsModel *contact = [_contacts objectAtIndex:i];
         [contact setExpanded:NO];
         MEVHorizontalContactsCell *cell = (MEVHorizontalContactsCell *)[_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        [cell hideMenuViews];
+        [cell hideMenuOptions];
     }
     [_horizontalContactListView invalidateIntrinsicContentSize];
     [_horizontalContactListView performBatchUpdates:nil completion:nil];
@@ -146,7 +144,7 @@
     MEVHorizontalContactsCell *cell = (MEVHorizontalContactsCell *)[_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
     
     if ([[_contacts objectAtIndex:index] isExpanded]) {
-        [cell hideMenuViews];
+        [cell hideMenuOptions];
         [[_contacts objectAtIndex:index] setExpanded:NO];
         
         [_horizontalContactListView performBatchUpdates:nil completion:nil];

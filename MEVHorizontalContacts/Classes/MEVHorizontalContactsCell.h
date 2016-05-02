@@ -9,11 +9,23 @@
 @import UIKit;
 @import QuartzCore;
 
+
+@protocol MEVHorizontalContactsCellDataSource <NSObject>
+
+- (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath;
+
+- (NSString *)textForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
+
+- (UIImage *)imageForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
+
+
+@end
+
 @protocol MEVHorizontalContactsCellDelegate <NSObject>
 
-- (void)cellSelected:(NSInteger)index;
+- (void)cellSelectedAtIndexPath:(NSIndexPath *)indexPath;
 
-- (void)menuSelectedOption:(NSInteger)option atIndex:(NSInteger)index;
+- (void)menuOptionSelected:(NSInteger)option atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -26,13 +38,14 @@
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) MEVHorizontalContactsModel *contact;
 @property (nonatomic, strong) id<MEVHorizontalContactsCellDelegate> cellDelegate;
-
+@property (nonatomic, strong) id<MEVHorizontalContactsCellDataSource> cellDataSource;
+@property (nonatomic, strong) NSIndexPath *cellIndexPath;
 
 - (void)setUpCellOptions;
 
-- (void)showMenuViews;
+- (void)showMenuOptions;
 
-- (void)hideMenuViews;
+- (void)hideMenuOptions;
 
 - (void)setContactModel:(MEVHorizontalContactsModel *)contact;
 

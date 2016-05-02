@@ -28,7 +28,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
     
     self.title = @"MEVHorizontalContacts";
     
-    [self.tableView setBackgroundColor:[UIColor colorWithRed:236/255.0f green:236/255.0f blue:236/255.0f alpha:1]];
+    [self.tableView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     [self.tableView setEstimatedRowHeight:100];
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
@@ -56,10 +56,10 @@ static NSString *CellIdentifier = @"CellIdentifier";
             return 140;
             break;
         case 1:
-            return 120;
+            return 100;
             break;
         case 2:
-            return 100;
+            return 80;
             break;
         case 3:
             return 180;
