@@ -9,7 +9,7 @@
 @import UIKit;
 @import QuartzCore;
 
-@protocol MEVHorizontalContactCellDelegate <NSObject>
+@protocol MEVHorizontalContactsCellDelegate <NSObject>
 
 - (void)cellSelected:(NSInteger)index;
 
@@ -28,7 +28,7 @@
 
 @property (nonatomic, strong) MEVHorizontalContactsModel *contact;
 
-@property (nonatomic,strong) id<MEVHorizontalContactCellDelegate> cellDelegate;
+@property (nonatomic,strong) id<MEVHorizontalContactsCellDelegate> cellDelegate;
 
 
 - (void)setUpCellOptions;

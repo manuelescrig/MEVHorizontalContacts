@@ -8,8 +8,6 @@
 
 @import UIKit;
 
-#import "MEVHorizontalContactsView.h"
-
 @protocol MEVHorizontalContactsAddContactViewDelegate <NSObject>
 
 - (void)buttonDidTap:(UIButton *)button;

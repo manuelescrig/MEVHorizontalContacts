@@ -22,6 +22,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		72DBA79E47A5B9B89EA9497D /* Pods_MEVHorizontalContacts_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E27EA3DC7411F59BE2C3B0 /* Pods_MEVHorizontalContacts_Example.framework */; };
+		C4A75FE41CD7417300879B57 /* MEVHorizontalContactsExample1.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A75FE31CD7417300879B57 /* MEVHorizontalContactsExample1.m */; };
 		E882CF588CC9F5599B4234EA /* Pods_MEVHorizontalContacts_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8039D58A41683A9D35C246 /* Pods_MEVHorizontalContacts_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,8 @@
 		8EC29E429A4B34C13F7C72FA /* Pods-MEVHorizontalContacts_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MEVHorizontalContacts_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MEVHorizontalContacts_Example/Pods-MEVHorizontalContacts_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9B8039D58A41683A9D35C246 /* Pods_MEVHorizontalContacts_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MEVHorizontalContacts_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B53B8BE49849E1F0B59FCF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		C4A75FE21CD7417300879B57 /* MEVHorizontalContactsExample1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEVHorizontalContactsExample1.h; sourceTree = "<group>"; };
+		C4A75FE31CD7417300879B57 /* MEVHorizontalContactsExample1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEVHorizontalContactsExample1.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,8 @@
 				6003F59D195388D20070C39A /* MEVAppDelegate.m */,
 				6003F5A5195388D20070C39A /* MEVViewController.h */,
 				6003F5A6195388D20070C39A /* MEVViewController.m */,
+				C4A75FE21CD7417300879B57 /* MEVHorizontalContactsExample1.h */,
+				C4A75FE31CD7417300879B57 /* MEVHorizontalContactsExample1.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -393,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4A75FE41CD7417300879B57 /* MEVHorizontalContactsExample1.m in Sources */,
 				6003F59E195388D20070C39A /* MEVAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* MEVViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

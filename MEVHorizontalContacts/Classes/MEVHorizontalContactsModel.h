@@ -9,8 +9,6 @@
 @import Foundation;
 @import UIKit;
 
-#import "MEVHorizontalContactsView.h"
-
 @interface MEVHorizontalContactsModel : NSObject
 
 @property (nonatomic, strong) NSString *id;
