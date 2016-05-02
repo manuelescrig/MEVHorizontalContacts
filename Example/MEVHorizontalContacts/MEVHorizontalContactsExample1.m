@@ -32,8 +32,8 @@
     for (int i = 0; i < 10; i++) {
         MEVHorizontalContactsModel *contact =  [MEVHorizontalContactsModel new];
         [contact setId:@"1"];
-        [contact setName:@"Manuel"];
-        [contact setImage:nil];
+        [contact setName:[self getRandomUserName]];
+        [contact setImage:[UIImage imageNamed:[self getRandomImageName]]];
         [contacts addObject:contact];
     }
     _contacts = [contacts copy];
@@ -45,13 +45,12 @@
     [_horizontalContactListView registerClass:[MEVHorizontalContactsAddContactView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"addContactView"];
     [_horizontalContactListView setDataSource:self];
     [_horizontalContactListView setDelegate:self];
-    [_horizontalContactListView setBackgroundColor:[UIColor clearColor]];
     [_horizontalContactListView setContentInset:UIEdgeInsetsMake(5, 10, 0, 14)];
+    [_horizontalContactListView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     _horizontalContactListView.alwaysBounceHorizontal = YES;
     _horizontalContactListView.showsVerticalScrollIndicator = NO;
     _horizontalContactListView.showsHorizontalScrollIndicator = NO;
     _horizontalContactListView.translatesAutoresizingMaskIntoConstraints = NO;
-    [_horizontalContactListView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     [self addSubview:_horizontalContactListView];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContactsView" : _horizontalContactListView}]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContactsView" : _horizontalContactListView}]];
@@ -191,8 +190,23 @@
     
     // Close Contacts
     [self closeAllContacts];
-    
 }
 
+
+#pragma mark - Generate Data Methods
+
+- (NSString *)getRandomUserName
+{
+    NSLog(@"getRandomUserName");
+    NSArray *array = @[@"James", @"Mary", @"Robert", @"Patricia", @"David", @"Linda", @"Charles", @"Barbara", @"John", @"Paul"];
+    return [array objectAtIndex: arc4random() % [array count]];
+}
+
+- (NSString *)getRandomImageName
+{
+    NSLog(@"getRandomImageName");
+    NSArray *array = @[@"image1", @"image2", @"image3", @"image4", @"image5", @"image6", @"image7", @"image8", @"image9", @"image10"];
+    return [array objectAtIndex: arc4random() % [array count]];
+}
 
 @end

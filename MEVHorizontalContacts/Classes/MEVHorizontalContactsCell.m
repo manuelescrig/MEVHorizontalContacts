@@ -30,24 +30,23 @@ int const kCellButtonWidth = 50;
     
     UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [self addGestureRecognizer:singleFingerTap];
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight, CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight)];
-    imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - kBottomBarViewLabelHeight/2);
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.backgroundColor = [UIColor lightGrayColor];
-    imageView.opaque = YES;
-    imageView.layer.cornerRadius = (CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight)/2;
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight, CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight)];
+    _imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - kBottomBarViewLabelHeight/2);
+    _imageView.contentMode = UIViewContentModeScaleAspectFill;
+    _imageView.backgroundColor = [UIColor lightGrayColor];
+    _imageView.opaque = YES;
+    _imageView.layer.cornerRadius = (CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight)/2;
 //    imageView.layer.borderColor = UIColorFromRGB(PT_THEME_DARK_COLOR_2).CGColor;
-    imageView.layer.borderWidth = 1;
-    imageView.layer.masksToBounds = YES;
-    [self addSubview:imageView];
+    _imageView.layer.borderWidth = 1;
+    _imageView.layer.masksToBounds = YES;
+    [self addSubview:_imageView];
     
-    label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight, CGRectGetWidth(self.bounds), kBottomBarViewLabelHeight)];
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont fontWithName:@"AvenirNext-Medium" size:14];
-    label.text = @"Name";
-    [self addSubview:label];
+    _label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight, CGRectGetWidth(self.bounds), kBottomBarViewLabelHeight)];
+    _label.backgroundColor = [UIColor clearColor];
+    _label.textColor = [UIColor whiteColor];
+    _label.textAlignment = NSTextAlignmentCenter;
+    _label.font = [UIFont fontWithName:@"AvenirNext-Medium" size:14];
+    [self addSubview:_label];
     
     return self;
 }
@@ -192,8 +191,8 @@ int const kCellButtonWidth = 50;
 {
     self.contact = model;
     
-    [imageView setImage:[model image]];
-    [label setText:[model getName]];
+    [_imageView setImage:[model image]];
+    [_label setText:[model getName]];
 }
 
 @end

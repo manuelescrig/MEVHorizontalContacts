@@ -10,15 +10,13 @@
 
 @implementation MEVHorizontalContactsAddContactView
 
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
 
 - (id)initWithFrame:(CGRect)frame
 {
     if (!(self = [super initWithFrame:frame])) return nil;
     
     self.opaque = YES;
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor lightGrayColor];
     
     UIImage *image = [[UIImage imageNamed:@"IconAdd"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -27,8 +25,8 @@
     [button setImage:image forState:UIControlStateSelected];
     [button setOpaque:YES];
     [button.layer setCornerRadius:30];
-    [button setTintColor:UIColorFromRGB(0xFFFFFF)];
-    [button setBackgroundColor:UIColorFromRGB(0x00C4E5)];
+    [button setTintColor:[UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f]];
+    [button setBackgroundColor:[UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1.0f]];
     [button addTarget:self action:@selector(buttonDidTap:) forControlEvents:UIControlEventTouchDown];
     [button setFrame:CGRectMake(0,10,60,60)];
     [self addSubview:button];
@@ -45,7 +43,7 @@
 
 + (CGSize)defaultSize
 {
-    return CGSizeMake(50, 50);
+    return CGSizeMake(60, 60);
 }
 
 @end

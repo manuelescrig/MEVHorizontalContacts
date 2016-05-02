@@ -21,14 +21,11 @@
 @class MEVHorizontalContactsModel;
 
 @interface MEVHorizontalContactsCell : UICollectionViewCell
-{
-    UIImageView *imageView;
-    UILabel *label;
-}
 
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) MEVHorizontalContactsModel *contact;
-
-@property (nonatomic,strong) id<MEVHorizontalContactsCellDelegate> cellDelegate;
+@property (nonatomic, strong) id<MEVHorizontalContactsCellDelegate> cellDelegate;
 
 
 - (void)setUpCellOptions;
