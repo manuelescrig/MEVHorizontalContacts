@@ -1,5 +1,5 @@
 //
-//  MEVHorizontalContactsExample1.h
+//  MEVHorizontalContactsExample3.h
 //  MEVHorizontalContacts
 //
 //  Created by Manuel Escrig Ventura on 02/05/16.
@@ -12,7 +12,7 @@
 #import "MEVHorizontalContactsCell.h"
 #import "MEVHorizontalContactsModel.h"
 
-@interface MEVHorizontalContactsExample1 : UIView <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MEVHorizontalContactsCellDelegate>
+@interface MEVHorizontalContactsExample3 : UIView <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MEVHorizontalContactsCellDelegate>
 
 - (void)loadView;
 

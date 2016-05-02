@@ -1,21 +1,21 @@
 //
-//  MEVHorizontalContactsExample1.m
+//  MEVHorizontalContactsExample2.m
 //  MEVHorizontalContacts
 //
 //  Created by Manuel Escrig Ventura on 02/05/16.
 //  Copyright © 2016 Manuel Escrig Ventura. All rights reserved.
 //
 
-#import "MEVHorizontalContactsExample1.h"
+#import "MEVHorizontalContactsExample2.h"
 
-@interface MEVHorizontalContactsExample1()
+@interface MEVHorizontalContactsExample2()
 
 @property (nonatomic, strong) UICollectionView *horizontalContactListView;
 @property (nonatomic, strong) NSArray *contacts;
 
 @end
 
-@implementation MEVHorizontalContactsExample1
+@implementation MEVHorizontalContactsExample2
 
 
 #pragma mark - View Life Cycle
@@ -44,8 +44,8 @@
     [_horizontalContactListView registerClass:[MEVHorizontalContactsCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     [_horizontalContactListView setDataSource:self];
     [_horizontalContactListView setDelegate:self];
-    [_horizontalContactListView setContentInset:UIEdgeInsetsMake(10, 10, 10, 10)];
-    [_horizontalContactListView setBackgroundColor:[UIColor colorWithRed:170/255.0f green:178/255.0f blue:189/255.0f alpha:1.0f]];
+    [_horizontalContactListView setContentInset:UIEdgeInsetsMake(5, 10, 0, 14)];
+    [_horizontalContactListView setBackgroundColor:[UIColor colorWithRed:204/255.0f green:209/255.0f blue:217/255.0f alpha:1.0f]];
     _horizontalContactListView.alwaysBounceHorizontal = YES;
     _horizontalContactListView.showsVerticalScrollIndicator = NO;
     _horizontalContactListView.showsHorizontalScrollIndicator = NO;
@@ -71,11 +71,11 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MEVHorizontalContactsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    cell.tag = indexPath.row;
     cell.cellDelegate = self;
-    [cell.imageView.layer setBorderWidth:2.f];
-    [cell.imageView.layer setBorderColor:[UIColor whiteColor].CGColor];
-    [cell.label setTextColor:[UIColor whiteColor]];
+//    [cell.imageView.layer setBorderWidth:0.f];
+//    [cell.imageView.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [cell.label setTextColor:[UIColor grayColor]];
+    cell.tag = indexPath.row;
     
     MEVHorizontalContactsModel *contact = [_contacts objectAtIndex:indexPath.row];
     [cell setContactModel:contact];
@@ -109,12 +109,16 @@
 {
     NSLog(@"sizeForItemAtIndexPath _contacts = %@", _contacts);
     MEVHorizontalContactsModel *contact = [_contacts objectAtIndex:indexPath.row];
-    
     if ([contact isExpanded]) {
         return CGSizeMake(CGRectGetHeight(_horizontalContactListView.frame) + 200, CGRectGetHeight(_horizontalContactListView.frame)-20);
     } else {
         return CGSizeMake(CGRectGetHeight(_horizontalContactListView.frame), CGRectGetHeight(_horizontalContactListView.frame)-20);
     }
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 

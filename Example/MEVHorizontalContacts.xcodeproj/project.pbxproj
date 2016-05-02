@@ -23,6 +23,9 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		72DBA79E47A5B9B89EA9497D /* Pods_MEVHorizontalContacts_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E27EA3DC7411F59BE2C3B0 /* Pods_MEVHorizontalContacts_Example.framework */; };
 		C4A75FE41CD7417300879B57 /* MEVHorizontalContactsExample1.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A75FE31CD7417300879B57 /* MEVHorizontalContactsExample1.m */; };
+		C4A75FE71CD771FF00879B57 /* MEVHorizontalContactsExample2.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A75FE61CD771FF00879B57 /* MEVHorizontalContactsExample2.m */; };
+		C4A75FEA1CD7723900879B57 /* MEVHorizontalContactsExample3.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A75FE91CD7723900879B57 /* MEVHorizontalContactsExample3.m */; };
+		C4A75FED1CD7724900879B57 /* MEVHorizontalContactsExample4.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A75FEC1CD7724900879B57 /* MEVHorizontalContactsExample4.m */; };
 		E882CF588CC9F5599B4234EA /* Pods_MEVHorizontalContacts_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B8039D58A41683A9D35C246 /* Pods_MEVHorizontalContacts_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +71,12 @@
 		B5B53B8BE49849E1F0B59FCF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		C4A75FE21CD7417300879B57 /* MEVHorizontalContactsExample1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEVHorizontalContactsExample1.h; sourceTree = "<group>"; };
 		C4A75FE31CD7417300879B57 /* MEVHorizontalContactsExample1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEVHorizontalContactsExample1.m; sourceTree = "<group>"; };
+		C4A75FE51CD771FF00879B57 /* MEVHorizontalContactsExample2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEVHorizontalContactsExample2.h; sourceTree = "<group>"; };
+		C4A75FE61CD771FF00879B57 /* MEVHorizontalContactsExample2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEVHorizontalContactsExample2.m; sourceTree = "<group>"; };
+		C4A75FE81CD7723900879B57 /* MEVHorizontalContactsExample3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEVHorizontalContactsExample3.h; sourceTree = "<group>"; };
+		C4A75FE91CD7723900879B57 /* MEVHorizontalContactsExample3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEVHorizontalContactsExample3.m; sourceTree = "<group>"; };
+		C4A75FEB1CD7724900879B57 /* MEVHorizontalContactsExample4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEVHorizontalContactsExample4.h; sourceTree = "<group>"; };
+		C4A75FEC1CD7724900879B57 /* MEVHorizontalContactsExample4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEVHorizontalContactsExample4.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +148,12 @@
 				6003F5A6195388D20070C39A /* MEVViewController.m */,
 				C4A75FE21CD7417300879B57 /* MEVHorizontalContactsExample1.h */,
 				C4A75FE31CD7417300879B57 /* MEVHorizontalContactsExample1.m */,
+				C4A75FE51CD771FF00879B57 /* MEVHorizontalContactsExample2.h */,
+				C4A75FE61CD771FF00879B57 /* MEVHorizontalContactsExample2.m */,
+				C4A75FE81CD7723900879B57 /* MEVHorizontalContactsExample3.h */,
+				C4A75FE91CD7723900879B57 /* MEVHorizontalContactsExample3.m */,
+				C4A75FEB1CD7724900879B57 /* MEVHorizontalContactsExample4.h */,
+				C4A75FEC1CD7724900879B57 /* MEVHorizontalContactsExample4.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -398,8 +413,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4A75FED1CD7724900879B57 /* MEVHorizontalContactsExample4.m in Sources */,
 				C4A75FE41CD7417300879B57 /* MEVHorizontalContactsExample1.m in Sources */,
 				6003F59E195388D20070C39A /* MEVAppDelegate.m in Sources */,
+				C4A75FEA1CD7723900879B57 /* MEVHorizontalContactsExample3.m in Sources */,
+				C4A75FE71CD771FF00879B57 /* MEVHorizontalContactsExample2.m in Sources */,
 				6003F5A7195388D20070C39A /* MEVViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);

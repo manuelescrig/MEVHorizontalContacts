@@ -55,13 +55,4 @@
     return _expanded;
 }
 
-- (CGSize)getSize
-{    
-    if (_expanded) {
-        return CGSizeMake(280, 80);
-    } else {
-        return CGSizeMake(70, 80);
-    }
-}
-
 @end

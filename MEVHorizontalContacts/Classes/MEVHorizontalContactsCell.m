@@ -10,8 +10,6 @@
 #import "MEVHorizontalContactsCell.h"
 #import "MEVHorizontalContactsModel.h"
 
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
 int const kBottomBarViewLabelHeight = 20;
 int const kCellButtonWidth = 50;
 
@@ -26,18 +24,19 @@ int const kCellButtonWidth = 50;
     if (!(self = [super initWithFrame:frame])) return nil;
     
     self.opaque = YES;
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor redColor];
     
-    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-    [self addGestureRecognizer:singleFingerTap];
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight, CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight)];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
+    [self addGestureRecognizer:singleTap];
+
+    float maxWidth = CGRectGetWidth(self.bounds) > CGRectGetHeight(self.bounds) ? CGRectGetHeight(self.bounds) : CGRectGetWidth(self.bounds);
+    
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, maxWidth - kBottomBarViewLabelHeight, maxWidth - kBottomBarViewLabelHeight)];
+    _imageView.opaque = YES;
     _imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - kBottomBarViewLabelHeight/2);
     _imageView.contentMode = UIViewContentModeScaleAspectFill;
     _imageView.backgroundColor = [UIColor lightGrayColor];
-    _imageView.opaque = YES;
-    _imageView.layer.cornerRadius = (CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight)/2;
-//    imageView.layer.borderColor = UIColorFromRGB(PT_THEME_DARK_COLOR_2).CGColor;
-    _imageView.layer.borderWidth = 1;
+    _imageView.layer.cornerRadius = (maxWidth - kBottomBarViewLabelHeight)/2;
     _imageView.layer.masksToBounds = YES;
     [self addSubview:_imageView];
     
@@ -53,8 +52,14 @@ int const kCellButtonWidth = 50;
 
 
 
-
 #pragma mark - Actions
+
+- (void)singleTap:(UITapGestureRecognizer *)recognizer
+{
+    if([_cellDelegate respondsToSelector:@selector(cellSelected:)])
+        [_cellDelegate cellSelected:self.tag];
+}
+
 
 - (void)setUpCellOptions
 {
@@ -78,7 +83,7 @@ int const kCellButtonWidth = 50;
         [view setFrame:CGRectMake(y, x, kCellButtonWidth, kCellButtonWidth)];
         y += kCellButtonWidth + 10;
         [view setBackgroundColor:[UIColor whiteColor]];
-        [view setTintColor:UIColorFromRGB(0x00C4E5)];
+        [view setTintColor:[UIColor redColor]];
         UIImage *btnImage;
         
         switch (index) {
@@ -139,11 +144,6 @@ int const kCellButtonWidth = 50;
         [_cellDelegate menuSelectedOption:2 atIndex:self.tag];
 }
 
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
-{
-    if([_cellDelegate respondsToSelector:@selector(cellSelected:)])
-        [_cellDelegate cellSelected:self.tag];
-}
 
 #pragma mark - Animation Methods
 

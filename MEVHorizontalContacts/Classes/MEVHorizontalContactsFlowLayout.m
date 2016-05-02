@@ -7,7 +7,6 @@
 //
 
 #import "MEVHorizontalContactsFlowLayout.h"
-#import "MEVHorizontalContactsAddContactView.h"
 
 @interface MEVHorizontalContactsFlowLayout()
 
@@ -25,7 +24,6 @@
     if (self) {
         
         [self setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-        [self registerClass:[MEVHorizontalContactsAddContactView class] forDecorationViewOfKind:@"addContactView"];
         [self setMinimumInteritemSpacing:2];
         [self setMinimumLineSpacing:2];
         

@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Manuel Escrig Ventura. All rights reserved.
 //
 
-@import Foundation;
 @import UIKit;
 
 @interface MEVHorizontalContactsModel : NSObject
@@ -21,8 +20,6 @@
 
 - (void)setExpanded:(BOOL)expanded;
 - (BOOL)isExpanded;
-
-- (CGSize)getSize;
 
 
 @end
