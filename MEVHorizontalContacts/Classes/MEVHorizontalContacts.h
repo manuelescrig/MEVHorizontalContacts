@@ -12,8 +12,6 @@
 #import "MEVHorizontalContactsCell.h"
 #import "MEVHorizontalContactsModel.h"
 
-NSInteger const kHorizontalContactsLabelHeight = 30;
-
 @protocol MEVHorizontalContactsDataSource <NSObject>
 
 @required
