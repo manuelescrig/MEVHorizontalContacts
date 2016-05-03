@@ -84,6 +84,8 @@
     
     if ([contact isExpanded] == NO) {
         [cell hideMenuOptions];
+    } else {
+        [cell showMenuOptions];
     }
     return cell;
 }
@@ -128,7 +130,7 @@
 
 - (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath
 {
-    return 4;
+    return 1;
 }
 
 - (UIImage *)imageForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath
@@ -201,7 +203,7 @@
         [self closeAllContacts];
         
         [[_contacts objectAtIndex:indexPath.row] setExpanded:YES];
-        [cell setUpCellOptions];
+        [cell showMenuOptions];
         
         [_horizontalContactListView performBatchUpdates:nil completion:nil];
         [_horizontalContactListView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];

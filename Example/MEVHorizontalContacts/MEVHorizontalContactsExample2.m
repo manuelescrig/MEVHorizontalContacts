@@ -20,7 +20,6 @@
 
 #pragma mark - View Life Cycle
 
-
 - (void)loadView
 {
     self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -81,9 +80,13 @@
     [cell.label setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:16]];
     
     MEVHorizontalContactsModel *contact = [_contacts objectAtIndex:indexPath.row];
-    [cell setContactModel:contact];
+    [cell.imageView setImage:[contact image]];
+    [cell.label setText:[contact getName]];
+    
     if ([contact isExpanded] == NO) {
         [cell hideMenuOptions];
+    } else {
+        [cell showMenuOptions];
     }
     return cell;
 }
@@ -109,12 +112,12 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"sizeForItemAtIndexPath _contacts = %@", _contacts);
-    MEVHorizontalContactsModel *contact = [_contacts objectAtIndex:indexPath.row];
-    if ([contact isExpanded]) {
-        return CGSizeMake(70 + 200, 90);
-    } else {
+//    MEVHorizontalContactsModel *contact = [_contacts objectAtIndex:indexPath.row];
+//    if ([contact isExpanded]) {
+//        return CGSizeMake(70 + 200, 90);
+//    } else {
         return CGSizeMake(70, 90);
-    }
+//    }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -169,6 +172,38 @@
 
 #pragma mark – MEVHorizontalContactListCellDelegate
 
+
+- (void)cellSelectedAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"cellSelectedAtIndexPath");
+    
+    [_horizontalContactListView invalidateIntrinsicContentSize];
+    MEVHorizontalContactsCell *cell = (MEVHorizontalContactsCell *)[_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+    
+    if ([[_contacts objectAtIndex:indexPath.row] isExpanded]) {
+        [cell hideMenuOptions];
+        [[_contacts objectAtIndex:indexPath.row] setExpanded:NO];
+        
+        [_horizontalContactListView performBatchUpdates:nil completion:nil];
+        [_horizontalContactListView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    } else {
+        [self closeAllContacts];
+        
+        [[_contacts objectAtIndex:indexPath.row] setExpanded:YES];
+        [cell showMenuOptions];
+        
+        [_horizontalContactListView performBatchUpdates:nil completion:nil];
+        [_horizontalContactListView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+    }
+}
+
+- (void)menuOptionSelected:(NSInteger)option atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"indexPath.row = %zu",indexPath.row);
+    NSLog(@"option = %zi",option);
+}
+
+
 - (void)closeAllContacts
 {
     NSLog(@"closeAllContacts");
@@ -181,36 +216,6 @@
     }
     [_horizontalContactListView invalidateIntrinsicContentSize];
     [_horizontalContactListView performBatchUpdates:nil completion:nil];
-}
-
-- (void)cellSelectedAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"cellSelected");
-    
-    [_horizontalContactListView invalidateIntrinsicContentSize];
-    MEVHorizontalContactsCell *cell = (MEVHorizontalContactsCell *)[_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-    
-    if ([[_contacts objectAtIndex:indexPath.row] isExpanded]) {
-        [cell hideMenuOptions];
-        [[_contacts objectAtIndex:indexPath.row] setExpanded:NO];
-        
-        [_horizontalContactListView performBatchUpdates:nil completion:nil];
-        [_horizontalContactListView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    } else {
-        [self closeAllContacts];
-        
-        [[_contacts objectAtIndex:indexPath.row] setExpanded:YES];
-        [cell setUpCellOptions];
-        
-        [_horizontalContactListView performBatchUpdates:nil completion:nil];
-        [_horizontalContactListView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
-    }
-}
-
-- (void)menuOptionSelected:(NSInteger)option atIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"indexPath.row = %zu",indexPath.row);
-    NSLog(@"option = %zi",option);
 }
 
 

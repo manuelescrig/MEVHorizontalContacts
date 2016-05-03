@@ -12,14 +12,24 @@
 
 @protocol MEVHorizontalContactsCellDataSource <NSObject>
 
+@required
+
 - (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath;
 
 - (NSString *)textForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
 
 - (UIImage *)imageForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
 
+@optional
+
+- (UIColor *)textColorForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
+
+- (UIColor *)backgroundColorForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
+
+- (UIColor *)tintColorForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
 
 @end
+
 
 @protocol MEVHorizontalContactsCellDelegate <NSObject>
 
@@ -41,11 +51,12 @@
 @property (nonatomic, strong) id<MEVHorizontalContactsCellDataSource> cellDataSource;
 @property (nonatomic, strong) NSIndexPath *cellIndexPath;
 
-- (void)setUpCellOptions;
 
 - (void)showMenuOptions;
 
 - (void)hideMenuOptions;
+
+- (BOOL)isMenuShown;
 
 - (void)setContactModel:(MEVHorizontalContactsModel *)contact;
 

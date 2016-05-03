@@ -10,9 +10,10 @@
 
 @interface MEVHorizontalContactsFlowLayout()
 
-// arrays to keep track of insert, delete index paths
+// Arrays to keep track of insert, delete index paths
 @property (nonatomic, strong) NSMutableArray *deleteIndexPaths;
 @property (nonatomic, strong) NSMutableArray *insertIndexPaths;
+
 @end
 
 @implementation MEVHorizontalContactsFlowLayout

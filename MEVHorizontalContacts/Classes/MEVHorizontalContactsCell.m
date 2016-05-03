@@ -11,12 +11,18 @@
 #import "MEVHorizontalContactsModel.h"
 
 int const kBottomBarViewLabelHeight = 30;
+int const kBottomBarViewMenuOptionsPadding = 10;
+
+
+@interface MEVHorizontalContactsCell()
+
+@property (nonatomic, strong) NSMutableArray *menuOptions;
+@property (nonatomic, assign) BOOL isMenuShown;
+
+@end
+
 
 @implementation MEVHorizontalContactsCell
-{
-    NSMutableArray *menuOptions;
-}
-
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -24,7 +30,8 @@ int const kBottomBarViewLabelHeight = 30;
     
     self.opaque = YES;
     
-    menuOptions = [NSMutableArray new];
+    _menuOptions = [NSMutableArray new];
+    _isMenuShown = NO;
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSingleTap:)];
     [self addGestureRecognizer:singleTap];
@@ -49,11 +56,8 @@ int const kBottomBarViewLabelHeight = 30;
     return self;
 }
 
-#pragma mark - MEVHorizontalContactsCellDataSource Methods
 
-
-
-#pragma mark - Actions
+#pragma mark - UI Actions
 
 - (void)cellSingleTap:(UITapGestureRecognizer *)recognizer
 {
@@ -67,25 +71,29 @@ int const kBottomBarViewLabelHeight = 30;
         [_cellDelegate menuOptionSelected:sender.tag atIndexPath:self.cellIndexPath];
 }
 
+
+#pragma mark - Setup Methods (Private)
+
 - (void)setUpCellOptions
 {
-    [menuOptions removeAllObjects];
+    [_menuOptions removeAllObjects];
     
     int numberOfItems;
-    if([_cellDataSource respondsToSelector:@selector(numberOfItemsInCellIndexPath:)])
+    if([_cellDataSource respondsToSelector:@selector(numberOfItemsInCellIndexPath:)]) {
         numberOfItems = [_cellDataSource numberOfItemsInCellIndexPath:self.cellIndexPath];
+    }
     
     float maxWidth = CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight;
+    NSLog(@"maxWidth = %f", maxWidth);
     int y = maxWidth;
+    y += kBottomBarViewMenuOptionsPadding;
     
     for (int index = 0; index < numberOfItems ; index++) {
         
-        y += 10;
-        
         UIButton *button = [UIButton new];
+        button.frame = CGRectMake(y,0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
         button.tag = index;
         button.alpha = 0;
-        button.frame = CGRectMake(y,0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
         button.tintColor = [UIColor redColor];
         [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -117,28 +125,30 @@ int const kBottomBarViewLabelHeight = 30;
             [button addSubview:imageView];
         }
         
-        [menuOptions addObject:button];
+        [_menuOptions addObject:button];
         [self addSubview:button];
 
-        y += maxWidth + 10;
+        y += (maxWidth + kBottomBarViewMenuOptionsPadding);
     }
-    
-    [self showMenuOptions];
 }
 
 
-#pragma mark - Animation Methods
+#pragma mark - Animation Methods (Public)
 
 - (void)showMenuOptions
 {
     NSLog(@"showMenuOptions");
     
+    _isMenuShown = YES;
+    
+    [self setUpCellOptions];
+    
     float delay = 0.1f;
-    for (UIView *view in menuOptions) {
+    for (UIView *view in _menuOptions) {
 
         [view setUserInteractionEnabled:NO];
         [UIView animateWithDuration:0.01f
-                              delay:0.1f + (delay * [menuOptions indexOfObject:view])
+                              delay:0.1f + (delay * [_menuOptions indexOfObject:view])
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
             view.alpha = 1;
@@ -153,8 +163,8 @@ int const kBottomBarViewLabelHeight = 30;
 {
     float delay = 0.05f;
     int pos = 0;
-    for (int i = (int)[menuOptions count]; i > 0 ; i--) {
-        UIView *view = [menuOptions objectAtIndex:i-1];
+    for (int i = (int)[_menuOptions count]; i > 0 ; i--) {
+        UIView *view = [_menuOptions objectAtIndex:i-1];
         [UIView animateWithDuration:0.1f
                               delay:delay * pos
                             options:UIViewAnimationOptionCurveEaseInOut
@@ -162,13 +172,19 @@ int const kBottomBarViewLabelHeight = 30;
                              view.alpha = 0;
                          } completion:^(BOOL finished) {
                              [view removeFromSuperview];
+                             _isMenuShown = NO;
                          }];
         pos++;
     }
 }
 
 
-#pragma mark - Overridden Properties
+- (BOOL)isMenuShown
+{
+    return _isMenuShown;
+}
+
+#pragma mark - Overridden Properties (Public)
 
 - (void)setContactModel:(MEVHorizontalContactsModel *)model
 {

@@ -84,6 +84,8 @@
     [cell setContactModel:contact];
     if ([contact isExpanded] == NO) {
         [cell hideMenuOptions];
+    } else {
+        [cell showMenuOptions];
     }
     return cell;
 }
@@ -199,7 +201,7 @@
         [self closeAllContacts];
         
         [[_contacts objectAtIndex:indexPath.row] setExpanded:YES];
-        [cell setUpCellOptions];
+        [cell showMenuOptions];
         
         [_horizontalContactListView performBatchUpdates:nil completion:nil];
         [_horizontalContactListView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
