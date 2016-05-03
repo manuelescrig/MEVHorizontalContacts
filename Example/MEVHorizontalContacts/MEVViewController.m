@@ -53,10 +53,10 @@ static NSString *CellIdentifier = @"CellIdentifier";
 {
     switch (indexPath.row) {
         case 0:
-            return 140;
+            return 100;
             break;
         case 1:
-            return 100;
+            return 140;
             break;
         case 2:
             return 80;
@@ -84,28 +84,24 @@ static NSString *CellIdentifier = @"CellIdentifier";
     switch (indexPath.row) {
         case 0: {
             MEVHorizontalContactsExample1 *horizontalContactsView = [MEVHorizontalContactsExample1 new];
-            [horizontalContactsView loadView];
             [cell addSubview:horizontalContactsView];
             [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView}]];
             [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView}]];
         } break;
         case 1: {
             MEVHorizontalContactsExample2 *horizontalContactsView = [MEVHorizontalContactsExample2 new];
-            [horizontalContactsView loadView];
             [cell addSubview:horizontalContactsView];
             [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView}]];
             [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView}]];
         } break;
         case 2: {
             MEVHorizontalContactsExample3 *horizontalContactsView = [MEVHorizontalContactsExample3 new];
-            [horizontalContactsView loadView];
             [cell addSubview:horizontalContactsView];
             [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView}]];
             [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView}]];
         } break;
         case 3: {
             MEVHorizontalContactsExample4 *horizontalContactsView = [MEVHorizontalContactsExample4 new];
-            [horizontalContactsView loadView];
             [cell addSubview:horizontalContactsView];
             [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView}]];
             [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContactsView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContactsView" : horizontalContactsView}]];

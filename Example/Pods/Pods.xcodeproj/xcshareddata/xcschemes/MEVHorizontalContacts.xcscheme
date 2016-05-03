@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9DED23D82F6F517FC205DA7C'
+               BlueprintIdentifier = 'AB64F0AE8EB17550249F7EE6'
                BlueprintName = 'MEVHorizontalContacts'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'MEVHorizontalContacts.framework'>

@@ -8,12 +8,6 @@
 
 @import UIKit;
 
-#import "MEVHorizontalContactsFlowLayout.h"
-#import "MEVHorizontalContactsCell.h"
-#import "MEVHorizontalContactsModel.h"
-
-@interface MEVHorizontalContactsExample3 : UIView <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MEVHorizontalContactsCellDelegate, MEVHorizontalContactsCellDataSource>
-
-- (void)loadView;
+@interface MEVHorizontalContactsExample3 : UIView
 
 @end

@@ -10,10 +10,6 @@
 #import "MEVHorizontalContactsCell.h"
 #import "MEVHorizontalContactsModel.h"
 
-int const kBottomBarViewLabelHeight = 30;
-int const kBottomBarViewMenuOptionsPadding = 10;
-
-
 @interface MEVHorizontalContactsCell()
 
 @property (nonatomic, strong) NSMutableArray *menuOptions;
@@ -24,11 +20,15 @@ int const kBottomBarViewMenuOptionsPadding = 10;
 
 @implementation MEVHorizontalContactsCell
 
+
+#pragma mark - View Life Cycle
+
 - (id)initWithFrame:(CGRect)frame
 {
     if (!(self = [super initWithFrame:frame])) return nil;
     
     self.opaque = YES;
+    self.backgroundColor = [UIColor lightGrayColor];
     
     _menuOptions = [NSMutableArray new];
     _isMenuShown = NO;
@@ -36,17 +36,15 @@ int const kBottomBarViewMenuOptionsPadding = 10;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSingleTap:)];
     [self addGestureRecognizer:singleTap];
 
-    float maxWidth = CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight;
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, maxWidth, maxWidth)];
+    _imageView = [UIImageView new];
     _imageView.opaque = YES;
-    _imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - kBottomBarViewLabelHeight/2);
+    _imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - _labelHeight/2);
     _imageView.contentMode = UIViewContentModeScaleAspectFill;
     _imageView.backgroundColor = [UIColor lightGrayColor];
-    _imageView.layer.cornerRadius = (maxWidth)/2;
     _imageView.layer.masksToBounds = YES;
     [self addSubview:_imageView];
     
-    _label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight, CGRectGetWidth(self.bounds), kBottomBarViewLabelHeight)];
+    _label = [UILabel new];
     _label.opaque = YES;
     _label.textColor = [UIColor whiteColor];
     _label.textAlignment = NSTextAlignmentCenter;
@@ -56,19 +54,39 @@ int const kBottomBarViewMenuOptionsPadding = 10;
     return self;
 }
 
+#pragma mark - Layout
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    float maxWidth = CGRectGetHeight(self.bounds) - _labelHeight;
+    _imageView.frame = CGRectMake(0, 0, maxWidth, maxWidth);
+    _imageView.layer.cornerRadius = (maxWidth)/2;
+    _label.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - _labelHeight, CGRectGetWidth(self.bounds), _labelHeight);
+}
+
 
 #pragma mark - UI Actions
 
 - (void)cellSingleTap:(UITapGestureRecognizer *)recognizer
 {
+    if (self.isSelected) {
+        self.selected = NO;
+        [self hideMenuOptions];
+        
+    } else {
+        self.selected = YES;
+        [self showMenuOptions];
+    }
+    
     if([_cellDelegate respondsToSelector:@selector(cellSelectedAtIndexPath:)])
         [_cellDelegate cellSelectedAtIndexPath:self.cellIndexPath];
 }
 
 - (void)menuOptionSingleTap:(UIButton *)sender
 {
-    if([_cellDelegate respondsToSelector:@selector(menuOptionSelected:atIndexPath:)])
-        [_cellDelegate menuOptionSelected:sender.tag atIndexPath:self.cellIndexPath];
+    if([_cellDelegate respondsToSelector:@selector(menuOptionSelected:atCellIndexPath:)])
+        [_cellDelegate menuOptionSelected:sender.tag atCellIndexPath:self.cellIndexPath];
 }
 
 
@@ -76,6 +94,7 @@ int const kBottomBarViewMenuOptionsPadding = 10;
 
 - (void)setUpCellOptions
 {
+    [_menuOptions makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [_menuOptions removeAllObjects];
     
     int numberOfItems;
@@ -83,24 +102,25 @@ int const kBottomBarViewMenuOptionsPadding = 10;
         numberOfItems = [_cellDataSource numberOfItemsInCellIndexPath:self.cellIndexPath];
     }
     
-    float maxWidth = CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight;
-    NSLog(@"maxWidth = %f", maxWidth);
-    int y = maxWidth;
-    y += kBottomBarViewMenuOptionsPadding;
+    float maxWidth = CGRectGetHeight(self.bounds) - _labelHeight;
+    int xOffset = maxWidth;
+    xOffset += _itemSpacing;
     
     for (int index = 0; index < numberOfItems ; index++) {
-        
+        NSLog(@"index = %d", index);
+
         UIButton *button = [UIButton new];
-        button.frame = CGRectMake(y,0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+        button.frame = CGRectMake(xOffset,0, maxWidth, maxWidth);
         button.tag = index;
-        button.alpha = 0;
+        button.alpha = 1;
+        button.backgroundColor = [UIColor yellowColor];
         button.tintColor = [UIColor redColor];
         [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
 
-        if ([_cellDataSource respondsToSelector:@selector(textForItemAtIndex:inCellIndexPath:)]) {
+        if ([_cellDataSource respondsToSelector:@selector(textForItemAtIndex:atCellIndexPath:)]) {
             
-            NSString *textLabel = [_cellDataSource textForItemAtIndex:index inCellIndexPath:self.cellIndexPath];
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - kBottomBarViewLabelHeight, CGRectGetWidth(self.bounds), kBottomBarViewLabelHeight)];
+            NSString *textLabel = [_cellDataSource textForItemAtIndex:index atCellIndexPath:self.cellIndexPath];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - _labelHeight, CGRectGetWidth(self.bounds), _labelHeight)];
             label.opaque = YES;
             label.backgroundColor = [UIColor clearColor];
             label.textColor = [UIColor whiteColor];
@@ -110,25 +130,27 @@ int const kBottomBarViewMenuOptionsPadding = 10;
             [button addSubview:label];
         }
      
-        if ([_cellDataSource respondsToSelector:@selector(imageForItemAtIndex:inCellIndexPath:)]) {
+        if ([_cellDataSource respondsToSelector:@selector(imageForItemAtIndex:atCellIndexPath:)]) {
             
-            UIImage *image = [_cellDataSource imageForItemAtIndex:index inCellIndexPath:self.cellIndexPath];
+            UIImage *image = [_cellDataSource imageForItemAtIndex:index atCellIndexPath:self.cellIndexPath];
             image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, maxWidth, maxWidth)];
             imageView.image = image;
             imageView.opaque = YES;
-            imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - kBottomBarViewLabelHeight/2);
+            imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - _labelHeight/2);
             imageView.contentMode = UIViewContentModeCenter;
             imageView.layer.cornerRadius = (maxWidth)/2;
             imageView.layer.masksToBounds = YES;
             [button addSubview:imageView];
         }
         
+        xOffset += _itemSpacing;
+
         [_menuOptions addObject:button];
         [self addSubview:button];
 
-        y += (maxWidth + kBottomBarViewMenuOptionsPadding);
+        xOffset += (maxWidth + _itemSpacing);
     }
 }
 

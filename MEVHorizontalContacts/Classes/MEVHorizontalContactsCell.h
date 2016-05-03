@@ -7,7 +7,8 @@
 //
 
 @import UIKit;
-@import QuartzCore;
+
+#import "MEVHorizontalContactsModel.h"
 
 
 @protocol MEVHorizontalContactsCellDataSource <NSObject>
@@ -16,17 +17,21 @@
 
 - (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath;
 
-- (NSString *)textForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)textForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath;
 
-- (UIImage *)imageForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
+- (UIImage *)imageForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath;
+
+- (CGFloat)heightForLabel;
+
+- (CGFloat)itemSpacing;
 
 @optional
 
-- (UIColor *)textColorForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
+- (UIColor *)textColorForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath;
 
-- (UIColor *)backgroundColorForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
+- (UIColor *)backgroundColorForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath;
 
-- (UIColor *)tintColorForItemAtIndex:(NSInteger)index inCellIndexPath:(NSIndexPath *)indexPath;
+- (UIColor *)tintColorForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -35,22 +40,22 @@
 
 - (void)cellSelectedAtIndexPath:(NSIndexPath *)indexPath;
 
-- (void)menuOptionSelected:(NSInteger)option atIndexPath:(NSIndexPath *)indexPath;
+- (void)menuOptionSelected:(NSInteger)option atCellIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
 
-@class MEVHorizontalContactsModel;
-
 @interface MEVHorizontalContactsCell : UICollectionViewCell
 
+@property (nonatomic, strong) NSIndexPath *cellIndexPath;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) MEVHorizontalContactsModel *contact;
-@property (nonatomic, strong) id<MEVHorizontalContactsCellDelegate> cellDelegate;
-@property (nonatomic, strong) id<MEVHorizontalContactsCellDataSource> cellDataSource;
-@property (nonatomic, strong) NSIndexPath *cellIndexPath;
+@property (nonatomic, weak) id<MEVHorizontalContactsCellDelegate> cellDelegate;
+@property (nonatomic, weak) id<MEVHorizontalContactsCellDataSource> cellDataSource;
 
+@property (nonatomic, assign) CGFloat labelHeight;
+@property (nonatomic, assign) CGFloat itemSpacing;
 
 - (void)showMenuOptions;
 
