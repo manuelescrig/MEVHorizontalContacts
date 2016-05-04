@@ -11,10 +11,7 @@
 
 #import "MEVHorizontalContactsModel.h"
 
-@implementation MEVHorizontalContactsModel {
-    
-    Boolean _expanded;
-}
+@implementation MEVHorizontalContactsModel
 
 - (BOOL)isEqual:(id)object
 {
@@ -29,16 +26,6 @@
     } else {
         return true;
     }
-}
-
-- (void)setExpanded:(BOOL)expanded;
-{
-    _expanded = expanded;
-}
-
-- (BOOL)isExpanded
-{
-    return _expanded;
 }
 
 @end

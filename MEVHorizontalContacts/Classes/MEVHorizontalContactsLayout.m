@@ -65,13 +65,7 @@
     
     _layoutAttributes = [NSMutableDictionary dictionary];
     
-    NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
-    UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:path];
-    attributes.frame = CGRectMake(0, 0, self.collectionView.frame.size.width, _itemHeight / 4.0f);
-    
-    NSString *headerKey = [self layoutKeyForHeaderAtIndexPath:path];
-    _layoutAttributes[headerKey] = attributes;
-    
+   
     NSUInteger numberOfSections = [self.collectionView numberOfSections];
 
     CGFloat yOffset = _insets.top;
@@ -138,27 +132,11 @@
     return [NSString stringWithFormat:@"s_%d_%d", indexPath.section, indexPath.row];
 }
 
-- (void)deSelectAllItems
-{
-    NSUInteger numberOfSections = [self.collectionView numberOfSections];
-    for (int section = 0; section < numberOfSections; section++) {
-        
-        NSUInteger numberOfItems = [self.collectionView numberOfItemsInSection:section];
-        for (int item = 0; item < numberOfItems; item++) {
-            
-            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
-            UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
-            cell.selected = NO;
-        }
-    }
-}
 
 #pragma mark - Invalidate
 
-- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
-
-    [self deSelectAllItems];
-    
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
+{
     return !(CGSizeEqualToSize(newBounds.size, self.collectionView.frame.size));
 }
 

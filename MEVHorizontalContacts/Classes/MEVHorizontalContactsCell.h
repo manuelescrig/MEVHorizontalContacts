@@ -60,11 +60,9 @@
 @property (nonatomic, assign) CGFloat labelHeight;
 @property (nonatomic, assign) CGFloat itemSpacing;
 
-- (void)showMenuOptions;
+- (void)showMenuOptionsAnimated:(BOOL)animated;
 
-- (void)hideMenuOptions;
-
-- (void)setContactModel:(MEVHorizontalContactsModel *)contact;
+- (void)hideMenuOptionsAnimated:(BOOL)animated;
 
 
 @end

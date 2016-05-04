@@ -17,8 +17,4 @@
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSString *name;
 
-- (void)setExpanded:(BOOL)expanded;
-- (BOOL)isExpanded;
-
-
 @end

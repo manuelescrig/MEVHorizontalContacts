@@ -12,7 +12,7 @@
 #import "MEVHorizontalContactsCell.h"
 #import "MEVHorizontalContactsModel.h"
 
-static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.1f;
+static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
 
 @interface MEVHorizontalContactsCell()
 
@@ -39,7 +39,7 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.1f;
 {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self setOpaque:YES];
-//    [self setBackgroundColor:[UIColor lightGrayColor]];
+//    [self setBackgroundColor:[UIColor blueColor]];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSingleTap:)];
     [self addGestureRecognizer:singleTap];
@@ -82,11 +82,11 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.1f;
 {
     if (self.isSelected) {
         self.selected = NO;
-        [self hideMenuOptions];
+        [self hideMenuOptionsAnimated:YES];
         
     } else {
         self.selected = YES;
-        [self showMenuOptions];
+        [self showMenuOptionsAnimated:YES];
     }
     
     if([_cellDelegate respondsToSelector:@selector(cellSelectedAtIndexPath:)])
@@ -120,12 +120,13 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.1f;
         NSLog(@"index = %d", index);
 
         UIButton *button = [UIButton new];
-        button.frame = CGRectMake(xOffset,0, maxWidth, maxWidth);
+        button.frame = CGRectMake(xOffset,0, maxWidth, CGRectGetHeight(self.bounds));
         button.tag = index;
         button.opaque = YES;
         button.alpha = .0f;
 //        button.backgroundColor = [UIColor yellowColor];
         button.tintColor = [UIColor redColor];
+        button.layer.masksToBounds = YES;
         [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
      
         if ([_cellDataSource respondsToSelector:@selector(imageForItemAtIndex:atCellIndexPath:)]) {
@@ -137,7 +138,6 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.1f;
             imageView.image = image;
             imageView.opaque = YES;
             imageView.backgroundColor = [UIColor whiteColor];
-            imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - _labelHeight/2);
             imageView.contentMode = UIViewContentModeCenter;
             imageView.layer.cornerRadius = (maxWidth)/2;
             imageView.layer.masksToBounds = YES;
@@ -147,9 +147,9 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.1f;
         if ([_cellDataSource respondsToSelector:@selector(textForItemAtIndex:atCellIndexPath:)]) {
             
             NSString *textLabel = [_cellDataSource textForItemAtIndex:index atCellIndexPath:self.cellIndexPath];
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - _labelHeight, CGRectGetWidth(self.bounds), _labelHeight)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(button.frame) - _labelHeight, CGRectGetWidth(button.frame), _labelHeight)];
             label.opaque = YES;
-            label.backgroundColor = [UIColor clearColor];
+//            label.backgroundColor = [UIColor orangeColor];
             label.textColor = [UIColor grayColor];
             label.textAlignment = NSTextAlignmentCenter;
             label.font = [UIFont systemFontOfSize:12];
@@ -167,16 +167,16 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.1f;
 
 #pragma mark - Animation Methods (Public)
 
-- (void)showMenuOptions
+- (void)showMenuOptionsAnimated:(BOOL)animated
 {
     NSLog(@"showMenuOptions");
     
     [self setUpCellOptions];
-    
+    float animationTime = animated ? kMEVHorizontalContactsDefaultIAnimationTime : 0.0f;
     for (UIView *view in _menuOptions) {
         [view setUserInteractionEnabled:NO];
-        [UIView animateWithDuration:kMEVHorizontalContactsDefaultIAnimationTime
-                              delay:kMEVHorizontalContactsDefaultIAnimationTime * [_menuOptions indexOfObject:view]
+        [UIView animateWithDuration:animationTime
+                              delay:animationTime * [_menuOptions indexOfObject:view]
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
                              view.alpha = 1;
@@ -187,13 +187,14 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.1f;
 }
 
 
-- (void)hideMenuOptions
+- (void)hideMenuOptionsAnimated:(BOOL)animated
 {
     int pos = 0;
+    float animationTime = animated ? kMEVHorizontalContactsDefaultIAnimationTime : 0.0f;
     for (int i = (int)[_menuOptions count]; i > 0 ; i--) {
         UIView *view = [_menuOptions objectAtIndex:i-1];
-        [UIView animateWithDuration:kMEVHorizontalContactsDefaultIAnimationTime
-                              delay:kMEVHorizontalContactsDefaultIAnimationTime * pos
+        [UIView animateWithDuration:animationTime
+                              delay:animationTime * pos
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
                              view.alpha = 0;

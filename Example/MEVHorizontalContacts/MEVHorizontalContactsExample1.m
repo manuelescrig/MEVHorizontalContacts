@@ -62,7 +62,7 @@
     
     // Data
     NSMutableArray *contacts = [NSMutableArray new];
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 50; i++) {
         MEVHorizontalContactsModel *contact =  [MEVHorizontalContactsModel new];
         [contact setId:@"1"];
         [contact setName:[self getRandomUserName]];
@@ -78,7 +78,6 @@
 }
 
 
-
 #pragma mark - MEVHorizontalContactsDataSource Methods
 
 - (NSInteger)numberOfContacts {
@@ -86,7 +85,7 @@
 }
 
 - (NSInteger)numberOfItemsAtIndex:(NSInteger)index {
-    return 2;
+    return 3;
 }
 
 - (MEVHorizontalContactsModel *)contactAtIndex:(NSInteger)index {

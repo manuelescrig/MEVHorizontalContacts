@@ -56,10 +56,10 @@ static NSString *CellIdentifier = @"CellIdentifier";
             return 100;
             break;
         case 1:
-            return 140;
+            return 120;
             break;
         case 2:
-            return 80;
+            return 140;
             break;
         case 3:
             return 180;
@@ -109,8 +109,6 @@ static NSString *CellIdentifier = @"CellIdentifier";
         default:
             break;
     }
-
-
     
     return cell;
 }
