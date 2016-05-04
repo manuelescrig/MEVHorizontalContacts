@@ -2,11 +2,17 @@
 //  MEVHorizontalContactsModel.m
 //  People Tracker
 //
-//  Created by Manuel Escrig Ventura on 24/02/15.
-//  Copyright (c) 2015 Manuel Escrig Ventura. All rights reserved.
+//  https://github.com/manuelescrig/MEVHorizontalContacts
+//
+//  Created by Manuel Escrig Ventura on 24/02/16.
+//  Copyright (c) 2016 Manuel Escrig Ventura. All rights reserved.
+//  Licence: MIT-Licence
 //
 
 #import "MEVHorizontalContacts.h"
+
+static float const kMEVHorizontalContactsDefaultLabelHegith = 30.0f;
+static float const kMEVHorizontalContactsDefaultItemSpacing = 5.0f;
 
 @interface MEVHorizontalContacts()
 
@@ -49,7 +55,6 @@
 - (void)setupView
 {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self setAlpha:1];
     [self setOpaque:YES];
     
     // Contact List
@@ -58,7 +63,8 @@
     [_horizontalContactListView registerClass:[MEVHorizontalContactsCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     [_horizontalContactListView setDataSource:self];
     [_horizontalContactListView setDelegate:self];
-    [_horizontalContactListView setBackgroundColor:[UIColor colorWithRed:204/255.0f green:209/255.0f blue:217/255.0f alpha:1.0f]];
+    [_horizontalContactListView setOpaque:YES];
+    [_horizontalContactListView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     [_horizontalContactListView setAlwaysBounceHorizontal:YES];
     [_horizontalContactListView setShowsVerticalScrollIndicator:NO];
     [_horizontalContactListView setShowsHorizontalScrollIndicator:NO];
@@ -75,6 +81,8 @@
 {
     if ([_dataSource respondsToSelector:@selector(horizontalContactsItemSpacing)]) {
         _layout.itemSpacing =  [_dataSource horizontalContactsItemSpacing];
+    } else {
+        _layout.itemSpacing = kMEVHorizontalContactsDefaultItemSpacing;
     }
 
     UIEdgeInsets insets;
@@ -84,7 +92,7 @@
     
     _layout.insets = insets;
     _layout.itemHeight = CGRectGetHeight(self.frame) - insets.top - insets.bottom;
-    _layout.itemWidth = _layout.itemHeight - kHorizontalContactsLabelHeight;
+    _layout.itemWidth = _layout.itemHeight - kMEVHorizontalContactsDefaultLabelHegith;
 }
 
 
@@ -101,16 +109,19 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MEVHorizontalContactsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    cell.labelHeight = 30;
-    cell.itemSpacing = 5;
+    cell.labelHeight = kMEVHorizontalContactsDefaultLabelHegith;
     cell.cellIndexPath = indexPath;
     cell.cellDelegate = self;
     cell.cellDataSource = self;
 
+    if ([_dataSource respondsToSelector:@selector(horizontalContactsItemSpacing)]) {
+        cell.itemSpacing =  [_dataSource horizontalContactsItemSpacing];
+    } else {
+        cell.itemSpacing = kMEVHorizontalContactsDefaultItemSpacing;
+    }
     
-    MEVHorizontalContactsModel *contact;
     if ([_dataSource respondsToSelector:@selector(contactAtIndex:)]) {
-        contact = [_dataSource contactAtIndex:indexPath.row];
+        MEVHorizontalContactsModel *contact = [_dataSource contactAtIndex:indexPath.row];
         [cell.imageView setImage:[contact image]];
         [cell.label setText:[contact getName]];
     }
@@ -152,20 +163,26 @@
 
 - (CGFloat)heightForLabel
 {
-    30;
+    kMEVHorizontalContactsDefaultLabelHegith;
 }
 
 - (CGFloat)itemSpacing
 {
-    5;
+    if ([_dataSource respondsToSelector:@selector(horizontalContactsItemSpacing)]) {
+        return [_dataSource horizontalContactsItemSpacing];
+    } else {
+        return kMEVHorizontalContactsDefaultItemSpacing;
+    }
 }
 
 
 #pragma mark – MEVHorizontalContactListCellDelegate
 
-
 - (void)cellSelectedAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([_delegate respondsToSelector:@selector(contactSelectedAtIndex:)]) {
+        return [_delegate contactSelectedAtIndex:indexPath.row];
+    }
     
     //    [_horizontalContactListView performBatchUpdates:nil completion:nil];
     //    MEVHorizontalContactsCell *cell = (MEVHorizontalContactsCell *)[_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
@@ -174,10 +191,6 @@
     //    } else {
     //        [_horizontalContactListView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     //    }
-    
-    if ([_delegate respondsToSelector:@selector(contactSelectedAtIndex:)]) {
-        return [_delegate contactSelectedAtIndex:indexPath.row];
-    }
 }
 
 - (void)menuOptionSelected:(NSInteger)option atCellIndexPath:(NSIndexPath *)indexPath

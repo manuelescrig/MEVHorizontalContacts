@@ -2,10 +2,12 @@
 //  MEVHorizontalContactsCell.m
 //  People Tracker
 //
-//  Created by Manuel Escrig Ventura on 24/02/15.
-//  Copyright (c) 2015 Manuel Escrig Ventura. All rights reserved.
+//  https://github.com/manuelescrig/MEVHorizontalContacts
 //
-
+//  Created by Manuel Escrig Ventura on 24/02/16.
+//  Copyright (c) 2016 Manuel Escrig Ventura. All rights reserved.
+//  Licence: MIT-Licence
+//
 
 #import "MEVHorizontalContactsCell.h"
 #import "MEVHorizontalContactsModel.h"
@@ -13,7 +15,6 @@
 @interface MEVHorizontalContactsCell()
 
 @property (nonatomic, strong) NSMutableArray *menuOptions;
-@property (nonatomic, assign) BOOL isMenuShown;
 
 @end
 
@@ -25,17 +26,24 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    if (!(self = [super initWithFrame:frame])) return nil;
-    
-    self.opaque = YES;
-    self.backgroundColor = [UIColor lightGrayColor];
-    
-    _menuOptions = [NSMutableArray new];
-    _isMenuShown = NO;
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setupView];
+    }
+    return self;
+}
+
+- (void)setupView
+{
+    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self setOpaque:YES];
+    [self setBackgroundColor:[UIColor lightGrayColor]];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSingleTap:)];
     [self addGestureRecognizer:singleTap];
-
+    
+    _menuOptions = [NSMutableArray new];
+    
     _imageView = [UIImageView new];
     _imageView.opaque = YES;
     _imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - _labelHeight/2);
@@ -50,9 +58,8 @@
     _label.textAlignment = NSTextAlignmentCenter;
     _label.font = [UIFont systemFontOfSize:12];
     [self addSubview:_label];
-    
-    return self;
 }
+
 
 #pragma mark - Layout
 
@@ -161,8 +168,6 @@
 {
     NSLog(@"showMenuOptions");
     
-    _isMenuShown = YES;
-    
     [self setUpCellOptions];
     
     float delay = 0.1f;
@@ -194,17 +199,11 @@
                              view.alpha = 0;
                          } completion:^(BOOL finished) {
                              [view removeFromSuperview];
-                             _isMenuShown = NO;
                          }];
         pos++;
     }
 }
 
-
-- (BOOL)isMenuShown
-{
-    return _isMenuShown;
-}
 
 #pragma mark - Overridden Properties (Public)
 
