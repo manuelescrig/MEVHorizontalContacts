@@ -11,12 +11,24 @@
 
 @import UIKit;
 
+
+@protocol MEVHorizontalContactsLayoutDataSource <NSObject>
+
+@required
+
+- (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
 @interface MEVHorizontalContactsLayout : UICollectionViewLayout
 
 @property (nonatomic, assign) UIEdgeInsets insets;
 @property (nonatomic, assign) CGFloat itemSpacing;
 @property (nonatomic, assign) CGFloat itemHeight;
 @property (nonatomic, assign) CGFloat itemWidth;
+@property (nonatomic, assign) CGFloat labelHeight;
+
+@property (nonatomic, strong) id<MEVHorizontalContactsLayoutDataSource> dataSource;
 
 - (void)deSelectAllItems;
 

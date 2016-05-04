@@ -67,22 +67,22 @@
     
     NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:path];
-    attributes.frame = CGRectMake(0, 0, self.collectionView.frame.size.width, self.itemHeight / 4.0f);
+    attributes.frame = CGRectMake(0, 0, self.collectionView.frame.size.width, _itemHeight / 4.0f);
     
     NSString *headerKey = [self layoutKeyForHeaderAtIndexPath:path];
     _layoutAttributes[headerKey] = attributes;
     
     NSUInteger numberOfSections = [self.collectionView numberOfSections];
 
-    CGFloat yOffset = self.insets.top;
-    CGFloat xOffset = self.insets.left;
+    CGFloat yOffset = _insets.top;
+    CGFloat xOffset = _insets.left;
     
     for (int section = 0; section < numberOfSections; section++)
     {
         NSUInteger numberOfItems = [self.collectionView numberOfItemsInSection:section];
         
         // Section double spacing
-        xOffset += self.itemSpacing;
+        xOffset += _itemSpacing;
 
         for (int item = 0; item < numberOfItems; item++)
         {
@@ -92,28 +92,34 @@
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
             NSLog(@"prepareLayout - cell.isSelected = %d", cell.isSelected);
 
+            NSInteger items = 0;
+            if([_dataSource respondsToSelector:@selector(numberOfItemsInCellIndexPath:)]) {
+                items = [_dataSource numberOfItemsInCellIndexPath:indexPath];
+            }
+            NSLog(@"prepareLayout - numberOfItems = %zu", items);
+
             CGSize itemSize = CGSizeZero;
             if (cell.isSelected) {
-                itemSize.width = (self.itemHeight+self.itemSpacing)  * 3;
+                itemSize.width = (_itemHeight + _itemSpacing)  * items;
             } else {
-                itemSize.width = self.itemHeight - 30;
+                itemSize.width = _itemHeight - _labelHeight;
             }
-            itemSize.height = self.itemHeight;
+            itemSize.height = _itemHeight;
             
             attributes.frame = CGRectIntegral(CGRectMake(xOffset, yOffset, itemSize.width, itemSize.height));
             NSString *key = [self layoutKeyForIndexPath:indexPath];
             _layoutAttributes[key] = attributes;
             
             xOffset += itemSize.width;
-            xOffset += self.itemSpacing;
+            xOffset += _itemSpacing;
             
         }
         
         // Section double spacing
-        xOffset += self.itemSpacing;
+        xOffset += _itemSpacing;
     }
     
-    xOffset += self.insets.right;
+    xOffset += _insets.right;
 
     _contentSize = CGSizeMake(xOffset, self.collectionView.frame.size.height - 10);
 }

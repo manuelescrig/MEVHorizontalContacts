@@ -63,13 +63,14 @@
 
 #pragma mark - Layout
 
-- (void)layoutSubviews {
+- (void)layoutSubviews
+{
     [super layoutSubviews];
     
     float maxWidth = CGRectGetHeight(self.bounds) - _labelHeight;
     _imageView.frame = CGRectMake(0, 0, maxWidth, maxWidth);
     _imageView.layer.cornerRadius = (maxWidth)/2;
-    _label.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - _labelHeight, CGRectGetWidth(self.bounds), _labelHeight);
+    _label.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - _labelHeight, CGRectGetHeight(self.bounds) - _labelHeight, _labelHeight);
 }
 
 
@@ -119,23 +120,10 @@
         UIButton *button = [UIButton new];
         button.frame = CGRectMake(xOffset,0, maxWidth, maxWidth);
         button.tag = index;
-        button.alpha = 1;
+        button.alpha = .0f;
         button.backgroundColor = [UIColor yellowColor];
         button.tintColor = [UIColor redColor];
         [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
-
-        if ([_cellDataSource respondsToSelector:@selector(textForItemAtIndex:atCellIndexPath:)]) {
-            
-            NSString *textLabel = [_cellDataSource textForItemAtIndex:index atCellIndexPath:self.cellIndexPath];
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - _labelHeight, CGRectGetWidth(self.bounds), _labelHeight)];
-            label.opaque = YES;
-            label.backgroundColor = [UIColor clearColor];
-            label.textColor = [UIColor whiteColor];
-            label.textAlignment = NSTextAlignmentCenter;
-            label.font = [UIFont systemFontOfSize:12];
-            label.text = textLabel;
-            [button addSubview:label];
-        }
      
         if ([_cellDataSource respondsToSelector:@selector(imageForItemAtIndex:atCellIndexPath:)]) {
             
@@ -150,6 +138,19 @@
             imageView.layer.cornerRadius = (maxWidth)/2;
             imageView.layer.masksToBounds = YES;
             [button addSubview:imageView];
+        }
+        
+        if ([_cellDataSource respondsToSelector:@selector(textForItemAtIndex:atCellIndexPath:)]) {
+            
+            NSString *textLabel = [_cellDataSource textForItemAtIndex:index atCellIndexPath:self.cellIndexPath];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - _labelHeight, CGRectGetWidth(self.bounds), _labelHeight)];
+            label.opaque = YES;
+            label.backgroundColor = [UIColor clearColor];
+            label.textColor = [UIColor whiteColor];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.font = [UIFont systemFontOfSize:12];
+            label.text = textLabel;
+            [button addSubview:label];
         }
         
         xOffset += _itemSpacing;

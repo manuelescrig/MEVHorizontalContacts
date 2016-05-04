@@ -86,7 +86,7 @@
 }
 
 - (NSInteger)numberOfItemsAtIndex:(NSInteger)index {
-    return 3;
+    return 5;
 }
 
 - (MEVHorizontalContactsModel *)contactAtIndex:(NSInteger)index {

@@ -154,7 +154,7 @@
 }
 
 - (void)item:(NSInteger)item selectedAtIndex:(NSInteger)index {
-    NSLog(@"cellSelectedAtIndexPath");
+    NSLog(@"selectedAtIndex - index : %zu item : %zu ", index, item);
 }
 
 

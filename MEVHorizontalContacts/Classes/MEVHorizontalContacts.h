@@ -53,7 +53,7 @@
 @end
 
 
-@interface MEVHorizontalContacts : UIView <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MEVHorizontalContactsCellDelegate, MEVHorizontalContactsCellDataSource>
+@interface MEVHorizontalContacts : UIView
 
 @property (nonatomic, weak) id<MEVHorizontalContactsDataSource> dataSource;
 
