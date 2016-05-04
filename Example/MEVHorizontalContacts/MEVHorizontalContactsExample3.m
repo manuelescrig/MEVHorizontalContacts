@@ -144,7 +144,7 @@
 }
 
 - (NSInteger)horizontalContactsItemSpacing {
-    return 1;
+    return 5;
 }
 
 #pragma mark - MEVHorizontalContactsDelegate Methods

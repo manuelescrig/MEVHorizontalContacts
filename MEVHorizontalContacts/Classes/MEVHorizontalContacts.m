@@ -125,7 +125,7 @@ static float const kMEVHorizontalContactsDefaultItemSpacing = 5.0f;
     if ([_dataSource respondsToSelector:@selector(contactAtIndex:)]) {
         MEVHorizontalContactsModel *contact = [_dataSource contactAtIndex:indexPath.row];
         [cell.imageView setImage:[contact image]];
-        [cell.label setText:[contact getName]];
+        [cell.label setText:[contact name]];
     }
 
     //    if ([contact isExpanded] == NO) {

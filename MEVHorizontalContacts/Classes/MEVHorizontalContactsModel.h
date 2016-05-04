@@ -17,10 +17,6 @@
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSString *name;
 
-+ (instancetype)contactWithImage:(UIImage *)image name:(NSString *)name;
-
-- (NSString *)getName;
-
 - (void)setExpanded:(BOOL)expanded;
 - (BOOL)isExpanded;
 

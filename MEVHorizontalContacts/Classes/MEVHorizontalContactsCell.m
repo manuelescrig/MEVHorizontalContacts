@@ -12,6 +12,8 @@
 #import "MEVHorizontalContactsCell.h"
 #import "MEVHorizontalContactsModel.h"
 
+static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.1f;
+
 @interface MEVHorizontalContactsCell()
 
 @property (nonatomic, strong) NSMutableArray *menuOptions;
@@ -37,7 +39,7 @@
 {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self setOpaque:YES];
-    [self setBackgroundColor:[UIColor lightGrayColor]];
+//    [self setBackgroundColor:[UIColor lightGrayColor]];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSingleTap:)];
     [self addGestureRecognizer:singleTap];
@@ -54,7 +56,7 @@
     
     _label = [UILabel new];
     _label.opaque = YES;
-    _label.textColor = [UIColor whiteColor];
+    _label.textColor = [UIColor grayColor];
     _label.textAlignment = NSTextAlignmentCenter;
     _label.font = [UIFont systemFontOfSize:12];
     [self addSubview:_label];
@@ -120,8 +122,9 @@
         UIButton *button = [UIButton new];
         button.frame = CGRectMake(xOffset,0, maxWidth, maxWidth);
         button.tag = index;
+        button.opaque = YES;
         button.alpha = .0f;
-        button.backgroundColor = [UIColor yellowColor];
+//        button.backgroundColor = [UIColor yellowColor];
         button.tintColor = [UIColor redColor];
         [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
      
@@ -133,6 +136,7 @@
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, maxWidth, maxWidth)];
             imageView.image = image;
             imageView.opaque = YES;
+            imageView.backgroundColor = [UIColor whiteColor];
             imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - _labelHeight/2);
             imageView.contentMode = UIViewContentModeCenter;
             imageView.layer.cornerRadius = (maxWidth)/2;
@@ -146,7 +150,7 @@
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - _labelHeight, CGRectGetWidth(self.bounds), _labelHeight)];
             label.opaque = YES;
             label.backgroundColor = [UIColor clearColor];
-            label.textColor = [UIColor whiteColor];
+            label.textColor = [UIColor grayColor];
             label.textAlignment = NSTextAlignmentCenter;
             label.font = [UIFont systemFontOfSize:12];
             label.text = textLabel;
@@ -169,31 +173,28 @@
     
     [self setUpCellOptions];
     
-    float delay = 0.1f;
     for (UIView *view in _menuOptions) {
-
         [view setUserInteractionEnabled:NO];
-        [UIView animateWithDuration:0.01f
-                              delay:0.1f + (delay * [_menuOptions indexOfObject:view])
-                            options:UIViewAnimationOptionCurveEaseInOut
+        [UIView animateWithDuration:kMEVHorizontalContactsDefaultIAnimationTime
+                              delay:kMEVHorizontalContactsDefaultIAnimationTime * [_menuOptions indexOfObject:view]
+                            options:UIViewAnimationOptionCurveLinear
                          animations:^{
-            view.alpha = 1;
-        } completion:^(BOOL finished) {
-            [view setUserInteractionEnabled:YES];
-        }];
+                             view.alpha = 1;
+                         } completion:^(BOOL finished) {
+                             [view setUserInteractionEnabled:YES];
+                         }];
     }
 }
 
 
 - (void)hideMenuOptions
 {
-    float delay = 0.05f;
     int pos = 0;
     for (int i = (int)[_menuOptions count]; i > 0 ; i--) {
         UIView *view = [_menuOptions objectAtIndex:i-1];
-        [UIView animateWithDuration:0.1f
-                              delay:delay * pos
-                            options:UIViewAnimationOptionCurveEaseInOut
+        [UIView animateWithDuration:kMEVHorizontalContactsDefaultIAnimationTime
+                              delay:kMEVHorizontalContactsDefaultIAnimationTime * pos
+                            options:UIViewAnimationOptionCurveLinear
                          animations:^{
                              view.alpha = 0;
                          } completion:^(BOOL finished) {
@@ -201,17 +202,6 @@
                          }];
         pos++;
     }
-}
-
-
-#pragma mark - Overridden Properties (Public)
-
-- (void)setContactModel:(MEVHorizontalContactsModel *)model
-{
-    self.contact = model;
-    
-    [_imageView setImage:[model image]];
-    [_label setText:[model getName]];
 }
 
 @end

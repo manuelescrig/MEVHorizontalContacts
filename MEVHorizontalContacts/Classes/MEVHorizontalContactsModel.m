@@ -31,23 +31,6 @@
     }
 }
 
-+ (instancetype)contactWithImage:(UIImage *)image name:(NSString *)name
-{
-    MEVHorizontalContactsModel *model = [[MEVHorizontalContactsModel new] init];
-    if (model) {
-        model.image = image;
-        model.name = name;
-        [model setExpanded:NO];
-    }
-      return model;
-}
-
-
-- (NSString *)getName
-{
-    return _name;
-}
-
 - (void)setExpanded:(BOOL)expanded;
 {
     _expanded = expanded;
