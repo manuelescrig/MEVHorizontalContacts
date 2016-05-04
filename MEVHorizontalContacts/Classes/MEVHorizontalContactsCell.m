@@ -125,7 +125,7 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
         button.opaque = YES;
         button.alpha = .0f;
 //        button.backgroundColor = [UIColor yellowColor];
-        button.tintColor = [UIColor redColor];
+        button.tintColor = [UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1];
         button.layer.masksToBounds = YES;
         [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
      

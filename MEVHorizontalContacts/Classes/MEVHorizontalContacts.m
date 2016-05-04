@@ -201,17 +201,15 @@ static float const kMEVHorizontalContactsDefaultItemSpacing = 5.0f;
         
     }
     
-
-    
     // Select new cell, in case of deselecting then set -1 as default value
     _selectedIndex = _selectedIndex == indexPath.row ? -1 : indexPath.row;
 
     [_horizontalContactListView performBatchUpdates:^{
         [_horizontalContactListView setContentOffset:CGPointMake(indexPath.row  * (_layout.itemWidth + [self itemSpacing]), 0) animated:YES];
-        } completion:^(BOOL finished) { }];
+    } completion:^(BOOL finished) {
+        [_horizontalContactListView invalidateIntrinsicContentSize];
+    }];
     
-//    [_horizontalContactListView invalidateIntrinsicContentSize];
-
     if ([_delegate respondsToSelector:@selector(contactSelectedAtIndex:)]) {
         return [_delegate contactSelectedAtIndex:indexPath.row];
     }
