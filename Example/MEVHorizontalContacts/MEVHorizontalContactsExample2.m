@@ -87,7 +87,7 @@
 }
 
 - (NSInteger)numberOfItemsAtIndex:(NSInteger)index {
-    return 1;
+    return 2;
 }
 
 - (MEVHorizontalContactsModel *)contactAtIndex:(NSInteger)index {
@@ -145,7 +145,7 @@
 }
 
 - (NSInteger)horizontalContactsItemSpacing {
-    return 10;
+    return 20;
 }
 
 #pragma mark - MEVHorizontalContactsDelegate Methods

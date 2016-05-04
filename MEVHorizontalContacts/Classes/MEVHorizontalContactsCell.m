@@ -153,8 +153,6 @@
             [button addSubview:label];
         }
         
-        xOffset += _itemSpacing;
-
         [_menuOptions addObject:button];
         [self addSubview:button];
 

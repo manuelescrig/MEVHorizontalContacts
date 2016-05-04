@@ -96,15 +96,16 @@
             if([_dataSource respondsToSelector:@selector(numberOfItemsInCellIndexPath:)]) {
                 items = [_dataSource numberOfItemsInCellIndexPath:indexPath];
             }
-            NSLog(@"prepareLayout - numberOfItems = %zu", items);
+            NSLog(@"prepareLayout - items = %zu", items);
+            NSLog(@"prepareLayout - _itemHeight = %f", _itemHeight);
+            NSLog(@"prepareLayout - _itemSpacing = %f", _itemSpacing);
 
             CGSize itemSize = CGSizeZero;
-            if (cell.isSelected) {
-                itemSize.width = (_itemHeight + _itemSpacing)  * items;
-            } else {
-                itemSize.width = _itemHeight - _labelHeight;
-            }
             itemSize.height = _itemHeight;
+            itemSize.width = _itemHeight - _labelHeight;
+            if (cell.isSelected) {
+                itemSize.width += (itemSize.width + _itemSpacing) * (items);
+            }
             
             attributes.frame = CGRectIntegral(CGRectMake(xOffset, yOffset, itemSize.width, itemSize.height));
             NSString *key = [self layoutKeyForIndexPath:indexPath];
