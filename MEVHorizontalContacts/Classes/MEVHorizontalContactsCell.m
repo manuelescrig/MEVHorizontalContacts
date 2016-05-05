@@ -90,14 +90,14 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
         [self showMenuOptionsAnimated:YES];
     }
     
-    if([_cellDelegate respondsToSelector:@selector(cellSelectedAtIndexPath:)])
-        [_cellDelegate cellSelectedAtIndexPath:self.cellIndexPath];
+    if ([_delegate respondsToSelector:@selector(cellSelectedAtIndexPath:)])
+        [_delegate cellSelectedAtIndexPath:_indexPath];
 }
 
 - (void)menuOptionSingleTap:(UIButton *)sender
 {
-    if([_cellDelegate respondsToSelector:@selector(menuOptionSelected:atCellIndexPath:)])
-        [_cellDelegate menuOptionSelected:sender.tag atCellIndexPath:self.cellIndexPath];
+    if ([_delegate respondsToSelector:@selector(menuOptionSelected:atCellIndexPath:)])
+        [_delegate menuOptionSelected:sender.tag atCellIndexPath:_indexPath];
 }
 
 
@@ -109,8 +109,8 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
     [_menuOptions removeAllObjects];
     
     int numberOfItems;
-    if([_cellDataSource respondsToSelector:@selector(numberOfItemsInCellIndexPath:)]) {
-        numberOfItems = [_cellDataSource numberOfItemsInCellIndexPath:self.cellIndexPath];
+    if ([_dataSource respondsToSelector:@selector(numberOfOptionsInCellIndexPath:)]) {
+        numberOfItems = [_dataSource numberOfOptionsInCellIndexPath:_indexPath];
     }
     
     float maxWidth = CGRectGetHeight(self.bounds) - _labelHeight;
@@ -129,10 +129,9 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
         button.tintColor = [UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1];
         button.layer.masksToBounds = YES;
         [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
-     
        
-        if ([_cellDataSource respondsToSelector:@selector(option:atContactIndex:)]) {
-            MEVHorizontalContactsCell *cell = [_cellDataSource option:index atContactIndex:self.cellIndexPath.row];
+        if ([_dataSource respondsToSelector:@selector(option:atContactIndex:)]) {
+            MEVHorizontalContactsCell *cell = [_dataSource option:index atContactIndex:_indexPath.row];
 
             UIImage *image = cell.imageView.image;
             image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];

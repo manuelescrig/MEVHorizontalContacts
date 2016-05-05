@@ -28,9 +28,9 @@
 
 @optional
 
-- (UIEdgeInsets)horizontalContactsInsets;
-
 - (NSInteger)horizontalContactsSpacing;
+
+- (UIEdgeInsets)horizontalContactsInsets;
 
 @end
 

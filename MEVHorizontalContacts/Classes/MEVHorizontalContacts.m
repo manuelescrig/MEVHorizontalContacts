@@ -100,7 +100,6 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
     
     _layout.insets = insets;
     _layout.itemHeight = CGRectGetHeight(self.frame) - insets.top - insets.bottom;
-    _layout.itemWidth = _layout.itemHeight - kMEVHorizontalContactsDefaultLabelHeight;
     _layout.labelHeight = kMEVHorizontalContactsDefaultLabelHeight;
 }
 
@@ -120,9 +119,9 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
     if ([_dataSource respondsToSelector:@selector(contactAtIndex:)]) {
         MEVHorizontalContactsCell *cell = [_dataSource contactAtIndex:indexPath.row];
         cell.labelHeight = kMEVHorizontalContactsDefaultLabelHeight;
-        cell.cellIndexPath = indexPath;
-        cell.cellDelegate = self;
-        cell.cellDataSource = self;
+        cell.indexPath = indexPath;
+        cell.delegate = self;
+        cell.dataSource = self;
         
         if ([_dataSource respondsToSelector:@selector(horizontalContactsSpacing)]) {
             cell.itemSpacing =  [_dataSource horizontalContactsSpacing];
@@ -161,7 +160,7 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
 #pragma mark – MEVHorizontalContactsLayoutDataSource
 #pragma mark – MEVHorizontalContactsCellDataSource 
 
-- (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath
+- (NSInteger)numberOfOptionsInCellIndexPath:(NSIndexPath *)indexPath
 {
     if ([_dataSource respondsToSelector:@selector(numberOfOptionsAtContactIndex:)]) {
         return [_dataSource numberOfOptionsAtContactIndex:indexPath.row];
@@ -176,15 +175,6 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
 {
     if ([_dataSource respondsToSelector:@selector(option:atContactIndex:)]) {
         return [_dataSource option:option atContactIndex:index];
-    }
-}
-
-- (CGFloat)itemSpacing
-{
-    if ([_dataSource respondsToSelector:@selector(horizontalContactsSpacing)]) {
-        return [_dataSource horizontalContactsSpacing];
-    } else {
-        return kMEVHorizontalContactsDefaultSpacing;
     }
 }
 

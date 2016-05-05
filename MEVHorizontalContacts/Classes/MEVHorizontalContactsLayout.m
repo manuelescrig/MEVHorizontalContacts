@@ -78,21 +78,17 @@
         // Section double spacing
         xOffset += _itemSpacing;
 
-        for (int item = 0; item < numberOfItems; item++)
-        {
+        for (int item = 0; item < numberOfItems; item++) {
+            
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath]; 
             
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
-            NSLog(@"prepareLayout - cell.isSelected = %d", cell.isSelected);
 
             NSInteger items = 0;
-            if([_dataSource respondsToSelector:@selector(numberOfItemsInCellIndexPath:)]) {
-                items = [_dataSource numberOfItemsInCellIndexPath:indexPath];
+            if([_dataSource respondsToSelector:@selector(numberOfOptionsInCellIndexPath:)]) {
+                items = [_dataSource numberOfOptionsInCellIndexPath:indexPath];
             }
-            NSLog(@"prepareLayout - items = %zu", items);
-            NSLog(@"prepareLayout - _itemHeight = %f", _itemHeight);
-            NSLog(@"prepareLayout - _itemSpacing = %f", _itemSpacing);
 
             CGSize itemSize = CGSizeZero;
             itemSize.height = _itemHeight;
@@ -115,7 +111,6 @@
     }
     
     xOffset += _insets.right;
-
     _contentSize = CGSizeMake(xOffset, self.collectionView.frame.size.height - 10);
 }
 
@@ -150,7 +145,6 @@
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atCellIndexPath:(NSIndexPath *)indexPath
 {
-
     NSString *headerKey = [self layoutKeyForHeaderAtIndexPath:indexPath];
     return _layoutAttributes[headerKey];
 }

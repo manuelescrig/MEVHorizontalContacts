@@ -77,34 +77,23 @@
 
 - (MEVHorizontalContactsCell *)option:(NSInteger)option atContactIndex:(NSInteger)index {
     
+    UIImage *image;
     NSString *labelText;
     switch (option) {
         case 0:
             labelText = @"Call";
-            break;
-        case 1:
-            labelText = @"Email";
-            break;
-        case 2:
-            labelText = @"Message";
-            break;
-        default:
-            labelText = @"Call";
-            break;
-    }
-    
-    UIImage *image;
-    switch (option) {
-        case 0:
             image = [UIImage imageNamed:@"actionCall"];
             break;
         case 1:
+            labelText = @"Email";
             image = [UIImage imageNamed:@"actionEmail"];
             break;
         case 2:
+            labelText = @"Message";
             image = [UIImage imageNamed:@"actionMessage"];
             break;
         default:
+            labelText = @"Call";
             image = [UIImage imageNamed:@"actionCall"];
             break;
     }
