@@ -66,10 +66,11 @@ Then, import the following file your classes:
 ### Usage
 
 ## Roadmap
-- [x] Carthage support
-- [x] Swift compatible
-- [x] Swift version
-- [x] Tests
+- [x] CocoaPods support
+- [ ] Carthage support
+- [ ] Swift compatible
+- [ ] Swift version
+- [ ] Tests
 
 ## Change Log
 
