@@ -8,13 +8,10 @@ An **iOS** UICollectionViewLayout subclass that recreates the contacts layout in
 [![Language](http://img.shields.io/badge/language-objective--c-blue.svg?style=flat)](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html)
 
 ## Features
-☑️ Customizable contacts cells
-
-☑️ Customizable contact options cells
-
-☑️ Different sizes and responsive design
-
-☑️ Multiple delegate methods
+- [x] Customizable contacts cells
+- [x] Customizable contact options cells
+- [x] Different sizes and responsive design
+- [x] Multiple delegate methods
 
 
 ## Demo App
@@ -68,6 +65,11 @@ Then, import the following file your classes:
 
 ### Usage
 
+## Roadmap
+- [x] Carthage support
+- [x] Swift compatible
+- [x] Swift version
+- [x] Tests
 
 ## Change Log
 
