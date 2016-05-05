@@ -82,4 +82,4 @@ See [Changelog.md](https://github.com/manuelescrig/MEVHorizontalContacts/blob/ma
 
 ## License
 
-MEVHorizontalContacts is available under the MIT license. See the LICENSE file for more info.
+MEVHorizontalContacts is available under the MIT license. See the [LICENSE](https://github.com/manuelescrig/MEVHorizontalContacts/blob/master/LICENSE) file for more info.
