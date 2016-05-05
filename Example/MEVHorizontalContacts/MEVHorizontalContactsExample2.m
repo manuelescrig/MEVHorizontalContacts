@@ -119,7 +119,7 @@
     return UIEdgeInsetsMake(5, 0, 5, 0);
 }
 
-- (NSInteger)horizontalContactsItemSpacing {
+- (NSInteger)horizontalContactsSpacing {
     return 20;
 }
 
@@ -129,7 +129,7 @@
     NSLog(@"cellSelectedAtIndexPath");
 }
 
-- (void)item:(NSInteger)item selectedAtIndex:(NSInteger)index {
+- (void)option:(NSInteger)option selectedAtContactIndex:(NSInteger)index {
     NSLog(@"cellSelectedAtIndexPath");
 }
 

@@ -30,7 +30,7 @@
 
 - (UIEdgeInsets)horizontalContactsInsets;
 
-- (NSInteger)horizontalContactsItemSpacing;
+- (NSInteger)horizontalContactsSpacing;
 
 @end
 
@@ -39,7 +39,7 @@
 
 - (void)contactSelectedAtIndex:(NSInteger)index;
 
-- (void)item:(NSInteger)item selectedAtIndex:(NSInteger)index;
+- (void)option:(NSInteger)option selectedAtContactIndex:(NSInteger)index;
 
 @end
 

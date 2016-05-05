@@ -17,11 +17,9 @@
 
 @required
 
-- (MEVHorizontalContactsCell *)option:(NSInteger)option atContactIndex:(NSInteger)index;
-
 - (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath;
 
-- (CGFloat)heightForLabel;
+- (MEVHorizontalContactsCell *)option:(NSInteger)option atContactIndex:(NSInteger)index;
 
 - (CGFloat)itemSpacing;
 
@@ -39,12 +37,12 @@
 
 @interface MEVHorizontalContactsCell : UICollectionViewCell
 
-@property (nonatomic, strong) NSIndexPath *cellIndexPath;
-@property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UILabel *label;
 @property (nonatomic, weak) id<MEVHorizontalContactsCellDelegate> cellDelegate;
 @property (nonatomic, weak) id<MEVHorizontalContactsCellDataSource> cellDataSource;
 
+@property (nonatomic, strong) NSIndexPath *cellIndexPath;
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UILabel *label;
 @property (nonatomic, assign) CGFloat labelHeight;
 @property (nonatomic, assign) CGFloat itemSpacing;
 

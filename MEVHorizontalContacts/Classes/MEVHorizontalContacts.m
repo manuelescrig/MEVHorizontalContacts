@@ -12,7 +12,7 @@
 #import "MEVHorizontalContacts.h"
 
 static float const kMEVHorizontalContactsDefaultLabelHeight = 30.0f;
-static float const kMEVHorizontalContactsDefaultItemSpacing = 5.0f;
+static float const kMEVHorizontalContactsDefaultSpacing = 5.0f;
 
 static NSString *const kMEVHorizontalContactsContactCell = @"contactCell";
 static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
@@ -87,10 +87,10 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
 
 - (void)layoutSubviews
 {    
-    if ([_dataSource respondsToSelector:@selector(horizontalContactsItemSpacing)]) {
-        _layout.itemSpacing =  [_dataSource horizontalContactsItemSpacing];
+    if ([_dataSource respondsToSelector:@selector(horizontalContactsSpacing)]) {
+        _layout.itemSpacing =  [_dataSource horizontalContactsSpacing];
     } else {
-        _layout.itemSpacing = kMEVHorizontalContactsDefaultItemSpacing;
+        _layout.itemSpacing = kMEVHorizontalContactsDefaultSpacing;
     }
     
     UIEdgeInsets insets;
@@ -124,10 +124,10 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
         cell.cellDelegate = self;
         cell.cellDataSource = self;
         
-        if ([_dataSource respondsToSelector:@selector(horizontalContactsItemSpacing)]) {
-            cell.itemSpacing =  [_dataSource horizontalContactsItemSpacing];
+        if ([_dataSource respondsToSelector:@selector(horizontalContactsSpacing)]) {
+            cell.itemSpacing =  [_dataSource horizontalContactsSpacing];
         } else {
-            cell.itemSpacing = kMEVHorizontalContactsDefaultItemSpacing;
+            cell.itemSpacing = kMEVHorizontalContactsDefaultSpacing;
         }
         
         if (indexPath.row == _selectedIndex) {
@@ -179,18 +179,12 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
     }
 }
 
-
-- (CGFloat)heightForLabel
-{
-    kMEVHorizontalContactsDefaultLabelHeight;
-}
-
 - (CGFloat)itemSpacing
 {
-    if ([_dataSource respondsToSelector:@selector(horizontalContactsItemSpacing)]) {
-        return [_dataSource horizontalContactsItemSpacing];
+    if ([_dataSource respondsToSelector:@selector(horizontalContactsSpacing)]) {
+        return [_dataSource horizontalContactsSpacing];
     } else {
-        return kMEVHorizontalContactsDefaultItemSpacing;
+        return kMEVHorizontalContactsDefaultSpacing;
     }
 }
 
@@ -225,8 +219,8 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
 
 - (void)menuOptionSelected:(NSInteger)option atCellIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_delegate respondsToSelector:@selector(item:selectedAtIndex:)]) {
-        return [_delegate item:option selectedAtIndex:indexPath.row];
+    if ([_delegate respondsToSelector:@selector(option:selectedAtContactIndex:)]) {
+        return [_delegate option:option selectedAtContactIndex:indexPath.row];
     }
 }
 
