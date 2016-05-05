@@ -11,30 +11,19 @@
 
 @import UIKit;
 
-#import "MEVHorizontalContactsModel.h"
-
+@class MEVHorizontalContactsCell;
 
 @protocol MEVHorizontalContactsCellDataSource <NSObject>
 
 @required
 
+- (MEVHorizontalContactsCell *)option:(NSInteger)option atContactIndex:(NSInteger)index;
+
 - (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath;
-
-- (NSString *)textForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath;
-
-- (UIImage *)imageForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath;
 
 - (CGFloat)heightForLabel;
 
 - (CGFloat)itemSpacing;
-
-@optional
-
-- (UIColor *)textColorForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath;
-
-- (UIColor *)backgroundColorForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath;
-
-- (UIColor *)tintColorForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -53,7 +42,6 @@
 @property (nonatomic, strong) NSIndexPath *cellIndexPath;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *label;
-@property (nonatomic, strong) MEVHorizontalContactsModel *contact;
 @property (nonatomic, weak) id<MEVHorizontalContactsCellDelegate> cellDelegate;
 @property (nonatomic, weak) id<MEVHorizontalContactsCellDataSource> cellDataSource;
 

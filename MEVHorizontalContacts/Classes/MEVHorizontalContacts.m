@@ -14,6 +14,9 @@
 static float const kMEVHorizontalContactsDefaultLabelHeight = 30.0f;
 static float const kMEVHorizontalContactsDefaultItemSpacing = 5.0f;
 
+static NSString *const kMEVHorizontalContactsContactCell = @"contactCell";
+static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
+
 @interface MEVHorizontalContacts()  <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MEVHorizontalContactsCellDelegate, MEVHorizontalContactsCellDataSource, MEVHorizontalContactsLayoutDataSource>
 
 @property (nonatomic, strong) UICollectionView *horizontalContactListView;
@@ -25,7 +28,7 @@ static float const kMEVHorizontalContactsDefaultItemSpacing = 5.0f;
 @implementation MEVHorizontalContacts
 
 
-#pragma mark - View Life Cycle
+#pragma mark - View Life Cycle (private)
 
 - (id)init
 {
@@ -64,7 +67,8 @@ static float const kMEVHorizontalContactsDefaultItemSpacing = 5.0f;
     _layout = [[MEVHorizontalContactsLayout alloc] init];
     _layout.dataSource = self;
     _horizontalContactListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)) collectionViewLayout:_layout];
-    [_horizontalContactListView registerClass:[MEVHorizontalContactsCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
+    [_horizontalContactListView registerClass:[MEVHorizontalContactsCell class] forCellWithReuseIdentifier:kMEVHorizontalContactsContactCell];
+    [_horizontalContactListView registerClass:[MEVHorizontalContactsCell class] forCellWithReuseIdentifier:kMEVHorizontalContactsOptionCell];
     [_horizontalContactListView setDataSource:self];
     [_horizontalContactListView setDelegate:self];
     [_horizontalContactListView setOpaque:YES];
@@ -79,7 +83,7 @@ static float const kMEVHorizontalContactsDefaultItemSpacing = 5.0f;
 }
 
 
-#pragma mark - Layout
+#pragma mark - Layout (private)
 
 - (void)layoutSubviews
 {    
@@ -101,7 +105,7 @@ static float const kMEVHorizontalContactsDefaultItemSpacing = 5.0f;
 }
 
 
-#pragma mark - UICollectionView Datasource
+#pragma mark - UICollectionView Datasource (private)
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -113,42 +117,54 @@ static float const kMEVHorizontalContactsDefaultItemSpacing = 5.0f;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MEVHorizontalContactsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    cell.labelHeight = kMEVHorizontalContactsDefaultLabelHeight;
-    cell.cellIndexPath = indexPath;
-    cell.cellDelegate = self;
-    cell.cellDataSource = self;
-    
-    if (indexPath.row == _selectedIndex) {
-        cell.selected = YES;
-        [cell showMenuOptionsAnimated:NO];
-    } else {
-        cell.selected = NO;
-        [cell hideMenuOptionsAnimated:NO];
-    }
-    
-    if ([_dataSource respondsToSelector:@selector(horizontalContactsItemSpacing)]) {
-        cell.itemSpacing =  [_dataSource horizontalContactsItemSpacing];
-    } else {
-        cell.itemSpacing = kMEVHorizontalContactsDefaultItemSpacing;
-    }
-    
     if ([_dataSource respondsToSelector:@selector(contactAtIndex:)]) {
-        MEVHorizontalContactsModel *contact = [_dataSource contactAtIndex:indexPath.row];
-        [cell.imageView setImage:[contact image]];
-        [cell.label setText:[contact name]];
+        MEVHorizontalContactsCell *cell = [_dataSource contactAtIndex:indexPath.row];
+        cell.labelHeight = kMEVHorizontalContactsDefaultLabelHeight;
+        cell.cellIndexPath = indexPath;
+        cell.cellDelegate = self;
+        cell.cellDataSource = self;
+        
+        if ([_dataSource respondsToSelector:@selector(horizontalContactsItemSpacing)]) {
+            cell.itemSpacing =  [_dataSource horizontalContactsItemSpacing];
+        } else {
+            cell.itemSpacing = kMEVHorizontalContactsDefaultItemSpacing;
+        }
+        
+        if (indexPath.row == _selectedIndex) {
+            cell.selected = YES;
+            [cell showMenuOptionsAnimated:NO];
+        } else {
+            cell.selected = NO;
+            [cell hideMenuOptionsAnimated:NO];
+        }
+    
+        return cell;
+    } else {
+        MEVHorizontalContactsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
+        return cell;
     }
-
-    return cell;
 }
+
+#pragma mark - ReusableCells Methods (public)
+
+- (MEVHorizontalContactsCell *)dequeueReusableContactCellForIndex:(NSInteger)index
+{
+   return [_horizontalContactListView dequeueReusableCellWithReuseIdentifier:kMEVHorizontalContactsContactCell forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+}
+
+- (MEVHorizontalContactsCell *)dequeueReusableOptionCellForIndex:(NSInteger)index
+{
+    return [_horizontalContactListView dequeueReusableCellWithReuseIdentifier:kMEVHorizontalContactsOptionCell forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+}
+
 
 #pragma mark – MEVHorizontalContactsLayoutDataSource
 #pragma mark – MEVHorizontalContactsCellDataSource 
 
 - (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_dataSource respondsToSelector:@selector(numberOfItemsAtIndex:)]) {
-        return [_dataSource numberOfItemsAtIndex:indexPath.row];
+    if ([_dataSource respondsToSelector:@selector(numberOfOptionsAtContactIndex:)]) {
+        return [_dataSource numberOfOptionsAtContactIndex:indexPath.row];
     }
     return 0;
 }
@@ -156,21 +172,13 @@ static float const kMEVHorizontalContactsDefaultItemSpacing = 5.0f;
 
 #pragma mark – MEVHorizontalContactsCellDataSource
 
-- (NSString *)textForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath
+- (MEVHorizontalContactsCell *)option:(NSInteger)option atContactIndex:(NSInteger)index
 {
-    if ([_dataSource respondsToSelector:@selector(textForItem:atIndex:)]) {
-        return [_dataSource textForItem:index atIndex:indexPath.row];
+    if ([_dataSource respondsToSelector:@selector(option:atContactIndex:)]) {
+        return [_dataSource option:option atContactIndex:index];
     }
-    return @"";
 }
 
-- (UIImage *)imageForItemAtIndex:(NSInteger)index atCellIndexPath:(NSIndexPath *)indexPath
-{
-    if ([_dataSource respondsToSelector:@selector(imageForItem:atIndex:)]) {
-        return [_dataSource imageForItem:index atIndex:indexPath.row];
-    }
-    return nil;
-}
 
 - (CGFloat)heightForLabel
 {

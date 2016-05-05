@@ -13,7 +13,6 @@
 
 #import "MEVHorizontalContactsLayout.h"
 #import "MEVHorizontalContactsCell.h"
-#import "MEVHorizontalContactsModel.h"
 
 @protocol MEVHorizontalContactsDataSource <NSObject>
 
@@ -21,21 +20,13 @@
 
 - (NSInteger)numberOfContacts;
 
-- (NSInteger)numberOfItemsAtIndex:(NSInteger)index;
+- (NSInteger)numberOfOptionsAtContactIndex:(NSInteger)index;
 
-- (MEVHorizontalContactsModel *)contactAtIndex:(NSInteger)index;
+- (MEVHorizontalContactsCell *)contactAtIndex:(NSInteger)index;
 
-- (NSString *)textForItem:(NSInteger)item atIndex:(NSInteger)index;
-
-- (UIImage *)imageForItem:(NSInteger)item atIndex:(NSInteger)index;
+- (MEVHorizontalContactsCell *)option:(NSInteger)option atContactIndex:(NSInteger)index;
 
 @optional
-
-- (UIColor *)textColorForItem:(NSInteger)item atIndex:(NSInteger)index;
-
-- (UIColor *)backgroundColorForItem:(NSInteger)item atIndex:(NSInteger)index;
-
-- (UIColor *)tintColorForItem:(NSInteger)item atIndex:(NSInteger)index;
 
 - (UIEdgeInsets)horizontalContactsInsets;
 
@@ -58,5 +49,9 @@
 @property (nonatomic, weak) id<MEVHorizontalContactsDataSource> dataSource;
 
 @property (nonatomic, weak) id<MEVHorizontalContactsDelegate> delegate;
+
+- (MEVHorizontalContactsCell *)dequeueReusableContactCellForIndex:(NSInteger)index;
+
+- (MEVHorizontalContactsCell *)dequeueReusableOptionCellForIndex:(NSInteger)index;
 
 @end

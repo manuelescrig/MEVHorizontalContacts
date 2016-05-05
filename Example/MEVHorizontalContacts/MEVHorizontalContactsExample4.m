@@ -12,7 +12,7 @@
 
 @interface MEVHorizontalContactsExample4 () <MEVHorizontalContactsDataSource, MEVHorizontalContactsDelegate>
 
-@property (nonatomic, strong) NSArray *contacts;
+@property (nonatomic, strong) MEVHorizontalContacts *horizontalContacts;
 
 @end
 
@@ -46,97 +46,72 @@
 - (void)setupView {
     NSLog(@"setupView = %@", self);
     
-    [self setupData];
-    
     self.translatesAutoresizingMaskIntoConstraints = NO;
     
-    MEVHorizontalContacts *horizontalContacts = [MEVHorizontalContacts new];
-    horizontalContacts.dataSource = self;
-    horizontalContacts.delegate = self;
-    [self addSubview:horizontalContacts];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContacts]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContacts" : horizontalContacts}]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContacts]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContacts" : horizontalContacts}]];
+    _horizontalContacts = [MEVHorizontalContacts new];
+    _horizontalContacts.dataSource = self;
+    _horizontalContacts.delegate = self;
+    [self addSubview:_horizontalContacts];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContacts]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContacts" : _horizontalContacts}]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContacts]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContacts" : _horizontalContacts}]];
 }
-
-- (void)setupData {
-    
-    // Data
-    NSMutableArray *contacts = [NSMutableArray new];
-    for (int i = 0; i < 10; i++) {
-        MEVHorizontalContactsModel *contact =  [MEVHorizontalContactsModel new];
-        [contact setId:@"1"];
-        [contact setName:[self getRandomUserName]];
-        [contact setImage:[UIImage imageNamed:[self getRandomImageName]]];
-        [contacts addObject:contact];
-    }
-    _contacts = [contacts copy];
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-}
-
 
 
 #pragma mark - MEVHorizontalContactsDataSource Methods
 
 - (NSInteger)numberOfContacts {
-    return [_contacts count];
-}
-
-- (NSInteger)numberOfItemsAtIndex:(NSInteger)index {
     return 3;
 }
 
-- (MEVHorizontalContactsModel *)contactAtIndex:(NSInteger)index {
-    return [_contacts objectAtIndex:index];
+- (NSInteger)numberOfOptionsAtContactIndex:(NSInteger)index {
+    return 3;
 }
 
-- (NSString *)textForItem:(NSInteger)item atIndex:(NSInteger)index {
-    switch (item) {
+- (MEVHorizontalContactsCell *)contactAtIndex:(NSInteger)index {
+    MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableContactCellForIndex:index];
+    [cell.imageView setImage:[UIImage imageNamed:[self getRandomImageName]]];
+    [cell.label setText:[self getRandomUserName]];
+    return cell;
+}
+
+- (MEVHorizontalContactsCell *)option:(NSInteger)option atContactIndex:(NSInteger)index {
+    
+    NSString *labelText;
+    switch (option) {
         case 0:
-            return @"Call";
+            labelText = @"Call";
             break;
         case 1:
-            return @"Email";
+            labelText = @"Email";
             break;
         case 2:
-            return @"Message";
+            labelText = @"Message";
             break;
         default:
-            return @"Call";
+            labelText = @"Call";
             break;
     }
-}
-
-- (UIImage *)imageForItem:(NSInteger)item atIndex:(NSInteger)index {
-    switch (item) {
+    
+    UIImage *image;
+    switch (option) {
         case 0:
-            return [UIImage imageNamed:@"actionCall"];
+            image = [UIImage imageNamed:@"actionCall"];
             break;
         case 1:
-            return [UIImage imageNamed:@"actionEmail"];
+            image = [UIImage imageNamed:@"actionEmail"];
             break;
         case 2:
-            return [UIImage imageNamed:@"actionMessage"];
+            image = [UIImage imageNamed:@"actionMessage"];
             break;
         default:
-            return [UIImage imageNamed:@"actionCall"];
+            image = [UIImage imageNamed:@"actionCall"];
             break;
     }
-}
-
-- (UIColor *)textColorForItem:(NSInteger)item atIndex:(NSInteger)index {
-    return [UIColor redColor];
-}
-
-- (UIColor *)backgroundColorForItem:(NSInteger)item atIndex:(NSInteger)index {
-    return [UIColor whiteColor];
-}
-
-- (UIColor *)tintColorForItem:(NSInteger)item atIndex:(NSInteger)index {
-    return [UIColor redColor];
+    
+    MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableOptionCellForIndex:index];
+    [cell.imageView setImage:image];
+    [cell.label setText:labelText];
+    return cell;
 }
 
 - (UIEdgeInsets)horizontalContactsInsets {

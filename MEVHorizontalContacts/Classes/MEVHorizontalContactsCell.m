@@ -10,7 +10,6 @@
 //
 
 #import "MEVHorizontalContactsCell.h"
-#import "MEVHorizontalContactsModel.h"
 
 static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
 
@@ -24,7 +23,7 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
 @implementation MEVHorizontalContactsCell
 
 
-#pragma mark - View Life Cycle
+#pragma mark - View Life Cycle (public)
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -34,6 +33,8 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
     }
     return self;
 }
+
+#pragma mark - View Life Cycle (private)
 
 - (void)setupView
 {
@@ -63,7 +64,7 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
 }
 
 
-#pragma mark - Layout
+#pragma mark - Layout (private)
 
 - (void)layoutSubviews
 {
@@ -76,7 +77,7 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
 }
 
 
-#pragma mark - UI Actions
+#pragma mark - UI Actions (private)
 
 - (void)cellSingleTap:(UITapGestureRecognizer *)recognizer
 {
@@ -129,9 +130,11 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
         button.layer.masksToBounds = YES;
         [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
      
-        if ([_cellDataSource respondsToSelector:@selector(imageForItemAtIndex:atCellIndexPath:)]) {
-            
-            UIImage *image = [_cellDataSource imageForItemAtIndex:index atCellIndexPath:self.cellIndexPath];
+       
+        if ([_cellDataSource respondsToSelector:@selector(option:atContactIndex:)]) {
+            MEVHorizontalContactsCell *cell = [_cellDataSource option:index atContactIndex:self.cellIndexPath.row];
+
+            UIImage *image = cell.imageView.image;
             image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, maxWidth, maxWidth)];
@@ -142,14 +145,11 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
             imageView.layer.cornerRadius = (maxWidth)/2;
             imageView.layer.masksToBounds = YES;
             [button addSubview:imageView];
-        }
-        
-        if ([_cellDataSource respondsToSelector:@selector(textForItemAtIndex:atCellIndexPath:)]) {
             
-            NSString *textLabel = [_cellDataSource textForItemAtIndex:index atCellIndexPath:self.cellIndexPath];
+            NSString *textLabel = cell.label.text;
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(button.frame) - _labelHeight, CGRectGetWidth(button.frame), _labelHeight)];
             label.opaque = YES;
-//            label.backgroundColor = [UIColor orangeColor];
+            //            label.backgroundColor = [UIColor orangeColor];
             label.textColor = [UIColor grayColor];
             label.textAlignment = NSTextAlignmentCenter;
             label.font = [UIFont systemFontOfSize:12];
