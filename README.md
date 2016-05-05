@@ -30,11 +30,11 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ### Requirements
 
-Requires iOS SDK version > 8.0
+Requires iOS SDK version > 7.0
 
 Requires ARC
 
-## Installation with CocoaPods
+### Installation with CocoaPods
 
 [CocoaPods](cocoapods.org) is a 3rd-party dependency manager for Swift and Objective-C projects. For more information, refer to the [CocoaPods Getting Started Guide](https://guides.cocoapods.org/using/getting-started.html). Otherwise, you can install CocoaPods with the following command:
 
@@ -55,6 +55,19 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+
+###  Installation Manually
+To integrate MEVHorizontalContacts into your Xcode project manually, just include the filest from [/Pod/Classes/](https://github.com/manuelescrig/MEVHorizontalContacts/tree/master/MEVHorizontalContacts/Classes) folder in your App’s Xcode project.
+
+Then, import the following file your classes:
+```objc
+#import "MEVHorizontalContacts.h"
+```
+
+## Quick Guide
+
+### Usage
+
 
 ## Change Log
 
