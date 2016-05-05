@@ -26,19 +26,34 @@ Run the demo app and play with it!
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
+## Getting Started
+
+### Requirements
 
 Requires iOS SDK version > 8.0
 
 Requires ARC
 
-## Installation
+## Installation with CocoaPods
 
-MEVHorizontalContacts is available through [CocoaPods](http://cocoapods.org). 
-To install it, simply add the following line to your Podfile:
+[CocoaPods](cocoapods.org) is a 3rd-party dependency manager for Swift and Objective-C projects. For more information, refer to the [CocoaPods Getting Started Guide](https://guides.cocoapods.org/using/getting-started.html). Otherwise, you can install CocoaPods with the following command:
+
+```bash
+$ gem install cocoapods
+```
+
+#### Podfile
+To integrate MEVHorizontalContacts into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
+source 'https://github.com/CocoaPods/Specs.git'
 pod 'MEVHorizontalContacts'
+```
+
+Then, run the following command:
+
+```bash
+$ pod install
 ```
 
 ## Change Log
