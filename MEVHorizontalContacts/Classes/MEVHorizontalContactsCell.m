@@ -41,7 +41,6 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self setOpaque:YES];
-//    [self setBackgroundColor:[UIColor blueColor]];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSingleTap:)];
     [self addGestureRecognizer:singleTap];
@@ -82,6 +81,8 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 - (void)cellSingleTap:(UITapGestureRecognizer *)recognizer
 {
+    NSLog(@"cellSingleTap");
+    
     if (self.isSelected) {
         self.selected = NO;
         [self hideMenuOptionsAnimated:YES];
@@ -126,7 +127,6 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
         button.tag = index;
         button.opaque = YES;
         button.alpha = .0f;
-//        button.backgroundColor = [UIColor yellowColor];
         button.tintColor = [UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1];
         button.layer.masksToBounds = YES;
         [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];

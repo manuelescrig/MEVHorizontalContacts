@@ -68,7 +68,8 @@
     NSUInteger numberOfSections = [self.collectionView numberOfSections];
     CGFloat yOffset = _insets.top;
     CGFloat xOffset = _insets.left;
-    
+    CGFloat xOffsetExpaned = 0;
+
     for (int section = 0; section < numberOfSections; section++) {
         NSUInteger numberOfItems = [self.collectionView numberOfItemsInSection:section];
         
@@ -79,7 +80,6 @@
             
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath]; 
-            
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
 
             NSInteger items = 0;
@@ -91,7 +91,26 @@
             itemSize.height = _itemHeight;
             itemSize.width = _itemHeight - _labelHeight;
             if (cell.isSelected) {
+                
+                NSLog(@"prepareLayout - numberOfSections = %d", numberOfSections);
+                NSLog(@"prepareLayout - section = %d", section);
+                NSLog(@"prepareLayout - numberOfItems = %d", numberOfItems);
+                NSLog(@"prepareLayout - item = %d", item);
+
+                //                int itemsInScreen = self.collectionView.frame.size.width / (itemSize.width + _itemSpacing);
+                //                itemSize.width += (itemSize.width + _itemSpacing) * (itemsInScreen-1);
                 itemSize.width += (itemSize.width + _itemSpacing) * (items);
+                
+                NSLog(@"prepareLayout - self.collectionView.frame.size.width = %f", self.collectionView.frame.size.width);
+                NSLog(@"prepareLayout - (itemSize.width + _itemSpacing) = %f", (itemSize.width + _itemSpacing));
+                int itemsInScreen = self.collectionView.frame.size.width / (itemSize.width + _itemSpacing);
+                NSLog(@"prepareLayout - itemsInScreenSpaceLeft = %d", itemsInScreen);
+
+                itemsInScreen -= items;
+                NSLog(@"prepareLayout - itemsInScreenSpaceLeft = %d", itemsInScreen);
+
+//                xOffsetExpaned = self.collectionView.frame.size.width -  (itemSize.width + _itemSpacing);
+
             }
             
             attributes.frame = CGRectIntegral(CGRectMake(xOffset, yOffset, itemSize.width, itemSize.height));
@@ -100,7 +119,6 @@
             
             xOffset += itemSize.width;
             xOffset += _itemSpacing;
-            
         }
         
         // Section double spacing
@@ -108,7 +126,7 @@
     }
     
     xOffset += _insets.right;
-    _contentSize = CGSizeMake(xOffset, self.collectionView.frame.size.height - 10);
+    _contentSize = CGSizeMake(xOffset + xOffsetExpaned, self.collectionView.frame.size.height - 10);
 }
 
 

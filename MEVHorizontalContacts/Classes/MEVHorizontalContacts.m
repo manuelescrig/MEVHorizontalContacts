@@ -87,20 +87,10 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
 
 - (void)layoutSubviews
 {    
-    if ([_dataSource respondsToSelector:@selector(horizontalContactsSpacing)]) {
-        _layout.itemSpacing =  [_dataSource horizontalContactsSpacing];
-    } else {
-        _layout.itemSpacing = kMEVHorizontalContactsDefaultSpacing;
-    }
-    
-    UIEdgeInsets insets;
-    if ([_dataSource respondsToSelector:@selector(horizontalContactsInsets)]) {
-        insets =  [_dataSource horizontalContactsInsets];
-    }
-    
-    _layout.insets = insets;
-    _layout.itemHeight = CGRectGetHeight(self.frame) - insets.top - insets.bottom;
-    _layout.labelHeight = kMEVHorizontalContactsDefaultLabelHeight;
+    _layout.itemSpacing = [self mev_contactsSpacing];
+    _layout.insets = [self mev_contactsInsets];
+    _layout.labelHeight = [self mev_contactsLabelHeight];
+    _layout.itemHeight = CGRectGetHeight(self.frame) - _layout.insets.top - _layout.insets.bottom;
 }
 
 
@@ -108,41 +98,29 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if ([_dataSource respondsToSelector:@selector(numberOfContacts)]) {
-        return [_dataSource numberOfContacts];
-    }
-    return 0;
+    return [self mev_numberOfContacts];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_dataSource respondsToSelector:@selector(contactAtIndex:)]) {
-        MEVHorizontalContactsCell *cell = [_dataSource contactAtIndex:indexPath.row];
-        cell.labelHeight = kMEVHorizontalContactsDefaultLabelHeight;
-        cell.indexPath = indexPath;
-        cell.delegate = self;
-        cell.dataSource = self;
-        
-        if ([_dataSource respondsToSelector:@selector(horizontalContactsSpacing)]) {
-            cell.itemSpacing =  [_dataSource horizontalContactsSpacing];
-        } else {
-            cell.itemSpacing = kMEVHorizontalContactsDefaultSpacing;
-        }
-        
-        if (indexPath.row == _selectedIndex) {
-            cell.selected = YES;
-            [cell showMenuOptionsAnimated:NO];
-        } else {
-            cell.selected = NO;
-            [cell hideMenuOptionsAnimated:NO];
-        }
+    NSLog(@"cellForItemAtIndexPath - row %zu", indexPath.row);
+    MEVHorizontalContactsCell *cell = [self mev_contactAtIndex:indexPath.row];
+    cell.labelHeight = [self mev_contactsLabelHeight];;
+    cell.indexPath = indexPath;
+    cell.delegate = self;
+    cell.dataSource = self;
+    cell.itemSpacing = [self mev_contactsSpacing];
     
-        return cell;
+    if (indexPath.row == _selectedIndex) {
+        cell.selected = YES;
+        [cell showMenuOptionsAnimated:NO];
     } else {
-        MEVHorizontalContactsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-        return cell;
+        cell.selected = NO;
+        [cell hideMenuOptionsAnimated:NO];
     }
+    return cell;
 }
+
 
 #pragma mark - ReusableCells Methods (public)
 
@@ -156,16 +134,75 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
     return [_horizontalContactListView dequeueReusableCellWithReuseIdentifier:kMEVHorizontalContactsOptionCell forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
 
+//TODO:Add asserts
+#pragma mark - Getters (private)
+
+- (CGFloat)mev_contactsLabelHeight
+{
+    return kMEVHorizontalContactsDefaultLabelHeight;
+}
+
+- (CGFloat)mev_contactsSpacing
+{
+    if ([_dataSource respondsToSelector:@selector(horizontalContactsSpacing)]) {
+        return [_dataSource horizontalContactsSpacing];
+    } else {
+        return kMEVHorizontalContactsDefaultSpacing;
+    }
+}
+
+- (UIEdgeInsets)mev_contactsInsets
+{
+    if ([_dataSource respondsToSelector:@selector(horizontalContactsInsets)]) {
+        return [_dataSource horizontalContactsInsets];
+    } else {
+        return UIEdgeInsetsZero;
+    }
+}
+
+- (NSInteger)mev_numberOfContacts
+{
+    if ([_dataSource respondsToSelector:@selector(numberOfContacts)]) {
+        return [_dataSource numberOfContacts];
+    } else {
+        return 0;
+    }
+}
+
+- (MEVHorizontalContactsCell *)mev_contactAtIndex:(NSInteger)index
+{
+    if ([_dataSource respondsToSelector:@selector(contactAtIndex:)]) {
+        return [_dataSource contactAtIndex:index];
+    } else {
+        return nil;
+    }
+}
+
+- (NSInteger)mev_numberOfOptionsAtIndex:(NSInteger)index
+{
+    if ([_dataSource respondsToSelector:@selector(numberOfOptionsAtContactIndex:)]) {
+        return [_dataSource numberOfOptionsAtContactIndex:index];
+    } else {
+        return 0;
+    }
+}
+
+- (MEVHorizontalContactsCell *)mev_option:(NSInteger)option atContactAtIndex:(NSInteger)index
+{
+    if ([_dataSource respondsToSelector:@selector(option:atContactIndex:)]) {
+        return [_dataSource option:option atContactIndex:index];
+    } else {
+        return nil;
+    }
+}
+
 
 #pragma mark – MEVHorizontalContactsLayoutDataSource
 #pragma mark – MEVHorizontalContactsCellDataSource 
 
 - (NSInteger)numberOfOptionsInCellIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_dataSource respondsToSelector:@selector(numberOfOptionsAtContactIndex:)]) {
-        return [_dataSource numberOfOptionsAtContactIndex:indexPath.row];
-    }
-    return 0;
+    return [self mev_numberOfOptionsAtIndex:indexPath.row];
 }
 
 
@@ -173,9 +210,7 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
 
 - (MEVHorizontalContactsCell *)option:(NSInteger)option atContactIndex:(NSInteger)index
 {
-    if ([_dataSource respondsToSelector:@selector(option:atContactIndex:)]) {
-        return [_dataSource option:option atContactIndex:index];
-    }
+    return [self mev_option:option atContactAtIndex:option];
 }
 
 
@@ -183,20 +218,29 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
 
 - (void)cellSelectedAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Deselect old cell
+    NSLog(@"cellSelectedAtIndexPath");
+    
     if (_selectedIndex >= 0 && _selectedIndex != indexPath.row) {
-        
-        // Deselect old cell
         MEVHorizontalContactsCell *cell = [_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
         cell.selected = NO;
         [cell hideMenuOptionsAnimated:YES];
+    }
+    
+    int itemsInScreen = _horizontalContactListView.frame.size.width / (_layout.itemHeight - [self mev_contactsLabelHeight]) ;
+    
+    NSLog(@"cellSelectedAtIndexPath - itemsInScreen = %d", itemsInScreen);
+    
+    if (_selectedIndex != indexPath.row) {
+//        _horizontalContactListView.scrollEnabled = NO;
+//        [_horizontalContactListView setContentOffset:CGPointMake(indexPath.row  * (_layout.itemHeight -_layout.labelHeight  + _layout.itemSpacing), 0) animated:YES];
         
+   } else {
+        _horizontalContactListView.scrollEnabled = YES;
     }
     
     // Select new cell, in case of deselecting then set -1 as default value
     _selectedIndex = _selectedIndex == indexPath.row ? -1 : indexPath.row;
 
-    [_horizontalContactListView setContentOffset:CGPointMake(indexPath.row  * (_layout.itemHeight -_layout.labelHeight  + _layout.itemSpacing), 0) animated:YES];
     [_horizontalContactListView performBatchUpdates:^{ } completion:^(BOOL finished) { }];
     [_horizontalContactListView invalidateIntrinsicContentSize];
     
