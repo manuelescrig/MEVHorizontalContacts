@@ -82,7 +82,8 @@ See [Changelog.md](https://github.com/manuelescrig/MEVHorizontalContacts/blob/ma
 - Email [manuel@ventura.media](mailto:manuel@ventura.media)
 - Portfolio [http://ventura.media](http://ventura.media)
 
-
 ## License
 
 MEVHorizontalContacts is available under the MIT license. See the [LICENSE](https://github.com/manuelescrig/MEVHorizontalContacts/blob/master/LICENSE) file for more info.
+
+Icons made by [Gregor Cresnar](http://www.flaticon.com/authors/gregor-cresnar) is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)

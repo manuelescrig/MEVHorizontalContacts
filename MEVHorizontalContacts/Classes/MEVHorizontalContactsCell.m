@@ -11,7 +11,8 @@
 
 #import "MEVHorizontalContactsCell.h"
 
-static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
+static float const kMEVHorizontalContactsDefaultShowAnimationTime = 0.09f;
+static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 @interface MEVHorizontalContactsCell()
 
@@ -168,14 +169,14 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
 
 - (void)showMenuOptionsAnimated:(BOOL)animated
 {
-    NSLog(@"showMenuOptions");
+    NSLog(@"showMenuOptionsAnimated = %d", animated);
     
     [self setUpCellOptions];
-    float animationTime = animated ? kMEVHorizontalContactsDefaultIAnimationTime : 0.0f;
+    float animationTime = animated ? kMEVHorizontalContactsDefaultShowAnimationTime : 0.0f;
     for (UIView *view in _menuOptions) {
         [view setUserInteractionEnabled:NO];
         [UIView animateWithDuration:animationTime
-                              delay:animationTime * [_menuOptions indexOfObject:view]
+                              delay:animationTime * ([_menuOptions indexOfObject:view]+1)
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
                              view.alpha = 1;
@@ -188,8 +189,10 @@ static float const kMEVHorizontalContactsDefaultIAnimationTime = 0.05f;
 
 - (void)hideMenuOptionsAnimated:(BOOL)animated
 {
+    NSLog(@"hideMenuOptionsAnimated = %d", animated);
+
     int pos = 0;
-    float animationTime = animated ? kMEVHorizontalContactsDefaultIAnimationTime : 0.0f;
+    float animationTime = animated ? kMEVHorizontalContactsDefaultHideAnimationTime : 0.0f;
     for (int i = (int)[_menuOptions count]; i > 0 ; i--) {
         UIView *view = [_menuOptions objectAtIndex:i-1];
         [UIView animateWithDuration:animationTime

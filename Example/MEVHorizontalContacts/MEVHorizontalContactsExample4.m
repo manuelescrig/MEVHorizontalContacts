@@ -69,8 +69,8 @@
 
 - (MEVHorizontalContactsCell *)contactAtIndex:(NSInteger)index {
     MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableContactCellForIndex:index];
-    [cell.imageView setImage:[UIImage imageNamed:[self getRandomImageName]]];
-    [cell.label setText:[self getRandomUserName]];
+    [cell.imageView setImage:[UIImage imageNamed:[self getImageNameAtIndex:index]]];
+    [cell.label setText:[self getUserNameAtIndex:index]];
     return cell;
 }
 
@@ -124,14 +124,14 @@
 
 #pragma mark - Generate Data Methods
 
-- (NSString *)getRandomUserName {
+- (NSString *)getUserNameAtIndex:(NSInteger)index {
     NSArray *array = @[@"James", @"Mary", @"Robert", @"Patricia", @"David", @"Linda", @"Charles", @"Barbara", @"John", @"Paul"];
-    return [array objectAtIndex: arc4random() % [array count]];
+    return [array objectAtIndex:index];
 }
 
-- (NSString *)getRandomImageName {
+- (NSString *)getImageNameAtIndex:(NSInteger)index {
     NSArray *array = @[@"image1", @"image2", @"image3", @"image4", @"image5", @"image6", @"image7", @"image8", @"image9", @"image10"];
-    return [array objectAtIndex: arc4random() % [array count]];
+    return [array objectAtIndex:index];
 }
 
 @end

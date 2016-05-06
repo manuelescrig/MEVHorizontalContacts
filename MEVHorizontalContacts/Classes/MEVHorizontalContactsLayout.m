@@ -65,14 +65,11 @@
     
     _layoutAttributes = [NSMutableDictionary dictionary];
     
-   
     NSUInteger numberOfSections = [self.collectionView numberOfSections];
-
     CGFloat yOffset = _insets.top;
     CGFloat xOffset = _insets.left;
     
-    for (int section = 0; section < numberOfSections; section++)
-    {
+    for (int section = 0; section < numberOfSections; section++) {
         NSUInteger numberOfItems = [self.collectionView numberOfItemsInSection:section];
         
         // Section double spacing

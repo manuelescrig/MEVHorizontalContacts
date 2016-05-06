@@ -60,17 +60,33 @@
 #pragma mark - MEVHorizontalContactsDataSource Methods
 
 - (NSInteger)numberOfContacts {
-    return 10;
+    return 30;
 }
 
 - (NSInteger)numberOfOptionsAtContactIndex:(NSInteger)index {
-    return 3;
+    switch (index) {
+        case 0:
+            return 0;
+            break;
+        case 1:
+            return 1;
+            break;
+        case 2:
+            return 2;
+            break;
+        case 3:
+            return 5;
+            break;
+        default:
+            return 3;
+            break;
+    }
 }
 
 - (MEVHorizontalContactsCell *)contactAtIndex:(NSInteger)index {
     MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableContactCellForIndex:index];
-    [cell.imageView setImage:[UIImage imageNamed:[self getRandomImageName]]];
-    [cell.label setText:[self getRandomUserName]];
+    [cell.imageView setImage:[UIImage imageNamed:[self getImageNameAtIndex:index]]];
+    [cell.label setText:[self getUserNameAtIndex:index]];
     return cell;
 }
 
@@ -124,14 +140,14 @@
 
 #pragma mark - Generate Data Methods
 
-- (NSString *)getRandomUserName {
-    NSArray *array = @[@"James", @"Mary", @"Robert", @"Patricia", @"David", @"Linda", @"Charles", @"Barbara", @"John", @"Paul"];
-    return [array objectAtIndex: arc4random() % [array count]];
+- (NSString *)getUserNameAtIndex:(NSInteger)index {
+    NSArray *array = @[@"James", @"Mary", @"Robert", @"Patricia", @"David", @"Linda", @"Charles", @"Barbara", @"John", @"Paul", @"James", @"Mary", @"Robert", @"Patricia", @"David", @"Linda", @"Charles", @"Barbara", @"John", @"Paul", @"James", @"Mary", @"Robert", @"Patricia", @"David", @"Linda", @"Charles", @"Barbara", @"John", @"Paul"];
+    return [array objectAtIndex:index];
 }
 
-- (NSString *)getRandomImageName {
-    NSArray *array = @[@"image1", @"image2", @"image3", @"image4", @"image5", @"image6", @"image7", @"image8", @"image9", @"image10"];
-    return [array objectAtIndex: arc4random() % [array count]];
+- (NSString *)getImageNameAtIndex:(NSInteger)index {
+    NSArray *array = @[@"image1", @"image2", @"image3", @"image4", @"image5", @"image6", @"image7", @"image8", @"image9", @"image10", @"image1", @"image2", @"image3", @"image4", @"image5", @"image6", @"image7", @"image8", @"image9", @"image10", @"image1", @"image2", @"image3", @"image4", @"image5", @"image6", @"image7", @"image8", @"image9", @"image10"];
+    return [array objectAtIndex:index];
 }
 
 @end
