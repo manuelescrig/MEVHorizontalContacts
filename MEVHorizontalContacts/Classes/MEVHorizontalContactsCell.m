@@ -11,7 +11,7 @@
 
 #import "MEVHorizontalContactsCell.h"
 
-static float const kMEVHorizontalContactsDefaultShowAnimationTime = 0.09f;
+static float const kMEVHorizontalContactsDefaultShowAnimationTime = 0.12f;
 static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 @interface MEVHorizontalContactsCell()
@@ -85,7 +85,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
     
     if (self.isSelected) {
         self.selected = NO;
-        [self hideMenuOptionsAnimated:YES];
+        [self hideMenuOptionsAnimated:NO];
         
     } else {
         self.selected = YES;
@@ -172,14 +172,19 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
     NSLog(@"showMenuOptionsAnimated = %d", animated);
     
     [self setUpCellOptions];
+    
     float animationTime = animated ? kMEVHorizontalContactsDefaultShowAnimationTime : 0.0f;
     for (UIView *view in _menuOptions) {
+        view.alpha = 0;
+        view.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0.5);
+
         [view setUserInteractionEnabled:NO];
         [UIView animateWithDuration:animationTime
                               delay:animationTime * ([_menuOptions indexOfObject:view]+1)
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
                              view.alpha = 1;
+                             view.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
                          } completion:^(BOOL finished) {
                              [view setUserInteractionEnabled:YES];
                          }];

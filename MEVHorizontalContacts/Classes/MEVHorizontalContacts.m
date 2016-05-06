@@ -110,7 +110,7 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
     cell.delegate = self;
     cell.dataSource = self;
     cell.itemSpacing = [self mev_contactsSpacing];
-    
+
     if (indexPath.row == _selectedIndex) {
         cell.selected = YES;
         [cell showMenuOptionsAnimated:NO];
@@ -162,11 +162,12 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
 
 - (NSInteger)mev_numberOfContacts
 {
+    NSInteger number;
     if ([_dataSource respondsToSelector:@selector(numberOfContacts)]) {
-        return [_dataSource numberOfContacts];
-    } else {
-        return 0;
+        number = [_dataSource numberOfContacts];
     }
+    NSAssert(number >= 0, @"You must assign a valid number.");
+    return number;
 }
 
 - (MEVHorizontalContactsCell *)mev_contactAtIndex:(NSInteger)index
@@ -223,26 +224,19 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
     if (_selectedIndex >= 0 && _selectedIndex != indexPath.row) {
         MEVHorizontalContactsCell *cell = [_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
         cell.selected = NO;
-        [cell hideMenuOptionsAnimated:YES];
+        [cell hideMenuOptionsAnimated:NO];
     }
     
-    int itemsInScreen = _horizontalContactListView.frame.size.width / (_layout.itemHeight - [self mev_contactsLabelHeight]) ;
-    
-    NSLog(@"cellSelectedAtIndexPath - itemsInScreen = %d", itemsInScreen);
-    
     if (_selectedIndex != indexPath.row) {
-//        _horizontalContactListView.scrollEnabled = NO;
-//        [_horizontalContactListView setContentOffset:CGPointMake(indexPath.row  * (_layout.itemHeight -_layout.labelHeight  + _layout.itemSpacing), 0) animated:YES];
-        
-   } else {
-        _horizontalContactListView.scrollEnabled = YES;
+        [_horizontalContactListView setContentOffset:CGPointMake(indexPath.row  * (_layout.itemHeight -_layout.labelHeight  + _layout.itemSpacing), 0) animated:YES];
     }
     
     // Select new cell, in case of deselecting then set -1 as default value
     _selectedIndex = _selectedIndex == indexPath.row ? -1 : indexPath.row;
 
-    [_horizontalContactListView performBatchUpdates:^{ } completion:^(BOOL finished) { }];
-    [_horizontalContactListView invalidateIntrinsicContentSize];
+    [UIView performWithoutAnimation:^{
+        [_horizontalContactListView performBatchUpdates:^{ } completion:^(BOOL finished) { }];
+    }];
     
     if ([_delegate respondsToSelector:@selector(contactSelectedAtIndex:)]) {
         return [_delegate contactSelectedAtIndex:indexPath.row];
