@@ -53,14 +53,14 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
     _imageView.contentMode = UIViewContentModeScaleAspectFill;
     _imageView.backgroundColor = [UIColor lightGrayColor];
     _imageView.layer.masksToBounds = YES;
-    [self addSubview:_imageView];
+    [self.contentView addSubview:_imageView];
     
     _label = [UILabel new];
     _label.opaque = YES;
     _label.textColor = [UIColor grayColor];
     _label.textAlignment = NSTextAlignmentCenter;
     _label.font = [UIFont systemFontOfSize:12];
-    [self addSubview:_label];
+    [self.contentView addSubview:_label];
 }
 
 
@@ -84,11 +84,11 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
     NSLog(@"cellSingleTap");
     
     if (self.isSelected) {
-        self.selected = NO;
+        [self setUnselectedAnimated:YES];
         [self hideMenuOptionsAnimated:NO];
         
     } else {
-        self.selected = YES;
+        [self setSelectedAnimated:YES];
         [self showMenuOptionsAnimated:YES];
     }
     
@@ -167,26 +167,97 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 #pragma mark - Animation Methods (Public)
 
+
+- (void)setSelectedAnimated:(BOOL)animated
+{
+    // Bounce Animation
+    NSLog(@"setSelectedAnimated = %d", animated);
+    
+    self.selected = YES;
+    [self setUserInteractionEnabled:NO];
+    
+    float animationTime = animated ? kMEVHorizontalContactsDefaultShowAnimationTime : 0.0;
+    [UIView animateWithDuration:animationTime
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, 0.9, 0.9, 0.9);
+                         _label.layer.transform = CATransform3DScale(CATransform3DIdentity, 0.9, 0.9, 0.9);
+                     } completion:^(BOOL finished) {
+                         [UIView animateWithDuration:animationTime
+                                               delay:0
+                                             options:UIViewAnimationOptionCurveEaseOut
+                                          animations:^{
+                                              _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.01, 1.01, 1.01);
+                                              _label.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.01, 1.01, 1.01);
+                                          } completion:^(BOOL finished) {
+                                              [UIView animateWithDuration:animationTime
+                                                                    delay:0
+                                                                  options:UIViewAnimationOptionCurveEaseOut
+                                                               animations:^{
+                                                                   _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
+                                                                   _label.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
+                                                               } completion:^(BOOL finished) {
+                                                                   [self setUserInteractionEnabled:YES];
+                                                               }];
+                                          }];
+                     }];
+    
+}
+
+- (void)setUnselectedAnimated:(BOOL)animated
+{
+    // Bounce Animation
+    NSLog(@"setUnselectedAnimated = %d", animated);
+    
+    self.selected = NO;
+    [self setUserInteractionEnabled:NO];
+    
+    float animationTime = animated ? (kMEVHorizontalContactsDefaultShowAnimationTime*2) : 0.0;
+    [UIView animateWithDuration:animationTime
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.05, 1.05, 1.05);
+                         _label.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.05, 1.05, 1.05);
+                     } completion:^(BOOL finished) {
+                         [UIView animateWithDuration:animationTime
+                                               delay:0
+                                             options:UIViewAnimationOptionCurveEaseOut
+                                          animations:^{
+                                              _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
+                                              _label.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
+                                          } completion:^(BOOL finished) {
+                                              [self setUserInteractionEnabled:YES];
+                                          }];
+                     }];
+
+}
+
 - (void)showMenuOptionsAnimated:(BOOL)animated
 {
     NSLog(@"showMenuOptionsAnimated = %d", animated);
     
     [self setUpCellOptions];
     
-    float animationTime = animated ? kMEVHorizontalContactsDefaultShowAnimationTime : 0.0f;
+    float animationTime = animated ? kMEVHorizontalContactsDefaultShowAnimationTime : 0.0;
     for (UIView *view in _menuOptions) {
         view.alpha = 0;
         view.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0.5);
-
-        [view setUserInteractionEnabled:NO];
         [UIView animateWithDuration:animationTime
                               delay:animationTime * ([_menuOptions indexOfObject:view]+1)
-                            options:UIViewAnimationOptionCurveLinear
+                            options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
-                             view.alpha = 1;
-                             view.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
+                             view.alpha = 0.8;
+                             view.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.05, 1.05, 1.05);
                          } completion:^(BOOL finished) {
-                             [view setUserInteractionEnabled:YES];
+                             [UIView animateWithDuration:animationTime
+                                                   delay:0
+                                                 options:UIViewAnimationOptionCurveEaseOut
+                                              animations:^{
+                                                  view.alpha = 1;
+                                                  view.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
+                                              } completion:^(BOOL finished) {  }];
                          }];
     }
 }

@@ -229,14 +229,19 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
     
     if (_selectedIndex != indexPath.row) {
         [_horizontalContactListView setContentOffset:CGPointMake(indexPath.row  * (_layout.itemHeight -_layout.labelHeight  + _layout.itemSpacing), 0) animated:YES];
+        [UIView performWithoutAnimation:^{
+            _horizontalContactListView.layer.speed = 1.0;
+            [_horizontalContactListView performBatchUpdates:^{ } completion:^(BOOL finished) { }];
+        }];
+
+    } else {
+        _horizontalContactListView.layer.speed = 2.0;
+        [_horizontalContactListView performBatchUpdates:^{ } completion:^(BOOL finished) { }];
+ 
     }
     
     // Select new cell, in case of deselecting then set -1 as default value
     _selectedIndex = _selectedIndex == indexPath.row ? -1 : indexPath.row;
-
-    [UIView performWithoutAnimation:^{
-        [_horizontalContactListView performBatchUpdates:^{ } completion:^(BOOL finished) { }];
-    }];
     
     if ([_delegate respondsToSelector:@selector(contactSelectedAtIndex:)]) {
         return [_delegate contactSelectedAtIndex:indexPath.row];
