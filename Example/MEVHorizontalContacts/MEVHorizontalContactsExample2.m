@@ -64,7 +64,7 @@
     return 2;
 }
 
-- (NSInteger)numberOfOptionsAtContactIndex:(NSInteger)index {
+- (NSInteger)numberOfItemsAtContactIndex:(NSInteger)index {
     return 2;
 }
 
@@ -75,11 +75,11 @@
     return cell;
 }
 
-- (MEVHorizontalContactsCell *)option:(NSInteger)option atContactIndex:(NSInteger)index {
+- (MEVHorizontalContactsCell *)item:(NSInteger)item atContactIndex:(NSInteger)index {
     
     UIImage *image;
     NSString *labelText;
-    switch (option) {
+    switch (item) {
         case 0:
             labelText = @"Call";
             image = [UIImage imageNamed:@"actionCall"];
@@ -98,7 +98,7 @@
             break;
     }
     
-    MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableOptionCellForIndex:index];
+    MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableItemCellForIndex:index];
     [cell.imageView setImage:image];
     [cell.label setText:labelText];
     return cell;
@@ -118,7 +118,7 @@
     NSLog(@"cellSelectedAtIndexPath");
 }
 
-- (void)option:(NSInteger)option selectedAtContactIndex:(NSInteger)index {
+- (void)item:(NSInteger)item selectedAtContactIndex:(NSInteger)index {
     NSLog(@"cellSelectedAtIndexPath");
 }
 

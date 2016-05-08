@@ -1,6 +1,6 @@
 //
-//  MEVHorizontalContactsModel.m
-//  People Tracker
+//  MEVHorizontalContacts.m
+//  An iOS UICollectionViewLayout subclass to show a list of contacts with configurable expandable items.
 //
 //  https://github.com/manuelescrig/MEVHorizontalContacts
 //
@@ -129,7 +129,7 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
    return [_horizontalContactListView dequeueReusableCellWithReuseIdentifier:kMEVHorizontalContactsContactCell forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
 
-- (MEVHorizontalContactsCell *)dequeueReusableOptionCellForIndex:(NSInteger)index
+- (MEVHorizontalContactsCell *)dequeueReusableItemCellForIndex:(NSInteger)index
 {
     return [_horizontalContactListView dequeueReusableCellWithReuseIdentifier:kMEVHorizontalContactsOptionCell forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
@@ -179,19 +179,19 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
     }
 }
 
-- (NSInteger)mev_numberOfOptionsAtIndex:(NSInteger)index
+- (NSInteger)mev_numberOfItemsAtIndex:(NSInteger)index
 {
-    if ([_dataSource respondsToSelector:@selector(numberOfOptionsAtContactIndex:)]) {
-        return [_dataSource numberOfOptionsAtContactIndex:index];
+    if ([_dataSource respondsToSelector:@selector(numberOfItemsAtContactIndex:)]) {
+        return [_dataSource numberOfItemsAtContactIndex:index];
     } else {
         return 0;
     }
 }
 
-- (MEVHorizontalContactsCell *)mev_option:(NSInteger)option atContactAtIndex:(NSInteger)index
+- (MEVHorizontalContactsCell *)mev_item:(NSInteger)item atContactAtIndex:(NSInteger)index
 {
-    if ([_dataSource respondsToSelector:@selector(option:atContactIndex:)]) {
-        return [_dataSource option:option atContactIndex:index];
+    if ([_dataSource respondsToSelector:@selector(item:atContactIndex:)]) {
+        return [_dataSource item:item atContactIndex:index];
     } else {
         return nil;
     }
@@ -201,17 +201,17 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
 #pragma mark – MEVHorizontalContactsLayoutDataSource
 #pragma mark – MEVHorizontalContactsCellDataSource 
 
-- (NSInteger)numberOfOptionsInCellIndexPath:(NSIndexPath *)indexPath
+- (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath
 {
-    return [self mev_numberOfOptionsAtIndex:indexPath.row];
+    return [self mev_numberOfItemsAtIndex:indexPath.row];
 }
 
 
 #pragma mark – MEVHorizontalContactsCellDataSource
 
-- (MEVHorizontalContactsCell *)option:(NSInteger)option atContactIndex:(NSInteger)index
+- (MEVHorizontalContactsCell *)item:(NSInteger)item atContactIndex:(NSInteger)index
 {
-    return [self mev_option:option atContactAtIndex:option];
+    return [self mev_item:item atContactAtIndex:index];
 }
 
 
@@ -250,8 +250,8 @@ static NSString *const kMEVHorizontalContactsOptionCell = @"optionCell";
 
 - (void)menuOptionSelected:(NSInteger)option atCellIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_delegate respondsToSelector:@selector(option:selectedAtContactIndex:)]) {
-        return [_delegate option:option selectedAtContactIndex:indexPath.row];
+    if ([_delegate respondsToSelector:@selector(item:selectedAtContactIndex:)]) {
+        return [_delegate item:option selectedAtContactIndex:indexPath.row];
     }
 }
 

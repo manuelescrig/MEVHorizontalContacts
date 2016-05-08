@@ -1,6 +1,6 @@
 //
 //  MEHorizontalContactListFlowLayout.h
-//  People Tracker
+//  An iOS UICollectionViewLayout subclass to show a list of contacts with configurable expandable items.
 //
 //  https://github.com/manuelescrig/MEVHorizontalContacts
 //
@@ -15,7 +15,7 @@
 
 @required
 
-- (NSInteger)numberOfOptionsInCellIndexPath:(NSIndexPath *)indexPath;
+- (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

@@ -1,6 +1,6 @@
 //
 //  MEVHorizontalContactsCell.h
-//  People Tracker
+//  An iOS UICollectionViewLayout subclass to show a list of contacts with configurable expandable items.
 //
 //  https://github.com/manuelescrig/MEVHorizontalContacts
 //
@@ -17,9 +17,9 @@
 
 @required
 
-- (NSInteger)numberOfOptionsInCellIndexPath:(NSIndexPath *)indexPath;
+- (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath;
 
-- (MEVHorizontalContactsCell *)option:(NSInteger)option atContactIndex:(NSInteger)index;
+- (MEVHorizontalContactsCell *)item:(NSInteger)item atContactIndex:(NSInteger)index;
 
 @end
 
@@ -28,7 +28,7 @@
 
 - (void)cellSelectedAtIndexPath:(NSIndexPath *)indexPath;
 
-- (void)menuOptionSelected:(NSInteger)option atCellIndexPath:(NSIndexPath *)indexPath;
+- (void)itemSelected:(NSInteger)option atCellIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

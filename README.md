@@ -1,5 +1,6 @@
 # MEVHorizontalContacts
-An **iOS** UICollectionViewLayout subclass that recreates the contacts layout in the **Siri Suggestions**.
+An **iOS** UICollectionViewLayout subclass to show a **list of contacts** with configurable expandable **items**.
+
 
 [![CI Status](http://img.shields.io/travis/manuelescrig/MEVHorizontalContacts.svg?style=flat)](https://travis-ci.org/manuelescrig/MEVHorizontalContacts)
 [![Version](https://img.shields.io/cocoapods/v/MEVHorizontalContacts.svg?style=flat)](http://cocoapods.org/pods/MEVHorizontalContacts)
@@ -9,7 +10,7 @@ An **iOS** UICollectionViewLayout subclass that recreates the contacts layout in
 
 ## Features
 - [x] Customizable contacts cells
-- [x] Customizable contact options cells
+- [x] Customizable contact items cells
 - [x] Different sizes and responsive design
 - [x] Multiple delegate methods
 
@@ -68,8 +69,6 @@ Then, import the following file your classes:
 ## Roadmap
 - [x] CocoaPods support
 - [ ] Carthage support
-- [ ] Swift compatible
-- [ ] Swift version
 - [ ] Tests
 
 ## Change Log

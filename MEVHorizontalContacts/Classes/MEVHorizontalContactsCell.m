@@ -1,6 +1,6 @@
 //
 //  MEVHorizontalContactsCell.m
-//  People Tracker
+//  An iOS UICollectionViewLayout subclass to show a list of contacts with configurable expandable items.
 //
 //  https://github.com/manuelescrig/MEVHorizontalContacts
 //
@@ -98,8 +98,8 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 - (void)menuOptionSingleTap:(UIButton *)sender
 {
-    if ([_delegate respondsToSelector:@selector(menuOptionSelected:atCellIndexPath:)])
-        [_delegate menuOptionSelected:sender.tag atCellIndexPath:_indexPath];
+    if ([_delegate respondsToSelector:@selector(itemSelected:atCellIndexPath:)])
+        [_delegate itemSelected:sender.tag atCellIndexPath:_indexPath];
 }
 
 
@@ -111,8 +111,8 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
     [_menuOptions removeAllObjects];
     
     int numberOfItems;
-    if ([_dataSource respondsToSelector:@selector(numberOfOptionsInCellIndexPath:)]) {
-        numberOfItems = [_dataSource numberOfOptionsInCellIndexPath:_indexPath];
+    if ([_dataSource respondsToSelector:@selector(numberOfItemsInCellIndexPath:)]) {
+        numberOfItems = [_dataSource numberOfItemsInCellIndexPath:_indexPath];
     }
     
     float maxWidth = CGRectGetHeight(self.bounds) - _labelHeight;
@@ -131,8 +131,8 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
         button.layer.masksToBounds = YES;
         [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
        
-        if ([_dataSource respondsToSelector:@selector(option:atContactIndex:)]) {
-            MEVHorizontalContactsCell *cell = [_dataSource option:index atContactIndex:_indexPath.row];
+        if ([_dataSource respondsToSelector:@selector(item:atContactIndex:)]) {
+            MEVHorizontalContactsCell *cell = [_dataSource item:index atContactIndex:_indexPath.row];
 
             UIImage *image = cell.imageView.image;
             image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -248,7 +248,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
                               delay:animationTime * ([_menuOptions indexOfObject:view]+1)
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
-                             view.alpha = 0.8;
+                             view.alpha = 0.6;
                              view.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.05, 1.05, 1.05);
                          } completion:^(BOOL finished) {
                              [UIView animateWithDuration:animationTime

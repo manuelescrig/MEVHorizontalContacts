@@ -1,6 +1,6 @@
 //
 //  MEHorizontalContactListFlowLayout.m
-//  People Tracker
+//  An iOS UICollectionViewLayout subclass to show a list of contacts with configurable expandable items.
 //
 //  https://github.com/manuelescrig/MEVHorizontalContacts
 //
@@ -83,8 +83,8 @@
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
 
             NSInteger items = 0;
-            if([_dataSource respondsToSelector:@selector(numberOfOptionsInCellIndexPath:)]) {
-                items = [_dataSource numberOfOptionsInCellIndexPath:indexPath];
+            if([_dataSource respondsToSelector:@selector(numberOfItemsInCellIndexPath:)]) {
+                items = [_dataSource numberOfItemsInCellIndexPath:indexPath];
             }
 
             CGSize itemSize = CGSizeZero;
@@ -92,22 +92,13 @@
             itemSize.width = _itemHeight - _labelHeight;
             if (cell.isSelected) {
                 
-                NSLog(@"prepareLayout - numberOfSections = %d", numberOfSections);
-                NSLog(@"prepareLayout - section = %d", section);
-                NSLog(@"prepareLayout - numberOfItems = %d", numberOfItems);
-                NSLog(@"prepareLayout - item = %d", item);
-
                 //                int itemsInScreen = self.collectionView.frame.size.width / (itemSize.width + _itemSpacing);
                 //                itemSize.width += (itemSize.width + _itemSpacing) * (itemsInScreen-1);
                 itemSize.width += (itemSize.width + _itemSpacing) * (items);
                 
-                NSLog(@"prepareLayout - self.collectionView.frame.size.width = %f", self.collectionView.frame.size.width);
-                NSLog(@"prepareLayout - (itemSize.width + _itemSpacing) = %f", (itemSize.width + _itemSpacing));
                 int itemsInScreen = self.collectionView.frame.size.width / (itemSize.width + _itemSpacing);
-                NSLog(@"prepareLayout - itemsInScreenSpaceLeft = %d", itemsInScreen);
 
                 itemsInScreen -= items;
-                NSLog(@"prepareLayout - itemsInScreenSpaceLeft = %d", itemsInScreen);
 
 //                xOffsetExpaned = self.collectionView.frame.size.width -  (itemSize.width + _itemSpacing);
 
