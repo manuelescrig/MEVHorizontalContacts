@@ -164,25 +164,23 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
        
         if ([_dataSource respondsToSelector:@selector(item:atContactIndex:)]) {
             MEVHorizontalContactsCell *cell = [_dataSource item:index atContactIndex:_indexPath.row];
-
-            UIImage *image = [cell.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, maxWidth, maxWidth)];
-            imageView.image = image;
-            imageView.opaque = YES;
-            imageView.backgroundColor = self.backgroundColor;
-            imageView.contentMode = UIViewContentModeCenter;
-            imageView.layer.cornerRadius = (maxWidth)/2;
-            imageView.layer.masksToBounds = YES;
-            [button addSubview:imageView];
+            [cell.imageView setFrame:CGRectMake(0, 0, maxWidth, maxWidth)];
+            [cell.imageView setOpaque:YES];
+            [cell.imageView setImage:[[cell.imageView image] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+            [cell.imageView setTintColor:[UIColor blueColor]];
+            [cell.imageView setBackgroundColor:self.backgroundColor];
+            [cell.imageView setContentMode:UIViewContentModeCenter];
+            [cell.imageView.layer setCornerRadius:maxWidth/2];
+            [cell.imageView.layer setMasksToBounds:YES];
+            [button addSubview:cell.imageView];
             
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(button.frame) - _labelHeight, CGRectGetWidth(button.frame), _labelHeight)];
-            label.opaque = YES;
-            label.backgroundColor = self.backgroundColor;
-            label.textAlignment = NSTextAlignmentCenter;
-            label.textColor = [self mev_horizontalContactsItemLabelTextColor];
-            label.font = [self mev_horizontalContactsItemLabelFont];
-            label.text = cell.label.text;
-            [button addSubview:label];
+            [cell.label setFrame:CGRectMake(0, CGRectGetHeight(button.frame) - _labelHeight, CGRectGetWidth(button.frame), _labelHeight)];
+            [cell.label setOpaque:YES];
+            [cell.label setBackgroundColor:self.backgroundColor];
+            [cell.label setTextAlignment:NSTextAlignmentCenter];
+            [cell.label setTextColor:[self mev_horizontalContactsItemLabelTextColor]];
+            [cell.label setFont:[self mev_horizontalContactsItemLabelFont]];
+            [button addSubview:cell.label];
         }
         
         [_items addObject:button];

@@ -230,8 +230,6 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 - (void)cellSelectedAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cellSelectedAtIndexPath");
-    
     if (_selectedIndex >= 0 && _selectedIndex != indexPath.row) {
         MEVHorizontalContactsCell *cell = [_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
         cell.selected = NO;

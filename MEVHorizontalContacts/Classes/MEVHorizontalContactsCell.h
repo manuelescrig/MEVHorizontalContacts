@@ -13,39 +13,107 @@
 
 @class MEVHorizontalContactsCell;
 
+/**
+ * The object that acts as the data source of the horizontal contacts.
+ * @discussion The data source adopts the MEVHorizontalContactsCellDataSource protocol. The data source is not retained.
+ * @discussion Use this for configuring and customazing the content of the horizontal contacts list.
+ *
+ */
 @protocol MEVHorizontalContactsCellDataSource <NSObject>
 
 @required
 
+/**
+ * Asks the delegate the number of total items for a specific contact to represent.
+ * @warning It is required to be implemented.
+ *
+ * @param indexPath A NSIndexPath with the index of the contact.
+ * @return An NSInteger with the number of items for the specific contact index.
+ *
+ */
 - (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ * Asks the delegate for the content for an item for a specific contact index.
+ * @discussion Use this protocol method as you would use `- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath`.
+ * @warning It is required to be implemented.
+ *
+ * @param index A NSInteger with the index of the contact.
+ * @param item A NSInteger with the index of the item for the specific contact index.
+ * @return A MEVHorizontalContactsCell object representing the data of the specific item for the contact index.
+ *
+ */
 - (MEVHorizontalContactsCell *)item:(NSInteger)item atContactIndex:(NSInteger)index;
 
 @end
 
-
+/**
+ * The object that acts as the delegate of the horizontal contacts.
+ * @discussion The delegate adopts the MEVHorizontalContactsDelegate protocol. The delegate is not retained. All delegate methods are optional.
+ * @discussion Use this delegate for receiving action callbacks.
+ *
+ */
 @protocol MEVHorizontalContactsCellDelegate <NSObject>
 
+/**
+ * Tells the delegate that the contact was tapped.
+ * @param indexPath The indexPath of the contact that was tapped from the horizontal list.
+ *
+ */
 - (void)cellSelectedAtIndexPath:(NSIndexPath *)indexPath;
 
-- (void)itemSelected:(NSInteger)option atCellIndexPath:(NSIndexPath *)indexPath;
+/**
+ * Tells the delegate that an item from a contact  was tapped.
+ * @param indexPath The index of the contact that was tapped from the horizontal list.
+ * @param item The index of the item that was tapped from the horizontal list.
+ *
+ */
+- (void)itemSelected:(NSInteger)item atCellIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
-
+/**
+ * A UICollectionViewCell object subclass that represents the cell for each contact.
+ * @author Manuel Escrig Ventura
+ *
+ */
 @interface MEVHorizontalContactsCell : UICollectionViewCell
 
+/** The horizontal contacts data source object. */
 @property (nonatomic, weak) id<MEVHorizontalContactsCellDelegate> delegate;
+
+/** The horizontal contacts delegate object. */
 @property (nonatomic, weak) id<MEVHorizontalContactsCellDataSource> dataSource;
 
+/** The indexPath object with the row and section information. */
 @property (nonatomic, strong) NSIndexPath *indexPath;
+
+/** The imageView object that shows the image for each contact cell. */
 @property (nonatomic, strong) UIImageView *imageView;
+
+/** The UILabel object that shows the text for each contact cell. */
 @property (nonatomic, strong) UILabel *label;
+
+/** An CGFloat object to represent the label height of the items in the horizontal contacts list */
 @property (nonatomic, assign) CGFloat labelHeight;
+
+/** An CGFloat object to represent the space between the items in the horizontal contacts list */
 @property (nonatomic, assign) CGFloat itemSpacing;
 
+/**
+ * Show the contact cell items.
+ *
+ * @param animated When animated is YES then the menu items appear animated.
+ *
+ */
 - (void)showMenuOptionsAnimated:(BOOL)animated;
 
+/**
+ * Hide the contact cell items.
+ *
+ * @param animated When animated is YES then the menu items appear animated.
+ *
+ */
 - (void)hideMenuOptionsAnimated:(BOOL)animated;
 
 

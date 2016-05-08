@@ -117,7 +117,7 @@
 }
 
 - (void)item:(NSInteger)item selectedAtContactIndex:(NSInteger)index {
-    NSLog(@"cellSelectedAtIndexPath");
+    NSLog(@"selectedAtContactIndex - index : %zu option : %zu ", index, item);
 }
 
 

@@ -17,7 +17,7 @@
 /**
  * The object that acts as the data source of the horizontal contacts.
  * @discussion The data source adopts the MEVHorizontalContactsDataSource protocol. The data source is not retained. 
- * @discussion Use this delegate for configuring and customazing the content of the horizontal contacts list.
+ * @discussion Use this for configuring and customazing the content of the horizontal contacts list.
  *
  */
 @protocol MEVHorizontalContactsDataSource <NSObject>
@@ -122,16 +122,10 @@
  */
 @interface MEVHorizontalContacts : UIView
 
-/**
- * The horizontal contacts data source object.
- *
- */
+/** The horizontal contacts data source object. */
 @property (nonatomic, weak) id<MEVHorizontalContactsDataSource> dataSource;
 
-/**
- * The horizontal contacts delegate object.
- *
- */
+/** The horizontal contacts delegate object. */
 @property (nonatomic, weak) id<MEVHorizontalContactsDelegate> delegate;
 
 /**
