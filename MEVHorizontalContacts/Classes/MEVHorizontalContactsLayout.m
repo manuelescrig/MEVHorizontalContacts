@@ -24,43 +24,10 @@
 @implementation MEVHorizontalContactsLayout
 
 
-#pragma mark - Lifecycle
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        [self setup];
-    }
-    
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super init];
-    if (self) {
-        [self setup];
-    }
-    
-    return self;
-}
-
-- (void)setup
-{
-//    self.itemInsets = UIEdgeInsetsMake(22.0f, 22.0f, 13.0f, 22.0f);
-//    self.itemSize = CGSizeMake(125.0f, 125.0f);
-//    self.interItemSpacingY = 12.0f;
-//    self.numberOfColumns = 2;
-}
-
-
-#pragma mark - Layout
+#pragma mark - Layout (private)
 
 - (void)prepareLayout
 {
-    NSLog(@"prepareLayout");
-    
     [super prepareLayout];
     
     _layoutAttributes = [NSMutableDictionary dictionary];
@@ -92,16 +59,9 @@
             itemSize.width = _itemHeight - _labelHeight;
             if (cell.isSelected) {
                 
-                //                int itemsInScreen = self.collectionView.frame.size.width / (itemSize.width + _itemSpacing);
-                //                itemSize.width += (itemSize.width + _itemSpacing) * (itemsInScreen-1);
                 itemSize.width += (itemSize.width + _itemSpacing) * (items);
-                
                 int itemsInScreen = self.collectionView.frame.size.width / (itemSize.width + _itemSpacing);
-
                 itemsInScreen -= items;
-
-//                xOffsetExpaned = self.collectionView.frame.size.width -  (itemSize.width + _itemSpacing);
-
             }
             
             attributes.frame = CGRectIntegral(CGRectMake(xOffset, yOffset, itemSize.width, itemSize.height));
@@ -121,7 +81,7 @@
 }
 
 
-#pragma mark - Helpers
+#pragma mark - Helpers (private)
 
 - (NSString *)layoutKeyForIndexPath:(NSIndexPath *)indexPath
 {
@@ -134,7 +94,7 @@
 }
 
 
-#pragma mark - Invalidate
+#pragma mark - Invalidate (private)
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
@@ -142,7 +102,7 @@
 }
 
 
- #pragma mark - Required methods
+ #pragma mark - Required methods (private)
 
 - (CGSize)collectionViewContentSize
 {

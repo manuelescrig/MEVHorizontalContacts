@@ -16,7 +16,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 @interface MEVHorizontalContactsCell()
 
-@property (nonatomic, strong) NSMutableArray *menuOptions;
+@property (nonatomic, strong) NSMutableArray *items;
 
 @end
 
@@ -35,6 +35,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
     return self;
 }
 
+
 #pragma mark - View Life Cycle (private)
 
 - (void)setupView
@@ -45,7 +46,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSingleTap:)];
     [self addGestureRecognizer:singleTap];
     
-    _menuOptions = [NSMutableArray new];
+    _items = [NSMutableArray new];
     
     _imageView = [UIImageView new];
     _imageView.opaque = YES;
@@ -81,8 +82,6 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 - (void)cellSingleTap:(UITapGestureRecognizer *)recognizer
 {
-    NSLog(@"cellSingleTap");
-    
     if (self.isSelected) {
         [self setUnselectedAnimated:YES];
         [self hideMenuOptionsAnimated:NO];
@@ -107,8 +106,8 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 - (void)setUpCellOptions
 {
-    [_menuOptions makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [_menuOptions removeAllObjects];
+    [_items makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [_items removeAllObjects];
     
     int numberOfItems;
     if ([_dataSource respondsToSelector:@selector(numberOfItemsInCellIndexPath:)]) {
@@ -120,7 +119,6 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
     xOffset += _itemSpacing;
     
     for (int index = 0; index < numberOfItems ; index++) {
-        NSLog(@"index = %d", index);
 
         UIButton *button = [UIButton new];
         button.frame = CGRectMake(xOffset,0, maxWidth, CGRectGetHeight(self.bounds));
@@ -157,7 +155,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
             [button addSubview:label];
         }
         
-        [_menuOptions addObject:button];
+        [_items addObject:button];
         [self addSubview:button];
 
         xOffset += (maxWidth + _itemSpacing);
@@ -170,9 +168,6 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 - (void)setSelectedAnimated:(BOOL)animated
 {
-    // Bounce Animation
-    NSLog(@"setSelectedAnimated = %d", animated);
-    
     self.selected = YES;
     [self setUserInteractionEnabled:NO];
     
@@ -207,9 +202,6 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 - (void)setUnselectedAnimated:(BOOL)animated
 {
-    // Bounce Animation
-    NSLog(@"setUnselectedAnimated = %d", animated);
-    
     self.selected = NO;
     [self setUserInteractionEnabled:NO];
     
@@ -236,16 +228,14 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 - (void)showMenuOptionsAnimated:(BOOL)animated
 {
-    NSLog(@"showMenuOptionsAnimated = %d", animated);
-    
     [self setUpCellOptions];
     
     float animationTime = animated ? kMEVHorizontalContactsDefaultShowAnimationTime : 0.0;
-    for (UIView *view in _menuOptions) {
+    for (UIView *view in _items) {
         view.alpha = 0;
         view.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0.5);
         [UIView animateWithDuration:animationTime
-                              delay:animationTime * ([_menuOptions indexOfObject:view]+1)
+                              delay:animationTime * ([_items indexOfObject:view]+1)
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
                              view.alpha = 0.6;
@@ -265,12 +255,10 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 - (void)hideMenuOptionsAnimated:(BOOL)animated
 {
-    NSLog(@"hideMenuOptionsAnimated = %d", animated);
-
     int pos = 0;
     float animationTime = animated ? kMEVHorizontalContactsDefaultHideAnimationTime : 0.0f;
-    for (int i = (int)[_menuOptions count]; i > 0 ; i--) {
-        UIView *view = [_menuOptions objectAtIndex:i-1];
+    for (int i = (int)[_items count]; i > 0 ; i--) {
+        UIView *view = [_items objectAtIndex:i-1];
         [UIView animateWithDuration:animationTime
                               delay:animationTime * pos
                             options:UIViewAnimationOptionCurveLinear

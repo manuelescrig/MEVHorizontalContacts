@@ -44,7 +44,6 @@
 
 
 - (void)setupView {
-    NSLog(@"setupView = %@", self);
     
     self.translatesAutoresizingMaskIntoConstraints = NO;
     
