@@ -48,6 +48,7 @@
     self.translatesAutoresizingMaskIntoConstraints = NO;
 
     _horizontalContacts = [MEVHorizontalContacts new];
+    _horizontalContacts.backgroundColor = [UIColor lightGrayColor];
     _horizontalContacts.dataSource = self;
     _horizontalContacts.delegate = self;
     [self addSubview:_horizontalContacts];

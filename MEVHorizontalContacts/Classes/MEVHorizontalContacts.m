@@ -14,6 +14,7 @@
 static float const kMEVHorizontalContactsDefaultLabelHeight = 30.0f;
 static float const kMEVHorizontalContactsDefaultSpacing = 5.0f;
 
+
 static NSString *const kMEVHorizontalContactsContactCell = @"contactCell";
 static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
@@ -58,13 +59,11 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 - (void)setupView
 {
+    // Default configuration
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self setOpaque:YES];
-    [self setBackgroundColor:[self mev_horizontalContactsBackgroundColor]];
     
-    // Default configuration
     _selectedIndex = -1;
-    _animationMode = MEVHorizontalsAnimationBounce;
 
     // Contact List
     _layout = [[MEVHorizontalContactsLayout alloc] init];
@@ -75,7 +74,6 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     [_horizontalContactListView setDataSource:self];
     [_horizontalContactListView setDelegate:self];
     [_horizontalContactListView setOpaque:YES];
-    [_horizontalContactListView setBackgroundColor:self.backgroundColor];
     [_horizontalContactListView setAlwaysBounceHorizontal:YES];
     [_horizontalContactListView setShowsVerticalScrollIndicator:NO];
     [_horizontalContactListView setShowsHorizontalScrollIndicator:NO];
@@ -94,6 +92,8 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     _layout.insets = [self mev_horizontalContactsInsets];
     _layout.labelHeight = [self mev_horizontalContactsLabelHeight];
     _layout.itemHeight = [self mev_horizontalContactsItemHeight];
+    
+    [_horizontalContactListView setBackgroundColor:[self mev_horizontalContactsBackgroundColor]];
 }
 
 
@@ -141,6 +141,24 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 #pragma mark - Setters (Public)
 
+- (void)setDataSource:(id<MEVHorizontalContactsDataSource>)dataSource
+{
+    if ([dataSource conformsToProtocol:@protocol(MEVHorizontalContactsDataSource)]) {
+        _dataSource = dataSource;
+    } else {
+        NSAssert(NO, @"You must assign a valid MEVHorizontalContactsDataSource type for -setDataSource:");
+    }
+}
+
+- (void)setDelegate:(id<MEVHorizontalContactsDelegate>)delegate
+{
+    if ([delegate conformsToProtocol:@protocol(MEVHorizontalContactsDelegate)]) {
+        _delegate = delegate;
+    } else {
+        NSAssert(NO, @"You must assign a valid MEVHorizontalContactsDelegate type for -setDelegate:");
+    }
+}
+
 - (void)setAnimationMode:(MEVHorizontalsAnimationMode)animationMode
 {
     if (animationMode == MEVHorizontalsAnimationNone ||
@@ -151,17 +169,29 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     }
 }
 
-//TODO:Add asserts
+
 #pragma mark - Getters (private)
 
 - (MEVHorizontalsAnimationMode)mev_horizontalContactsAnimationMode
 {
-    return _animationMode;
+    if (_animationMode) {
+        return _animationMode;
+    } else {
+        // Default value when not assigend
+        _animationMode = MEVHorizontalsAnimationBounce;
+        return _animationMode;
+    }
 }
 
 - (UIColor *)mev_horizontalContactsBackgroundColor
 {
-    return [UIColor groupTableViewBackgroundColor];
+    if (self.backgroundColor) {
+        return self.backgroundColor;
+    } else {
+        // Default value when not assigend
+        self.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        return self.backgroundColor;
+    }
 }
 
 - (CGFloat)mev_horizontalContactsItemHeight
@@ -194,12 +224,11 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 - (NSInteger)mev_horizontalContactsNumberOfContacts
 {
-    NSInteger number;
     if ([_dataSource respondsToSelector:@selector(numberOfContacts)]) {
-        number = [_dataSource numberOfContacts];
+        return [_dataSource numberOfContacts];
+    } else {
+        NSAssert([_dataSource respondsToSelector:@selector(numberOfContacts)], @"'numberOfContacts' Not implemented");
     }
-    NSAssert(number >= 0, @"You must assign a valid number.");
-    return number;
 }
 
 - (MEVHorizontalContactsCell *)mev_horizontalContactsContactAtIndex:(NSInteger)index
@@ -207,7 +236,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     if ([_dataSource respondsToSelector:@selector(contactAtIndex:)]) {
         return [_dataSource contactAtIndex:index];
     } else {
-        return nil;
+        NSAssert([_dataSource respondsToSelector:@selector(contactAtIndex:)], @"'contactAtIndex:' Not implemented");
     }
 }
 
@@ -216,7 +245,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     if ([_dataSource respondsToSelector:@selector(numberOfItemsAtContactIndex:)]) {
         return [_dataSource numberOfItemsAtContactIndex:index];
     } else {
-        return 0;
+        NSAssert([_dataSource respondsToSelector:@selector(numberOfItemsAtContactIndex:)], @"'numberOfItemsAtContactIndex:' Not implemented");
     }
 }
 
@@ -225,7 +254,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     if ([_dataSource respondsToSelector:@selector(item:atContactIndex:)]) {
         return [_dataSource item:item atContactIndex:index];
     } else {
-        return nil;
+        NSAssert([_dataSource respondsToSelector:@selector(item:atContactIndex:)], @"'item:atContactIndex:' Not implemented");
     }
 }
 

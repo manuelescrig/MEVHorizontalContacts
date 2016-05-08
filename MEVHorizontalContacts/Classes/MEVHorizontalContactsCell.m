@@ -75,23 +75,40 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
     _label.backgroundColor = self.backgroundColor;
     
     // Sizes
-    float maxWidth = CGRectGetHeight(self.bounds) - _labelHeight;
-    _imageView.frame = CGRectMake(0, 0, maxWidth, maxWidth);
-    _imageView.layer.cornerRadius = (maxWidth)/2;
-    _label.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - _labelHeight, CGRectGetHeight(self.bounds) - _labelHeight, _labelHeight);
+    float itemWidth = [self mev_horizontalContactsItemWidth];
+    _imageView.frame = CGRectMake(0, 0, itemWidth, itemWidth);
+    _imageView.layer.cornerRadius = [self mev_horizontalContactsCornerRadious];
+    _label.frame = CGRectMake(0, itemWidth, itemWidth, _labelHeight);
 }
 
-//TODO:Add asserts
-#pragma mark - Getters (private)
 
-- (BOOL)mev_horizontalContactsCornerRadious
+#pragma mark - Getters (private)
+//TODO:Add asserts & default values
+
+- (CGFloat)mev_horizontalContactsCornerRadious
 {
-    return YES;
+    return [self mev_horizontalContactsItemWidth]/2;
+}
+
+- (CGFloat)mev_horizontalContactsItemWidth
+{
+    return CGRectGetHeight(self.bounds) - _labelHeight;
+}
+
+- (CGFloat)mev_horizontalContactsItemHeight
+{
+    return CGRectGetHeight(self.bounds);
 }
 
 - (UIColor *)mev_horizontalContactsContactLabelTextColor
 {
-    return [UIColor grayColor];
+    if (self.backgroundColor) {
+        return self.backgroundColor;
+    } else {
+        // Default value when not assigend
+        self.backgroundColor = [UIColor grayColor];
+        return self.backgroundColor;
+    }
 }
 
 - (UIFont *)mev_horizontalContactsContactLabelFont
@@ -143,14 +160,15 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
         numberOfItems = [_dataSource numberOfItemsInCellIndexPath:_indexPath];
     }
     
-    float maxWidth = CGRectGetHeight(self.bounds) - _labelHeight;
-    int xOffset = maxWidth;
+    float itemWidth = [self mev_horizontalContactsItemWidth];
+    float itemHeight = [self mev_horizontalContactsItemHeight];
+    int xOffset = itemWidth;
     xOffset += _itemSpacing;
     
     for (int index = 0; index < numberOfItems ; index++) {
         
         UIButton *button = [UIButton new];
-        button.frame = CGRectMake(xOffset,0, maxWidth, CGRectGetHeight(self.bounds));
+        button.frame = CGRectMake(xOffset,0, itemWidth, itemHeight);
         button.tag = index;
         button.opaque = YES;
         button.alpha = 0;
@@ -160,17 +178,17 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
         
         if ([_dataSource respondsToSelector:@selector(item:atContactIndex:)]) {
             MEVHorizontalContactsCell *cell = [_dataSource item:index atContactIndex:_indexPath.row];
-            [cell.imageView setFrame:CGRectMake(0, 0, maxWidth, maxWidth)];
+            [cell.imageView setFrame:CGRectMake(0, 0, itemWidth, itemWidth)];
             [cell.imageView setOpaque:YES];
             [cell.imageView setImage:[[cell.imageView image] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
             [cell.imageView setTintColor:[UIColor blueColor]];
             [cell.imageView setBackgroundColor:self.backgroundColor];
             [cell.imageView setContentMode:UIViewContentModeCenter];
-            [cell.imageView.layer setCornerRadius:maxWidth/2];
+            [cell.imageView.layer setCornerRadius:[self mev_horizontalContactsCornerRadious]];
             [cell.imageView.layer setMasksToBounds:YES];
             [button addSubview:cell.imageView];
             
-            [cell.label setFrame:CGRectMake(0, CGRectGetHeight(button.frame) - _labelHeight, CGRectGetWidth(button.frame), _labelHeight)];
+            [cell.label setFrame:CGRectMake(0, itemWidth, itemWidth, _labelHeight)];
             [cell.label setOpaque:YES];
             [cell.label setBackgroundColor:self.backgroundColor];
             [cell.label setTextAlignment:NSTextAlignmentCenter];
@@ -182,7 +200,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
         [_items addObject:button];
         [self addSubview:button];
         
-        xOffset += (maxWidth + _itemSpacing);
+        xOffset += (itemWidth + _itemSpacing);
     }
 }
 
