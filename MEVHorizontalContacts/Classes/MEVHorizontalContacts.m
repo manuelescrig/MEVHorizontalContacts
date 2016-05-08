@@ -60,6 +60,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self setOpaque:YES];
+    [self setBackgroundColor:[self mev_horizontalContactsBackgroundColor]];
     
     _selectedIndex = -1;
     
@@ -72,7 +73,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     [_horizontalContactListView setDataSource:self];
     [_horizontalContactListView setDelegate:self];
     [_horizontalContactListView setOpaque:YES];
-    [_horizontalContactListView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    [_horizontalContactListView setBackgroundColor:self.backgroundColor];
     [_horizontalContactListView setAlwaysBounceHorizontal:YES];
     [_horizontalContactListView setShowsVerticalScrollIndicator:NO];
     [_horizontalContactListView setShowsHorizontalScrollIndicator:NO];
@@ -87,10 +88,10 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 - (void)layoutSubviews
 {    
-    _layout.itemSpacing = [self mev_contactsSpacing];
-    _layout.insets = [self mev_contactsInsets];
-    _layout.labelHeight = [self mev_contactsLabelHeight];
-    _layout.itemHeight = [self mev_contactsItemHeight];
+    _layout.itemSpacing = [self mev_horizontalContactsSpacing];
+    _layout.insets = [self mev_horizontalContactsInsets];
+    _layout.labelHeight = [self mev_horizontalContactsLabelHeight];
+    _layout.itemHeight = [self mev_horizontalContactsItemHeight];
 }
 
 
@@ -98,14 +99,15 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self mev_numberOfContacts];
+    return [self mev_horizontalContactsNumberOfContacts];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MEVHorizontalContactsCell *cell = [self mev_contactAtIndex:indexPath.row];
-    cell.labelHeight = [self mev_contactsLabelHeight];;
-    cell.itemSpacing = [self mev_contactsSpacing];
+    MEVHorizontalContactsCell *cell = [self mev_horizontalContactsContactAtIndex:indexPath.row];
+    cell.backgroundColor = [self mev_horizontalContactsBackgroundColor];
+    cell.labelHeight = [self mev_horizontalContactsLabelHeight];;
+    cell.itemSpacing = [self mev_horizontalContactsSpacing];
     cell.indexPath = indexPath;
     cell.delegate = self;
     cell.dataSource = self;
@@ -136,17 +138,22 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 //TODO:Add asserts
 #pragma mark - Getters (private)
 
-- (CGFloat)mev_contactsItemHeight
+- (UIColor *)mev_horizontalContactsBackgroundColor
+{
+    return [UIColor groupTableViewBackgroundColor];
+}
+
+- (CGFloat)mev_horizontalContactsItemHeight
 {
     return CGRectGetHeight(self.frame) - _layout.insets.top - _layout.insets.bottom;
 }
 
-- (CGFloat)mev_contactsLabelHeight
+- (CGFloat)mev_horizontalContactsLabelHeight
 {
     return kMEVHorizontalContactsDefaultLabelHeight;
 }
 
-- (CGFloat)mev_contactsSpacing
+- (CGFloat)mev_horizontalContactsSpacing
 {
     if ([_dataSource respondsToSelector:@selector(horizontalContactsSpacing)]) {
         return [_dataSource horizontalContactsSpacing];
@@ -155,7 +162,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     }
 }
 
-- (UIEdgeInsets)mev_contactsInsets
+- (UIEdgeInsets)mev_horizontalContactsInsets
 {
     if ([_dataSource respondsToSelector:@selector(horizontalContactsInsets)]) {
         return [_dataSource horizontalContactsInsets];
@@ -164,7 +171,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     }
 }
 
-- (NSInteger)mev_numberOfContacts
+- (NSInteger)mev_horizontalContactsNumberOfContacts
 {
     NSInteger number;
     if ([_dataSource respondsToSelector:@selector(numberOfContacts)]) {
@@ -174,7 +181,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     return number;
 }
 
-- (MEVHorizontalContactsCell *)mev_contactAtIndex:(NSInteger)index
+- (MEVHorizontalContactsCell *)mev_horizontalContactsContactAtIndex:(NSInteger)index
 {
     if ([_dataSource respondsToSelector:@selector(contactAtIndex:)]) {
         return [_dataSource contactAtIndex:index];
@@ -183,7 +190,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     }
 }
 
-- (NSInteger)mev_numberOfItemsAtIndex:(NSInteger)index
+- (NSInteger)mev_horizontalContactsNumberOfItemsAtIndex:(NSInteger)index
 {
     if ([_dataSource respondsToSelector:@selector(numberOfItemsAtContactIndex:)]) {
         return [_dataSource numberOfItemsAtContactIndex:index];
@@ -192,7 +199,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     }
 }
 
-- (MEVHorizontalContactsCell *)mev_item:(NSInteger)item atContactAtIndex:(NSInteger)index
+- (MEVHorizontalContactsCell *)mev_horizontalContactsItem:(NSInteger)item atContactAtIndex:(NSInteger)index
 {
     if ([_dataSource respondsToSelector:@selector(item:atContactIndex:)]) {
         return [_dataSource item:item atContactIndex:index];
@@ -207,7 +214,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 - (NSInteger)numberOfItemsInCellIndexPath:(NSIndexPath *)indexPath
 {
-    return [self mev_numberOfItemsAtIndex:indexPath.row];
+    return [self mev_horizontalContactsNumberOfItemsAtIndex:indexPath.row];
 }
 
 
@@ -215,7 +222,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 - (MEVHorizontalContactsCell *)item:(NSInteger)item atContactIndex:(NSInteger)index
 {
-    return [self mev_item:item atContactAtIndex:index];
+    return [self mev_horizontalContactsItem:item atContactAtIndex:index];
 }
 
 
@@ -251,7 +258,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     }
 }
 
-- (void)menuOptionSelected:(NSInteger)option atCellIndexPath:(NSIndexPath *)indexPath
+- (void)itemSelected:(NSInteger)option atCellIndexPath:(NSIndexPath *)indexPath
 {
     if ([_delegate respondsToSelector:@selector(item:selectedAtContactIndex:)]) {
         return [_delegate item:option selectedAtContactIndex:indexPath.row];

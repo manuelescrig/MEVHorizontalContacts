@@ -14,6 +14,8 @@
 static float const kMEVHorizontalContactsDefaultShowAnimationTime = 0.12f;
 static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
+//static float const kMEVHorizontalContactsDefaultSpacing = 5.0f;
+
 @interface MEVHorizontalContactsCell()
 
 @property (nonatomic, strong) NSMutableArray *items;
@@ -49,18 +51,17 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
     _items = [NSMutableArray new];
     
     _imageView = [UIImageView new];
-    _imageView.opaque = YES;
     _imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - _labelHeight/2);
     _imageView.contentMode = UIViewContentModeScaleAspectFill;
-    _imageView.backgroundColor = [UIColor lightGrayColor];
+    _imageView.opaque = YES;
     _imageView.layer.masksToBounds = YES;
     [self.contentView addSubview:_imageView];
     
     _label = [UILabel new];
     _label.opaque = YES;
-    _label.textColor = [UIColor grayColor];
+    _label.textColor = [self mev_horizontalContactsContactLabelTextColor];
+    _label.font = [self mev_horizontalContactsContactLabelFont];
     _label.textAlignment = NSTextAlignmentCenter;
-    _label.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:_label];
 }
 
@@ -71,12 +72,44 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 {
     [super layoutSubviews];
     
+    // Background Colors
+    _imageView.backgroundColor = self.backgroundColor;
+    _label.backgroundColor = self.backgroundColor;
+
+    // Sizes
     float maxWidth = CGRectGetHeight(self.bounds) - _labelHeight;
     _imageView.frame = CGRectMake(0, 0, maxWidth, maxWidth);
     _imageView.layer.cornerRadius = (maxWidth)/2;
     _label.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - _labelHeight, CGRectGetHeight(self.bounds) - _labelHeight, _labelHeight);
 }
 
+//TODO:Add asserts
+#pragma mark - Getters (private)
+
+- (BOOL)mev_horizontalContactsCornerRadious
+{
+    return YES;
+}
+
+- (UIColor *)mev_horizontalContactsContactLabelTextColor
+{
+    return [UIColor grayColor];
+}
+
+- (UIFont *)mev_horizontalContactsContactLabelFont
+{
+    return [UIFont systemFontOfSize:12];
+}
+
+- (UIColor *)mev_horizontalContactsItemLabelTextColor
+{
+    return [UIColor grayColor];
+}
+
+- (UIFont *)mev_horizontalContactsItemLabelFont
+{
+    return [UIFont systemFontOfSize:12];
+}
 
 #pragma mark - UI Actions (private)
 
@@ -95,7 +128,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
         [_delegate cellSelectedAtIndexPath:_indexPath];
 }
 
-- (void)menuOptionSingleTap:(UIButton *)sender
+- (void)menuItemSingleTap:(UIButton *)sender
 {
     if ([_delegate respondsToSelector:@selector(itemSelected:atCellIndexPath:)])
         [_delegate itemSelected:sender.tag atCellIndexPath:_indexPath];
@@ -124,34 +157,31 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
         button.frame = CGRectMake(xOffset,0, maxWidth, CGRectGetHeight(self.bounds));
         button.tag = index;
         button.opaque = YES;
-        button.alpha = .0f;
-        button.tintColor = [UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1];
+        button.alpha = 0;
+        button.backgroundColor = self.backgroundColor;
         button.layer.masksToBounds = YES;
-        [button addTarget:self action:@selector(menuOptionSingleTap:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(menuItemSingleTap:) forControlEvents:UIControlEventTouchUpInside];
        
         if ([_dataSource respondsToSelector:@selector(item:atContactIndex:)]) {
             MEVHorizontalContactsCell *cell = [_dataSource item:index atContactIndex:_indexPath.row];
 
-            UIImage *image = cell.imageView.image;
-            image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            
+            UIImage *image = [cell.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, maxWidth, maxWidth)];
             imageView.image = image;
             imageView.opaque = YES;
-            imageView.backgroundColor = [UIColor whiteColor];
+            imageView.backgroundColor = self.backgroundColor;
             imageView.contentMode = UIViewContentModeCenter;
             imageView.layer.cornerRadius = (maxWidth)/2;
             imageView.layer.masksToBounds = YES;
             [button addSubview:imageView];
             
-            NSString *textLabel = cell.label.text;
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(button.frame) - _labelHeight, CGRectGetWidth(button.frame), _labelHeight)];
             label.opaque = YES;
-            //            label.backgroundColor = [UIColor orangeColor];
-            label.textColor = [UIColor grayColor];
+            label.backgroundColor = self.backgroundColor;
             label.textAlignment = NSTextAlignmentCenter;
-            label.font = [UIFont systemFontOfSize:12];
-            label.text = textLabel;
+            label.textColor = [self mev_horizontalContactsItemLabelTextColor];
+            label.font = [self mev_horizontalContactsItemLabelFont];
+            label.text = cell.label.text;
             [button addSubview:label];
         }
         
@@ -164,7 +194,6 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.06f;
 
 
 #pragma mark - Animation Methods (Public)
-
 
 - (void)setSelectedAnimated:(BOOL)animated
 {
