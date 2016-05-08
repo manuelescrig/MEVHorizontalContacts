@@ -62,7 +62,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
             return 140;
             break;
         case 3:
-            return 180;
+            return 95;
             break;
         default:
             return 100;

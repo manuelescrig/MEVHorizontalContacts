@@ -183,6 +183,11 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     }
 }
 
+- (BOOL)mev_horizontalContactsContractWhenItemSelected
+{
+    return _contractCellWhenItemSelected;
+}
+
 - (UIColor *)mev_horizontalContactsBackgroundColor
 {
     if (self.backgroundColor) {
@@ -331,6 +336,16 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 - (void)itemSelected:(NSInteger)option atCellIndexPath:(NSIndexPath *)indexPath
 {
+    if ([self mev_horizontalContactsContractWhenItemSelected]) {
+        MEVHorizontalContactsCell *cell = [_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
+        cell.selected = NO;
+        [cell hideMenuItemsAnimated:YES];
+        [self contractCell];
+        
+        // Select new cell, in case of deselecting then set -1 as default value
+        _selectedIndex = _selectedIndex == indexPath.row ? -1 : indexPath.row;
+    }
+    
     if ([_delegate respondsToSelector:@selector(item:selectedAtContactIndex:)]) {
         return [_delegate item:option selectedAtContactIndex:indexPath.row];
     }

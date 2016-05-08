@@ -48,6 +48,7 @@
     self.translatesAutoresizingMaskIntoConstraints = NO;
     
     _horizontalContacts = [MEVHorizontalContacts new];
+    _horizontalContacts.backgroundColor = [UIColor whiteColor];
     _horizontalContacts.animationMode = MEVHorizontalsAnimationNone;
     _horizontalContacts.dataSource = self;
     _horizontalContacts.delegate = self;
@@ -104,7 +105,7 @@
 }
 
 - (UIEdgeInsets)horizontalContactsInsets {
-    return UIEdgeInsetsMake(5, 0, 5, 0);
+    return UIEdgeInsetsMake(10, 0, 5, 0);
 }
 
 - (NSInteger)horizontalContactsSpacing {

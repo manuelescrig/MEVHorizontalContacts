@@ -49,6 +49,7 @@
     self.translatesAutoresizingMaskIntoConstraints = NO;
     
     _horizontalContacts = [MEVHorizontalContacts new];
+    _horizontalContacts.contractCellWhenItemSelected = YES;
     _horizontalContacts.dataSource = self;
     _horizontalContacts.delegate = self;
     [self addSubview:_horizontalContacts];
@@ -99,7 +100,10 @@
     
     MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableItemCellForIndex:index];
     [cell.imageView setImage:image];
+    [cell.imageView setBackgroundColor:[UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1]];
+    [cell.imageView setTintColor:[UIColor whiteColor]];
     [cell.label setText:labelText];
+    [cell.label setTextColor:[UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1]];
     return cell;
 }
 

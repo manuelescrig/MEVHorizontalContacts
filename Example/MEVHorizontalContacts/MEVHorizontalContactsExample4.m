@@ -70,6 +70,7 @@
     MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableContactCellForIndex:index];
     [cell.imageView setImage:[UIImage imageNamed:[self getImageNameAtIndex:index]]];
     [cell.label setText:[self getUserNameAtIndex:index]];
+    [cell setRounded:NO];
     return cell;
 }
 
@@ -97,13 +98,16 @@
     }
     
     MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableItemCellForIndex:index];
+    [cell setRounded:NO];
+    [cell.imageView setBackgroundColor:[UIColor whiteColor]];
     [cell.imageView setImage:image];
     [cell.label setText:labelText];
+    [cell.label setFont:[UIFont boldSystemFontOfSize:10.0f]];
     return cell;
 }
 
 - (UIEdgeInsets)horizontalContactsInsets {
-    return UIEdgeInsetsMake(5, 0, 5, 0);
+    return UIEdgeInsetsMake(10, 0, 5, 0);
 }
 
 - (NSInteger)horizontalContactsSpacing {

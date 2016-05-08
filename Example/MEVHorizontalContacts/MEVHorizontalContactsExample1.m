@@ -48,7 +48,7 @@
     self.translatesAutoresizingMaskIntoConstraints = NO;
 
     _horizontalContacts = [MEVHorizontalContacts new];
-    _horizontalContacts.backgroundColor = [UIColor lightGrayColor];
+    _horizontalContacts.backgroundColor = [UIColor whiteColor];
     _horizontalContacts.dataSource = self;
     _horizontalContacts.delegate = self;
     [self addSubview:_horizontalContacts];
@@ -86,7 +86,10 @@
 - (MEVHorizontalContactsCell *)contactAtIndex:(NSInteger)index {
     MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableContactCellForIndex:index];
     [cell.imageView setImage:[UIImage imageNamed:[self getImageNameAtIndex:index]]];
+    [cell.imageView.layer setBorderColor:[UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1].CGColor];
+    [cell.imageView.layer setBorderWidth:1.0f];
     [cell.label setText:[self getUserNameAtIndex:index]];
+    [cell.label setFont:[UIFont boldSystemFontOfSize:12.0f]];
     return cell;
 }
 
@@ -115,7 +118,12 @@
     
     MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableItemCellForIndex:index];
     [cell.imageView setImage:image];
+    [cell.imageView setTintColor:[UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1]];
+    [cell.imageView.layer setBorderColor:[UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1].CGColor];
+    [cell.imageView.layer setBorderWidth:1.0f];
     [cell.label setText:labelText];
+    [cell.label setFont:[UIFont boldSystemFontOfSize:10.0f]];
+
     return cell;
 }
 

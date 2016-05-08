@@ -123,11 +123,25 @@
  */
 @interface MEVHorizontalContacts : UIView
 
-/** The horizontal contacts data source object. */
+/** 
+ * The horizontal contacts data source object. 
+ *
+ */
 @property (nonatomic, weak) id<MEVHorizontalContactsDataSource> dataSource;
 
-/** The horizontal contacts delegate object. */
+/** 
+ * The horizontal contacts delegate object. 
+ *
+ */
 @property (nonatomic, weak) id<MEVHorizontalContactsDelegate> delegate;
+
+/**
+ * Indicates if the MEVHorizontalContacts should contract when an item is selected.
+ * @param contractCellWhenItemSelected A BOOL value.
+ * @discussion Default value is NO.
+ *
+ */
+@property (nonatomic, assign) BOOL contractCellWhenItemSelected;
 
 /**
  * @abstract Sets the animation type MEVHorizontalsAnimationMode for the MEVHorizontalContacts.
@@ -136,6 +150,7 @@
  *
  */
 @property (nonatomic, assign) MEVHorizontalsAnimationMode animationMode;
+
 
 /**
  * Required to be used with "MEVHorizontalContactsDataSource" in the `- (MEVHorizontalContactsCell *)contactAtIndex:(NSInteger)index` method.

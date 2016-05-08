@@ -112,6 +112,14 @@ typedef NS_ENUM(NSInteger, MEVHorizontalsAnimationMode) {
 /** An CGFloat object to represent the space between the items in the horizontal contacts list */
 @property (nonatomic, assign) CGFloat itemSpacing;
 
+/** 
+ * Indicates if the MEVHorizontalContacts should be either square or rounded.
+ * @param rounded A BOOL value.
+ * @discussion Default value is YES.
+ * 
+ */
+@property (nonatomic, getter=isRounded) BOOL rounded;
+
 /**
  * @abstract Sets the animation type MEVHorizontalsAnimationMode for the MEVHorizontalContacts.
  * @param animationMode A MEVHorizontalsAnimationMode type.

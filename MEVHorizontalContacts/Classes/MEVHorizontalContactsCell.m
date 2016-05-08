@@ -47,7 +47,8 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
     [self addGestureRecognizer:singleTap];
     
     _items = [NSMutableArray new];
-    
+    _rounded = YES;
+
     _imageView = [UIImageView new];
     _imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - _labelHeight/2);
     _imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -83,11 +84,14 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
 
 
 #pragma mark - Getters (private)
-//TODO:Add asserts & default values
 
 - (CGFloat)mev_horizontalContactsCornerRadious
 {
-    return [self mev_horizontalContactsItemWidth]/2;
+    if (self.isRounded) {
+        return [self mev_horizontalContactsItemWidth]/2;
+    } else {
+        return 0;
+    }
 }
 
 - (CGFloat)mev_horizontalContactsItemWidth
@@ -113,16 +117,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
 
 - (UIFont *)mev_horizontalContactsContactLabelFont
 {
-    return [UIFont systemFontOfSize:12];
-}
-
-- (UIColor *)mev_horizontalContactsItemLabelTextColor
-{
-    return [UIColor grayColor];
-}
-
-- (UIFont *)mev_horizontalContactsItemLabelFont
-{
+    // Default value when not assigend
     return [UIFont systemFontOfSize:12];
 }
 
@@ -181,8 +176,6 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
             [cell.imageView setFrame:CGRectMake(0, 0, itemWidth, itemWidth)];
             [cell.imageView setOpaque:YES];
             [cell.imageView setImage:[[cell.imageView image] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-            [cell.imageView setTintColor:[UIColor blueColor]];
-            [cell.imageView setBackgroundColor:self.backgroundColor];
             [cell.imageView setContentMode:UIViewContentModeCenter];
             [cell.imageView.layer setCornerRadius:[self mev_horizontalContactsCornerRadious]];
             [cell.imageView.layer setMasksToBounds:YES];
@@ -190,10 +183,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
             
             [cell.label setFrame:CGRectMake(0, itemWidth, itemWidth, _labelHeight)];
             [cell.label setOpaque:YES];
-            [cell.label setBackgroundColor:self.backgroundColor];
             [cell.label setTextAlignment:NSTextAlignmentCenter];
-            [cell.label setTextColor:[self mev_horizontalContactsItemLabelTextColor]];
-            [cell.label setFont:[self mev_horizontalContactsItemLabelFont]];
             [button addSubview:cell.label];
         }
         
@@ -243,27 +233,30 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
     [self setUserInteractionEnabled:NO];
     
     if (animated) {
-        float animationTime = animated ? kMEVHorizontalContactsDefaultShowAnimationTime : 0.0;
+        float animationTime = animated ? kMEVHorizontalContactsDefaultShowAnimationTime : 0;
+        float minValue = 0.9;
+        float maxValue = 1.02;
+        float regValue = 1;
         [UIView animateWithDuration:animationTime
                               delay:0
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
-                             _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, 0.9, 0.9, 0.9);
-                             _label.layer.transform = CATransform3DScale(CATransform3DIdentity, 0.9, 0.9, 0.9);
+                             _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, minValue, minValue, minValue);
+                             _label.layer.transform = CATransform3DScale(CATransform3DIdentity, minValue, minValue, minValue);
                          } completion:^(BOOL finished) {
                              [UIView animateWithDuration:animationTime
                                                    delay:0
                                                  options:UIViewAnimationOptionCurveEaseOut
                                               animations:^{
-                                                  _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.01, 1.01, 1.01);
-                                                  _label.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.01, 1.01, 1.01);
+                                                  _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, maxValue, maxValue, maxValue);
+                                                  _label.layer.transform = CATransform3DScale(CATransform3DIdentity, maxValue, maxValue, maxValue);
                                               } completion:^(BOOL finished) {
                                                   [UIView animateWithDuration:animationTime
                                                                         delay:0
                                                                       options:UIViewAnimationOptionCurveEaseOut
                                                                    animations:^{
-                                                                       _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
-                                                                       _label.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
+                                                                       _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, regValue, regValue, regValue);
+                                                                       _label.layer.transform = CATransform3DScale(CATransform3DIdentity, regValue, regValue, regValue);
                                                                    } completion:^(BOOL finished) {
                                                                        [self setUserInteractionEnabled:YES];
                                                                    }];
@@ -280,20 +273,22 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
     [self setUserInteractionEnabled:NO];
     
     if (animated) {
-        float animationTime = animated ? (kMEVHorizontalContactsDefaultShowAnimationTime*2) : 0.0;
+        float animationTime = animated ? (kMEVHorizontalContactsDefaultShowAnimationTime*2) : 0;
+        float maxValue = 1.02;
+        float regValue = 1;
         [UIView animateWithDuration:animationTime
                               delay:0
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
-                             _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.01, 1.01, 1.01);
-                             _label.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.01, 1.01, 1.01);
+                             _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, maxValue, maxValue, maxValue);
+                             _label.layer.transform = CATransform3DScale(CATransform3DIdentity, maxValue, maxValue, maxValue);
                          } completion:^(BOOL finished) {
                              [UIView animateWithDuration:animationTime
                                                    delay:0
                                                  options:UIViewAnimationOptionCurveEaseOut
                                               animations:^{
-                                                  _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
-                                                  _label.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
+                                                  _imageView.layer.transform = CATransform3DScale(CATransform3DIdentity, regValue, regValue, regValue);
+                                                  _label.layer.transform = CATransform3DScale(CATransform3DIdentity, regValue, regValue, regValue);
                                               } completion:^(BOOL finished) {
                                                   [self setUserInteractionEnabled:YES];
                                               }];
@@ -308,23 +303,26 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
 {
     [self setUpCellOptions];
     
-    float animationTime = animated ? kMEVHorizontalContactsDefaultShowAnimationTime : 0.0;
+    float animationTime = animated ? kMEVHorizontalContactsDefaultShowAnimationTime : 0;
+    float minValue = 0.5;
+    float maxValue = 1.02;
+    float regValue = 1;
     for (UIView *view in _items) {
         view.alpha = 0;
-        view.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0.5);
+        view.layer.transform = CATransform3DMakeScale(minValue, minValue, minValue);
         [UIView animateWithDuration:animationTime
                               delay:animationTime * ([_items indexOfObject:view]+1)
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
                              view.alpha = 0.6;
-                             view.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.05, 1.05, 1.05);
+                             view.layer.transform = CATransform3DScale(CATransform3DIdentity, maxValue, maxValue, maxValue);
                          } completion:^(BOOL finished) {
                              [UIView animateWithDuration:animationTime
                                                    delay:0
                                                  options:UIViewAnimationOptionCurveEaseOut
                                               animations:^{
                                                   view.alpha = 1;
-                                                  view.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1);
+                                                  view.layer.transform = CATransform3DScale(CATransform3DIdentity, regValue, regValue, regValue);
                                               } completion:^(BOOL finished) {  }];
                          }];
     }
@@ -334,7 +332,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
 - (void)hideMenuItemsAnimated:(BOOL)animated
 {
     int pos = 0;
-    float animationTime = animated ? kMEVHorizontalContactsDefaultHideAnimationTime : 0.0f;
+    float animationTime = animated ? kMEVHorizontalContactsDefaultHideAnimationTime : 0;
     for (int i = (int)[_items count]; i > 0 ; i--) {
         UIView *view = [_items objectAtIndex:i-1];
         [UIView animateWithDuration:animationTime
