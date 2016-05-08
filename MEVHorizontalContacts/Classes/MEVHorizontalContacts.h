@@ -14,6 +14,7 @@
 #import "MEVHorizontalContactsLayout.h"
 #import "MEVHorizontalContactsCell.h"
 
+
 /**
  * The object that acts as the data source of the horizontal contacts.
  * @discussion The data source adopts the MEVHorizontalContactsDataSource protocol. The data source is not retained. 
@@ -127,6 +128,14 @@
 
 /** The horizontal contacts delegate object. */
 @property (nonatomic, weak) id<MEVHorizontalContactsDelegate> delegate;
+
+/**
+ * @abstract Sets the animation type MEVHorizontalsAnimationMode for the MEVHorizontalContacts.
+ * @param animationMode A MEVHorizontalsAnimationMode type.
+ * @discussion MEVHorizontalsAnimationBounce is the default value when this property is not assigned.
+ *
+ */
+@property (nonatomic, assign) MEVHorizontalsAnimationMode animationMode;
 
 /**
  * Required to be used with "MEVHorizontalContactsDataSource" in the `- (MEVHorizontalContactsCell *)contactAtIndex:(NSInteger)index` method.

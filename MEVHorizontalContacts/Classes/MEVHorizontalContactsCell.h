@@ -14,6 +14,18 @@
 @class MEVHorizontalContactsCell;
 
 /**
+ * @enum MEVHorizontalsAnimationMode
+ * @abstract Animation mode for MEVHorizontalContacts.
+ * @constant MEVHorizontalsAnimationNone
+ * @constant MEVHorizontalsAnimationBounce
+ *
+ */
+typedef NS_ENUM(NSInteger, MEVHorizontalsAnimationMode) {
+    MEVHorizontalsAnimationNone,
+    MEVHorizontalsAnimationBounce
+};
+
+/**
  * The object that acts as the data source of the horizontal contacts.
  * @discussion The data source adopts the MEVHorizontalContactsCellDataSource protocol. The data source is not retained.
  * @discussion Use this for configuring and customazing the content of the horizontal contacts list.
@@ -101,12 +113,20 @@
 @property (nonatomic, assign) CGFloat itemSpacing;
 
 /**
+ * @abstract Sets the animation type MEVHorizontalsAnimationMode for the MEVHorizontalContacts.
+ * @param animationMode A MEVHorizontalsAnimationMode type.
+ * @discussion MEVHorizontalsAnimationBounce is the default value when this property is not assigned.
+ *
+ */
+@property (nonatomic, assign) MEVHorizontalsAnimationMode animationMode;
+
+/**
  * Show the contact cell items.
  *
  * @param animated When animated is YES then the menu items appear animated.
  *
  */
-- (void)showMenuOptionsAnimated:(BOOL)animated;
+- (void)showMenuItemsAnimated:(BOOL)animated;
 
 /**
  * Hide the contact cell items.
@@ -114,7 +134,7 @@
  * @param animated When animated is YES then the menu items appear animated.
  *
  */
-- (void)hideMenuOptionsAnimated:(BOOL)animated;
+- (void)hideMenuItemsAnimated:(BOOL)animated;
 
 
 @end
