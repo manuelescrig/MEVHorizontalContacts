@@ -8,7 +8,8 @@ An **iOS** UICollectionViewLayout subclass to show a **list of contacts** with c
 [![Platform](https://img.shields.io/cocoapods/p/MEVHorizontalContacts.svg?style=flat)](http://cocoapods.org/pods/MEVHorizontalContacts)
 [![Language](http://img.shields.io/badge/language-objective--c-blue.svg?style=flat)](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html)
 
- <p align="center">![Showcase](https://cloud.githubusercontent.com/assets/1849990/15117000/ea15edd2-1605-11e6-8058-5ecd7a862bff.gif)</p>
+<p align="center"><img src="https://cloud.githubusercontent.com/assets/1849990/15117000/ea15edd2-1605-11e6-8058-5ecd7a862bff.gif" align="center" height="480" width="640" ></p>
+
  
 ## Features
 - [x] Customizable contacts cells
