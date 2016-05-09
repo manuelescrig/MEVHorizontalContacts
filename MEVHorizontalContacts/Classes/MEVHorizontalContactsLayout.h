@@ -51,10 +51,7 @@
 /** An CGFloat object to represent the space between the items in the horizontal contacts list */
 @property (nonatomic, assign) CGFloat itemSpacing;
 
-/**
- * The horizontal contacts layout data source object.
- *
- */
+/** The horizontal contacts layout data source object. */
 @property (nonatomic, weak) id<MEVHorizontalContactsLayoutDataSource> dataSource;
 
 @end

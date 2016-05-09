@@ -18,7 +18,7 @@ An **iOS** UICollectionViewLayout subclass to show a **list of contacts** with c
 ## Demo App
 
 Run the demo app and play with it!
-[Demo App](https://appetize.io/)
+[Demo App](https://appetize.io/app/y5mq0egpmtvvj6e7up8qg07qjg?device=iphone6splus&scale=50&orientation=portrait&osVersion=9.3&deviceColor=white)
 
 ## Demo Project
 

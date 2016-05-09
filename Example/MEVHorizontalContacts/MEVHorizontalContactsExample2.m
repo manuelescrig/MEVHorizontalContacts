@@ -61,11 +61,11 @@
 #pragma mark - MEVHorizontalContactsDataSource Methods
 
 - (NSInteger)numberOfContacts {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)numberOfItemsAtContactIndex:(NSInteger)index {
-    return 2;
+    return 3;
 }
 
 - (MEVHorizontalContactsCell *)contactAtIndex:(NSInteger)index {

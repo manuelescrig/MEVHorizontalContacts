@@ -195,7 +195,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
 }
 
 
-#pragma mark - Animation Methods (Public)
+#pragma mark - Animation Methods (Private)
 
 - (void)showItems
 {
@@ -299,6 +299,9 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
     }
 }
 
+
+#pragma mark - Animation Methods (Public)
+
 - (void)showMenuItemsAnimated:(BOOL)animated
 {
     [self setUpCellOptions];
@@ -327,7 +330,6 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
                          }];
     }
 }
-
 
 - (void)hideMenuItemsAnimated:(BOOL)animated
 {

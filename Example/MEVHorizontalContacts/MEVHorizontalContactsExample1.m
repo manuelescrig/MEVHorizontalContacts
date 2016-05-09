@@ -66,16 +66,16 @@
 - (NSInteger)numberOfItemsAtContactIndex:(NSInteger)index {
     switch (index) {
         case 0:
-            return 0;
+            return 2;
             break;
         case 1:
-            return 1;
+            return 3;
             break;
         case 2:
             return 2;
             break;
         case 3:
-            return 5;
+            return 4;
             break;
         default:
             return 3;
