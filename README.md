@@ -119,6 +119,107 @@ _horizontalContacts.delegate = self;
 
 ```
 
+### Example
+
+###### Customization 1
+
+<p align="center"><img src="https://cloud.githubusercontent.com/assets/1849990/15117532/42b3110c-1608-11e6-81ce-36a493962c8b.gif" align="center" height="78" width="332" ></p>
+
+```objective-c
+- (MEVHorizontalContactsCell *)contactAtIndex:(NSInteger)index {
+    MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableContactCellForIndex:index];
+    [cell.imageView setImage:[UIImage imageNamed:[self getImageNameAtIndex:index]]];
+    [cell.imageView.layer setBorderColor:[UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1].CGColor];
+    [cell.imageView.layer setBorderWidth:1.0f];
+    [cell.label setText:[self getUserNameAtIndex:index]];
+    [cell.label setFont:[UIFont boldSystemFontOfSize:12.0f]];
+    return cell;
+}
+
+- (MEVHorizontalContactsCell *)item:(NSInteger)item atContactIndex:(NSInteger)index {
+
+    UIImage *image;
+    NSString *labelText;
+    switch (item) {
+        case 0:
+            labelText = @"Call";
+            image = [UIImage imageNamed:@"actionCall"];
+            break;
+        case 1:
+            labelText = @"Email";
+            image = [UIImage imageNamed:@"actionEmail"];
+            break;
+        case 2:
+            labelText = @"Message";
+            image = [UIImage imageNamed:@"actionMessage"];
+            break;
+        default:
+            labelText = @"Call";
+            image = [UIImage imageNamed:@"actionCall"];
+            break;
+    }
+    
+    MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableItemCellForIndex:index];
+    [cell.imageView setImage:image];
+    [cell.imageView setTintColor:[UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1]];
+    [cell.imageView.layer setBorderColor:[UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1].CGColor];
+    [cell.imageView.layer setBorderWidth:1.0f];
+    [cell.label setText:labelText];
+    [cell.label setFont:[UIFont boldSystemFontOfSize:10.0f]];
+
+    return cell;
+}
+
+```
+
+
+###### Customization 2
+
+<p align="center"><img src="https://cloud.githubusercontent.com/assets/1849990/15117199/c853d546-1606-11e6-924a-15e8dcd0e709.gif" align="center"  height="97" width="332" ></p>
+
+```objective-c
+- (MEVHorizontalContactsCell *)contactAtIndex:(NSInteger)index {
+    MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableContactCellForIndex:index];
+    [cell.imageView setImage:[UIImage imageNamed:[self getImageNameAtIndex:index]]];
+    [cell.label setText:[self getUserNameAtIndex:index]];
+    return cell;
+}
+
+- (MEVHorizontalContactsCell *)item:(NSInteger)item atContactIndex:(NSInteger)index {
+    
+    UIImage *image;
+    NSString *labelText;
+    switch (item) {
+        case 0:
+            labelText = @"Call";
+            image = [UIImage imageNamed:@"actionCall"];
+            break;
+        case 1:
+            labelText = @"Email";
+            image = [UIImage imageNamed:@"actionEmail"];
+            break;
+        case 2:
+            labelText = @"Message";
+            image = [UIImage imageNamed:@"actionMessage"];
+            break;
+        default:
+            labelText = @"Call";
+            image = [UIImage imageNamed:@"actionCall"];
+            break;
+    }
+    
+    MEVHorizontalContactsCell *cell = [_horizontalContacts dequeueReusableItemCellForIndex:index];
+    [cell.imageView setImage:image];
+    [cell.imageView setBackgroundColor:[UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1]];
+    [cell.imageView setTintColor:[UIColor whiteColor]];
+    [cell.label setText:labelText];
+    [cell.label setTextColor:[UIColor colorWithRed:34/255.0f green:167/255.0f blue:240/255.0f alpha:1]];
+    return cell;
+}
+
+```
+
+
 ## Roadmap
 - [x] CocoaPods support
 - [ ] Carthage support
