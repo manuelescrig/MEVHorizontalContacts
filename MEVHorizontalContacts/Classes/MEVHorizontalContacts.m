@@ -233,6 +233,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
         return [_dataSource numberOfContacts];
     } else {
         NSAssert([_dataSource respondsToSelector:@selector(numberOfContacts)], @"'numberOfContacts' Not implemented");
+        return 0;
     }
 }
 
@@ -242,6 +243,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
         return [_dataSource contactAtIndex:index];
     } else {
         NSAssert([_dataSource respondsToSelector:@selector(contactAtIndex:)], @"'contactAtIndex:' Not implemented");
+        return nil;
     }
 }
 
@@ -251,6 +253,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
         return [_dataSource numberOfItemsAtContactIndex:index];
     } else {
         NSAssert([_dataSource respondsToSelector:@selector(numberOfItemsAtContactIndex:)], @"'numberOfItemsAtContactIndex:' Not implemented");
+        return 0;
     }
 }
 
@@ -260,6 +263,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
         return [_dataSource item:item atContactIndex:index];
     } else {
         NSAssert([_dataSource respondsToSelector:@selector(item:atContactIndex:)], @"'item:atContactIndex:' Not implemented");
+        return nil;
     }
 }
 
@@ -315,7 +319,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 - (void)cellSelectedAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_selectedIndex >= 0 && _selectedIndex != indexPath.row) {
-        MEVHorizontalContactsCell *cell = [_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
+        MEVHorizontalContactsCell *cell = (MEVHorizontalContactsCell *)[_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
         cell.selected = NO;
         [cell hideMenuItemsAnimated:YES];
     }
@@ -337,7 +341,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 - (void)itemSelected:(NSInteger)option atCellIndexPath:(NSIndexPath *)indexPath
 {
     if ([self mev_horizontalContactsContractWhenItemSelected]) {
-        MEVHorizontalContactsCell *cell = [_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
+        MEVHorizontalContactsCell *cell = (MEVHorizontalContactsCell *)[_horizontalContactListView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
         cell.selected = NO;
         [cell hideMenuItemsAnimated:YES];
         [self contractCell];

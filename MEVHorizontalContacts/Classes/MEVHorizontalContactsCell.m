@@ -150,7 +150,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
     [_items makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [_items removeAllObjects];
     
-    int numberOfItems;
+    NSInteger numberOfItems = 0;
     if ([_dataSource respondsToSelector:@selector(numberOfItemsInCellIndexPath:)]) {
         numberOfItems = [_dataSource numberOfItemsInCellIndexPath:_indexPath];
     }

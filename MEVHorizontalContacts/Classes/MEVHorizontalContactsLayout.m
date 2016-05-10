@@ -85,12 +85,12 @@
 
 - (NSString *)layoutKeyForIndexPath:(NSIndexPath *)indexPath
 {
-    return [NSString stringWithFormat:@"%d_%d", indexPath.section, indexPath.row];
+    return [NSString stringWithFormat:@"%d_%d", (int)indexPath.section, (int)indexPath.row];
 }
 
 - (NSString *)layoutKeyForHeaderAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [NSString stringWithFormat:@"s_%d_%d", indexPath.section, indexPath.row];
+    return [NSString stringWithFormat:@"s_%d_%d", (int)indexPath.section, (int)indexPath.row];
 }
 
 
