@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = "MEVHorizontalContacts"
-  s.version          = "0.1.0"
-  s.summary          = "A horizontal collection view layout."
+  s.version          = "0.2.0"
+  s.summary          = "An iOS UICollectionViewLayout subclass to show a list of contacts with configurable expandable items."
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,11 +18,11 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+A very customazible layout in order to show a list of Contacts with menu options and diffente items with images or icons.
+                        DESC
 
   s.homepage         = "https://github.com/manuelescrig/MEVHorizontalContacts"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.screenshots      = "https://cloud.githubusercontent.com/assets/1849990/15137846/645a0d18-168c-11e6-96e2-651d8f8de3b0.gif"
   s.license          = 'MIT'
   s.author           = { "Manuel Escrig Ventura" => "manuelescrig@gmail.com" }
   s.source           = { :git => "https://github.com/manuelescrig/MEVHorizontalContacts.git", :tag => s.version.to_s }
