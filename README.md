@@ -69,6 +69,56 @@ Then, import the following file your classes:
 
 ### Usage
 
+###### 1. Import class
+
+```objective-c
+#import "MEVHorizontalContacts.h"
+```
+
+###### 2. Add Datasource and Delegate protocols.
+
+```objective-c
+@interface ViewController () <MEVHorizontalContactsDataSource, MEVHorizontalContactsDelegate>
+@property (nonatomic, strong) MEVHorizontalContacts *horizontalContacts;
+@end
+```
+
+###### 3. Create, initialize and add MEVHorizontalContacts view.
+
+```objective-c
+_horizontalContacts = [MEVHorizontalContacts new];
+_horizontalContacts.backgroundColor = [UIColor whiteColor];
+_horizontalContacts.dataSource = self;
+_horizontalContacts.delegate = self;
+[self addSubview:_horizontalContacts];
+[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[horizontalContacts]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:@{@"horizontalContacts" : _horizontalContacts}]];
+[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[horizontalContacts]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"horizontalContacts" : _horizontalContacts}]];
+```
+
+###### 4. Implement Datasource Methods
+
+```objective-c
+#pragma mark - MEVHorizontalContactsDataSource Methods
+
+- (NSInteger)numberOfContacts;
+- (NSInteger)numberOfItemsAtContactIndex:(NSInteger)index;
+- (MEVHorizontalContactsCell *)contactAtIndex:(NSInteger)index;
+- (MEVHorizontalContactsCell *)item:(NSInteger)item atContactIndex:(NSInteger)index;
+- (UIEdgeInsets)horizontalContactsInsets;
+- (NSInteger)horizontalContactsSpacing;
+
+```
+
+###### 5. Implement Delegate Methods
+
+```objective-c
+#pragma mark - MEVHorizontalContactsDelegate Methods
+
+- (void)contactSelectedAtIndex:(NSInteger)index;
+- (void)item:(NSInteger)item selectedAtContactIndex:(NSInteger)index;
+
+```
+
 ## Roadmap
 - [x] CocoaPods support
 - [ ] Carthage support
