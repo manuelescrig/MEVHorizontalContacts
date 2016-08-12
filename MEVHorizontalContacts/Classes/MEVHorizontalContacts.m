@@ -138,6 +138,10 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     return [_horizontalContactListView dequeueReusableCellWithReuseIdentifier:kMEVHorizontalContactsItemCell forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
 
+- (void)reloadData
+{
+    [_horizontalContactListView reloadData];
+}
 
 #pragma mark - Setters (Public)
 
