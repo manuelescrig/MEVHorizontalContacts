@@ -176,4 +176,10 @@
  */
 - (MEVHorizontalContactsCell *)dequeueReusableItemCellForIndex:(NSInteger)index;
 
+/**
+ * Reloads the data of the MEVHorizontalContacts in case the user needs to refresh the contacts.
+ *
+ */
+- (void)reloadData;
+
 @end
