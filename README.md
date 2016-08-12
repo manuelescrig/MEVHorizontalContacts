@@ -235,6 +235,10 @@ See [Changelog.md](https://github.com/manuelescrig/MEVHorizontalContacts/blob/ma
 - Email [manuel@ventura.media](mailto:manuel@ventura.media)
 - Portfolio [http://ventura.media](http://ventura.media)
 
+## Apps using this library
+
+- [People Tracker App ](http://www.peopletrackerapp.com)
+
 ## License
 
 MEVHorizontalContacts is available under the MIT license. See the [LICENSE](https://github.com/manuelescrig/MEVHorizontalContacts/blob/master/LICENSE) file for more info.
