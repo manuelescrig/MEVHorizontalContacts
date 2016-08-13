@@ -237,7 +237,7 @@ See [Changelog.md](https://github.com/manuelescrig/MEVHorizontalContacts/blob/ma
 
 ## Apps using this library
 
-- [People Tracker App ](http://www.peopletrackerapp.com)
+- [People Tracker App](http://itunes.apple.com/us/app/people-tracker-pro/id539205975?ls=1&mt=8), [www.peopletrackerapp.com](http://www.peopletrackerapp.com)
 
 ## License
 
