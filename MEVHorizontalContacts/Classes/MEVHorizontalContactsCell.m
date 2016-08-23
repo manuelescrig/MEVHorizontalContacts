@@ -41,7 +41,6 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
 - (void)setupView
 {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self setOpaque:YES];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSingleTap:)];
     [self addGestureRecognizer:singleTap];
@@ -52,12 +51,10 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
     _imageView = [UIImageView new];
     _imageView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - _labelHeight/2);
     _imageView.contentMode = UIViewContentModeScaleAspectFill;
-    _imageView.opaque = YES;
     _imageView.layer.masksToBounds = YES;
     [self.contentView addSubview:_imageView];
     
     _label = [UILabel new];
-    _label.opaque = YES;
     _label.textColor = [self mev_horizontalContactsContactLabelTextColor];
     _label.font = [self mev_horizontalContactsContactLabelFont];
     _label.textAlignment = NSTextAlignmentCenter;
@@ -71,10 +68,10 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
 {
     [super layoutSubviews];
     
-    // Background Colors
-    _imageView.backgroundColor = self.backgroundColor;
-    _label.backgroundColor = self.backgroundColor;
-    
+    // Colors
+    [self setBackgroundColor:[UIColor clearColor]];
+    [self.contentView setBackgroundColor:[UIColor clearColor]];
+
     // Sizes
     float itemWidth = [self mev_horizontalContactsItemWidth];
     _imageView.frame = CGRectMake(0, 0, itemWidth, itemWidth);
@@ -110,7 +107,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
         return self.backgroundColor;
     } else {
         // Default value when not assigend
-        self.backgroundColor = [UIColor grayColor];
+        self.backgroundColor = [UIColor clearColor];
         return self.backgroundColor;
     }
 }
@@ -167,7 +164,7 @@ static float const kMEVHorizontalContactsDefaultHideAnimationTime = 0.03f;
         button.tag = index;
         button.opaque = YES;
         button.alpha = 0;
-        button.backgroundColor = self.backgroundColor;
+        button.backgroundColor = [UIColor clearColor];
         button.layer.masksToBounds = YES;
         [button addTarget:self action:@selector(menuItemSingleTap:) forControlEvents:UIControlEventTouchUpInside];
         

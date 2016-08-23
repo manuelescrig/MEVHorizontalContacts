@@ -14,7 +14,6 @@
 static float const kMEVHorizontalContactsDefaultLabelHeight = 30.0f;
 static float const kMEVHorizontalContactsDefaultSpacing = 5.0f;
 
-
 static NSString *const kMEVHorizontalContactsContactCell = @"contactCell";
 static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
@@ -35,7 +34,6 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 {
     self = [super init];
     if (self) {
-        [self setupView];
     }
     return self;
 }
@@ -51,7 +49,8 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    if ((self = [super initWithCoder:aDecoder])) {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
         [self setupView];
     }
     return self;
@@ -59,9 +58,11 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 - (void)setupView
 {
-    // Default configuration
+    // Default View Background Color
+    [self setBackgroundColor:[UIColor whiteColor]];
+
+    // Default Configuration
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self setOpaque:YES];
     
     _selectedIndex = -1;
 
@@ -74,6 +75,8 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
     [_horizontalContactListView setDataSource:self];
     [_horizontalContactListView setDelegate:self];
     [_horizontalContactListView setOpaque:YES];
+    [_horizontalContactListView setAlpha:1.0f];
+    [_horizontalContactListView setBackgroundColor:[UIColor clearColor]];
     [_horizontalContactListView setAlwaysBounceHorizontal:YES];
     [_horizontalContactListView setShowsVerticalScrollIndicator:NO];
     [_horizontalContactListView setShowsHorizontalScrollIndicator:NO];
@@ -87,13 +90,13 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 #pragma mark - Layout (private)
 
 - (void)layoutSubviews
-{    
+{
+    [super layoutSubviews];
+
     _layout.itemSpacing = [self mev_horizontalContactsSpacing];
     _layout.insets = [self mev_horizontalContactsInsets];
     _layout.labelHeight = [self mev_horizontalContactsLabelHeight];
     _layout.itemHeight = [self mev_horizontalContactsItemHeight];
-    
-    [_horizontalContactListView setBackgroundColor:[self mev_horizontalContactsBackgroundColor]];
 }
 
 
@@ -107,7 +110,6 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MEVHorizontalContactsCell *cell = [self mev_horizontalContactsContactAtIndex:indexPath.row];
-    cell.backgroundColor = [self mev_horizontalContactsBackgroundColor];
     cell.labelHeight = [self mev_horizontalContactsLabelHeight];;
     cell.itemSpacing = [self mev_horizontalContactsSpacing];
     cell.animationMode = [self mev_horizontalContactsAnimationMode];
@@ -142,6 +144,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 {
     [_horizontalContactListView reloadData];
 }
+
 
 #pragma mark - Setters (Public)
 
@@ -190,17 +193,6 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 - (BOOL)mev_horizontalContactsContractWhenItemSelected
 {
     return _contractCellWhenItemSelected;
-}
-
-- (UIColor *)mev_horizontalContactsBackgroundColor
-{
-    if (self.backgroundColor) {
-        return self.backgroundColor;
-    } else {
-        // Default value when not assigend
-        self.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        return self.backgroundColor;
-    }
 }
 
 - (CGFloat)mev_horizontalContactsItemHeight
