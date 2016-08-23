@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MEVHorizontalContacts"
-  s.version          = “1.1”
+  s.version          = "1.2"
   s.summary          = "An iOS UICollectionViewLayout subclass to show a list of contacts with configurable expandable items."
 
 # This description is used to generate tags and improve search results.
@@ -32,7 +32,7 @@ A very customazible layout in order to show a list of Contacts with menu options
   s.requires_arc = true
 
   s.source_files = 'MEVHorizontalContacts/Classes/**/*'
-  
+
   # s.resource_bundles = {
   #   'MEVHorizontalContacts' => ['MEVHorizontalContacts/Assets/*.png']
   # }
