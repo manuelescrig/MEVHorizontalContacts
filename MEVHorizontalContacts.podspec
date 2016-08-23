@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MEVHorizontalContacts"
-  s.version          = "1.0"
+  s.version          = “1.1”
   s.summary          = "An iOS UICollectionViewLayout subclass to show a list of contacts with configurable expandable items."
 
 # This description is used to generate tags and improve search results.
