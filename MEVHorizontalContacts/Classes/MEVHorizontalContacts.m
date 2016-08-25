@@ -63,7 +63,7 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
     // Default Configuration
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
+
     _selectedIndex = -1;
 
     // Contact List
@@ -142,6 +142,8 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
 
 - (void)reloadData
 {
+    _selectedIndex = -1;
+
     [_horizontalContactListView reloadData];
 }
 
@@ -319,16 +321,16 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
         cell.selected = NO;
         [cell hideMenuItemsAnimated:YES];
     }
-    
+
     if (_selectedIndex != indexPath.row) {
         [self expandCellAtIndexPath:indexPath];
     } else {
         [self contractCell];
     }
-    
+
     // Select new cell, in case of deselecting then set -1 as default value
     _selectedIndex = _selectedIndex == indexPath.row ? -1 : indexPath.row;
-    
+
     if ([_delegate respondsToSelector:@selector(contactSelectedAtIndex:)]) {
         return [_delegate contactSelectedAtIndex:indexPath.row];
     }
@@ -341,11 +343,11 @@ static NSString *const kMEVHorizontalContactsItemCell = @"itemCell";
         cell.selected = NO;
         [cell hideMenuItemsAnimated:YES];
         [self contractCell];
-        
+
         // Select new cell, in case of deselecting then set -1 as default value
         _selectedIndex = _selectedIndex == indexPath.row ? -1 : indexPath.row;
     }
-    
+
     if ([_delegate respondsToSelector:@selector(item:selectedAtContactIndex:)]) {
         return [_delegate item:option selectedAtContactIndex:indexPath.row];
     }
